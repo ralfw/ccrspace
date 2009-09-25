@@ -22,10 +22,13 @@ namespace Test.CcrSpaces.Api
         }
 
 
+        // an actor channel needs to be able to carry any type of message in both directions
         IEnumerator<ITask> ActorMethod(CcrsActorContext ctx)
         {
             yield return ctx.Receive<string>();
             Console.WriteLine(ctx.ReceivedValue);
+
+            ctx.Reply("hello");
 
             yield return ctx.Receive<int, bool>();
             Console.WriteLine(ctx.ReceivedValue);
