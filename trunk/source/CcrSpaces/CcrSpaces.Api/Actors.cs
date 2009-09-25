@@ -26,6 +26,10 @@ namespace CcrSpaces.Api
                 return null;
             }
         }
+
+
+        public void Reply(object message)
+        {}
     }
 
 
