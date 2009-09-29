@@ -118,7 +118,7 @@ namespace Design.CcrSpaces.Api
         [Test, Ignore]
         public void Config_ccr_space()
         {
-            using(var space = CcrSpaceConfig.New()
+            using(var space = CcrSpaceFluent.New()
                                 .RunningDispatcher("mydispatcher", 10)
                                 .SchedulingWithDispatcherQueue("mydispatcher")
                                 .CatchingUnhandledExceptionAt(ex => Console.WriteLine(ex.Message))
