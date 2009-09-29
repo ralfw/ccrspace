@@ -13,19 +13,19 @@ namespace CcrSpaces.Api
         {}
 
 
-        internal CcrSpace(CcrSpaceConfig config)
+        internal CcrSpace(CcrSpaceFluent fluent)
         {}
 
 
-        public CcrsListenerConfig<TMessage> Listener<TMessage>()
+        public CcrsListenerFluent<TMessage> Listener<TMessage>()
         {
-            return new CcrsListenerConfig<TMessage>();
+            return new CcrsListenerFluent<TMessage>();
         }
 
 
         public CcrsOneWayListener<TMessage> CreateListener<TMessage>(Action<TMessage> messageHandler)
         {
-            return new CcrsOneWayListener<TMessage>();
+            return new CcrsOneWayListener<TMessage>(messageHandler);
         }
 
         public CcrsRequestResponseListener<TRequest, TResponse> CreateListener<TRequest, TResponse>(Func<TRequest, TResponse> requestHandler)

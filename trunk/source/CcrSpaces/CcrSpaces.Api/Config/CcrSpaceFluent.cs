@@ -5,25 +5,25 @@ using System.Text;
 
 namespace CcrSpaces.Api.Config
 {
-    public class CcrSpaceConfig
+    public class CcrSpaceFluent
     {
-        public static CcrSpaceConfig New()
+        public static CcrSpaceFluent New()
         {
-            return new CcrSpaceConfig();
+            return new CcrSpaceFluent();
         }
 
 
-        public CcrSpaceConfig RunningDispatcher(string name, int numberOfThreads)
-        {
-            return this;
-        }
-
-        public CcrSpaceConfig SchedulingWithDispatcherQueue(string dispatcherName)
+        public CcrSpaceFluent RunningDispatcher(string name, int numberOfThreads)
         {
             return this;
         }
 
-        public CcrSpaceConfig CatchingUnhandledExceptionAt(Action<Exception> defaultExceptionHandler)
+        public CcrSpaceFluent SchedulingWithDispatcherQueue(string dispatcherName)
+        {
+            return this;
+        }
+
+        public CcrSpaceFluent CatchingUnhandledExceptionAt(Action<Exception> defaultExceptionHandler)
         {
             return this;
         }
