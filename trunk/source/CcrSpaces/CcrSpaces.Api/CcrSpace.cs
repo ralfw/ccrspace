@@ -2,12 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CcrSpaces.Api.Config;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api
 {
     public class CcrSpace : IDisposable
     {
+        public CcrSpace()
+        {}
+
+
+        internal CcrSpace(CcrSpaceConfig config)
+        {}
+
+
+        public CcrsListenerConfig<TMessage> Listener<TMessage>()
+        {
+            return new CcrsListenerConfig<TMessage>();
+        }
+
+
         public CcrsOneWayListener<TMessage> CreateListener<TMessage>(Action<TMessage> messageHandler)
         {
             return new CcrsOneWayListener<TMessage>();

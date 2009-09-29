@@ -7,6 +7,13 @@ namespace CcrSpaces.Api
 {
     public class CcrsOneWayListener<TMessage> : ICcrsSimplexChannel<TMessage>
     {
+        internal CcrsOneWayListener()
+        {}
+
+        public CcrsOneWayListener(Action<TMessage> messageHandler)
+        {}
+
+
         public void Post(TMessage message)
         { }
     }
