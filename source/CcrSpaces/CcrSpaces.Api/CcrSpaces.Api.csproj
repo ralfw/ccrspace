@@ -51,18 +51,18 @@
   <ItemGroup>
     <Compile Include="Api\Actors.cs" />
     <Compile Include="Api\CcrSpace.cs" />
-    <Compile Include="Api\Config\CcrsListenerConfig.cs" />
-    <Compile Include="Api\Config\CcrsListenerFluent.cs" />
+    <Compile Include="Api\Config\CcrsOneWayListenerConfig.cs" />
+    <Compile Include="Api\Config\CcrsOneWayListenerFluent.cs" />
     <Compile Include="Api\Config\CcrSpaceFluent.cs" />
+    <Compile Include="Api\Config\CcrsRequestResponseListenerConfig.cs" />
+    <Compile Include="Api\RequestResponseListener.cs" />
     <Compile Include="Api\Flows.cs" />
     <Compile Include="Api\Channels.cs" />
-    <Compile Include="Api\Listeners.cs" />
+    <Compile Include="Api\OneWayListener.cs" />
+    <Compile Include="Infrastructure\PortExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Api\Publisher.cs" />
     <Compile Include="Api\TryCatch.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
