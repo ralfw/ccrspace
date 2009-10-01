@@ -31,7 +31,7 @@ namespace CcrSpaces.Api.Config
         
         public CcrSpace Create()
         {
-            return new CcrSpace(this);
+            return new CcrSpace();
         }
     }
 }

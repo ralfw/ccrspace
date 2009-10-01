@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api.Config
 {
-    internal class CcrsListenerConfig<TMessage>
+    public class CcrsOneWayListenerConfig<TMessage>
     {
-        public string Name;
         public Action<TMessage> MessageHandler;
         public bool ProcessSequentially;
+        public DispatcherQueue TaskQueue;
     }
 }

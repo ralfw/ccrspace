@@ -1,5 +1,3 @@
-Simple listener
-
 Ccrspace with default dispatcher and default dispQueue
 
 Req/Resp
@@ -26,3 +24,12 @@ Flows: Concatenating listeners
 Flows: Scatter/Gather
 
 Pub/sub: with filter
+
+
+===================
+Done
+===================
+Simple listener
+	-parallel or sequential processing
+	-configuration thru ctor params or fluent interface
+	

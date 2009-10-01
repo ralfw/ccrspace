@@ -9,33 +9,28 @@ namespace CcrSpaces.Api
 {
     public class CcrSpace : IDisposable
     {
+        private readonly Dispatcher defaultDispatcher;
+        private readonly DispatcherQueue defaultDispatcherQueue;
+
         public CcrSpace()
-        {}
-
-
-        internal CcrSpace(CcrSpaceFluent fluent)
-        {}
-
-
-        public CcrsListenerFluent<TMessage> Listener<TMessage>()
         {
-            return new CcrsListenerFluent<TMessage>();
+            this.defaultDispatcher = new Dispatcher();
+            this.defaultDispatcherQueue = new DispatcherQueue("~default", this.defaultDispatcher);
         }
 
 
         public CcrsOneWayListener<TMessage> CreateListener<TMessage>(Action<TMessage> messageHandler)
         {
-            return new CcrsOneWayListener<TMessage>(messageHandler);
+            var cfg = new CcrsOneWayListenerConfig<TMessage> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue};
+            return new CcrsOneWayListener<TMessage>(cfg);
         }
-
         public CcrsRequestResponseListener<TRequest, TResponse> CreateListener<TRequest, TResponse>(Func<TRequest, TResponse> requestHandler)
         {
-            return new CcrsRequestResponseListener<TRequest, TResponse>();        
+            throw new NotImplementedException();
         }
-
         public CcrsRequestResponseListener<TRequest, TResponse> CreateListener<TRequest, TResponse>(Action<TRequest, ICcrsSimplexChannel<TResponse>> requestHandler)
         {
-            return new CcrsRequestResponseListener<TRequest, TResponse>();
+            throw new NotImplementedException();
         }
 
 
@@ -56,7 +51,6 @@ namespace CcrSpaces.Api
         {
             return new CcrsTryCatch();
         }
-
         public CcrsTryCatch TryCatch(ICcrsSimplexChannel<Exception> exceptionSimplexChannel)
         {
             return new CcrsTryCatch();
@@ -65,7 +59,9 @@ namespace CcrSpaces.Api
 
         #region Implementation of IDisposable
         public void Dispose()
-        {}
+        {
+            this.defaultDispatcher.Dispose();
+        }
         #endregion
     }
 }
