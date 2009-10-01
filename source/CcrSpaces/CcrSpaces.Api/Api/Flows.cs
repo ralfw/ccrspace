@@ -9,6 +9,20 @@ namespace CcrSpaces.Api
     {
         public void Post(TRequest message)
         { }
+
+        #region Implementation of IPort
+
+        public void PostUnknownType(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryPostUnknownType(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 
     public class CcrsFlow<TRequest, TOutput> : ICcrsDuplexChannel<TRequest, TOutput>
@@ -32,5 +46,19 @@ namespace CcrSpaces.Api
         {
             return new CcrsFlow<TRequest, TNextOutput>();
         }
+
+        #region Implementation of IPort
+
+        public void PostUnknownType(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryPostUnknownType(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

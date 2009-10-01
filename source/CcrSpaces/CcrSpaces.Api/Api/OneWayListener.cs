@@ -13,10 +13,6 @@ namespace CcrSpaces.Api
         public CcrsOneWayListener(Action<TMessage> messageHandler)
             : this(new CcrsOneWayListenerConfig<TMessage> { MessageHandler = messageHandler, TaskQueue = new DispatcherQueue(), ProcessSequentially = false })
         { }
-        public CcrsOneWayListener(Action<TMessage> messageHandler, DispatcherQueue taskQueue)
-            : this(new CcrsOneWayListenerConfig<TMessage> { MessageHandler = messageHandler, TaskQueue = taskQueue, ProcessSequentially = false })
-        { }
-
         public CcrsOneWayListener(CcrsOneWayListenerConfig<TMessage> cfg)
         {
             this.channel = new Port<TMessage>();
@@ -28,5 +24,20 @@ namespace CcrSpaces.Api
         {
             this.channel.Post(message);
         }
+
+
+        #region Implementation of IPort
+
+        public void PostUnknownType(object item)
+        {
+            this.channel.PostUnknownType(item);
+        }
+
+        public bool TryPostUnknownType(object item)
+        {
+            return this.channel.TryPostUnknownType(item);
+        }
+
+        #endregion
     }
 }

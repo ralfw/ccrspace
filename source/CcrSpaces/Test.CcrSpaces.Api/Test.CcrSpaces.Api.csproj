@@ -53,10 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="testCcrsRequestMultiResponseListener.cs" />
     <Compile Include="testCcrsOneWayListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testCcrSpace.cs" />
-    <Compile Include="testCcrsRequestResponseListener.cs" />
+    <Compile Include="testCcrsRequestSingleResponseListener.cs" />
     <Compile Include="testPortExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

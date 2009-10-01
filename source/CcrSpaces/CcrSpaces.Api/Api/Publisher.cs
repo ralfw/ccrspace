@@ -25,5 +25,19 @@ namespace CcrSpaces.Api
 
         public void Unsubscribe(ICcrsSimplexChannel<TBroadcastMessage> publicationListener)
         { }
+
+        #region Implementation of IPort
+
+        public void PostUnknownType(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryPostUnknownType(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

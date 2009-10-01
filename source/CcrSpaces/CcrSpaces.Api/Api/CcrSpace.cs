@@ -24,13 +24,15 @@ namespace CcrSpaces.Api
             var cfg = new CcrsOneWayListenerConfig<TMessage> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue};
             return new CcrsOneWayListener<TMessage>(cfg);
         }
-        public CcrsRequestResponseListener<TRequest, TResponse> CreateListener<TRequest, TResponse>(Func<TRequest, TResponse> requestHandler)
+        public CcrsRequestResponseListenerBase<TRequest, TResponse> CreateListener<TRequest, TResponse>(Func<TRequest, TResponse> messageHandler)
         {
-            throw new NotImplementedException();
+            var cfg = new CcrsRequestSingleResponseListenerConfig<TRequest, TResponse> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue};
+            return new CcrsRequestSingleResponseListener<TRequest, TResponse>(cfg);
         }
-        public CcrsRequestResponseListener<TRequest, TResponse> CreateListener<TRequest, TResponse>(Action<TRequest, ICcrsSimplexChannel<TResponse>> requestHandler)
+        public CcrsRequestResponseListenerBase<TRequest, TResponse> CreateListener<TRequest, TResponse>(Action<TRequest, ICcrsSimplexChannel<TResponse>> messageHandler)
         {
-            throw new NotImplementedException();
+            var cfg = new CcrsRequestMultiResponseListenerConfig<TRequest, TResponse> { MessageHandler = messageHandler, TaskQueue = this.defaultDispatcherQueue };
+            return new CcrsRequestMultiResponseListener<TRequest, TResponse>(cfg);
         }
 
 
@@ -47,13 +49,9 @@ namespace CcrSpaces.Api
         }
 
 
-        public CcrsTryCatch TryCatch(Action<Exception> exceptionHandler)
+        public CcrsTry Try(Action tryThis)
         {
-            return new CcrsTryCatch();
-        }
-        public CcrsTryCatch TryCatch(ICcrsSimplexChannel<Exception> exceptionSimplexChannel)
-        {
-            return new CcrsTryCatch();
+            return new CcrsTry(tryThis);
         }
 
 

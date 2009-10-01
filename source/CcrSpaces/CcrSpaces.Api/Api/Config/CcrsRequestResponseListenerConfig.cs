@@ -8,7 +8,13 @@ namespace CcrSpaces.Api.Config
 {
     public class CcrsRequestResponseListenerConfig<TRequest, TResponse>
     {
-        public Func<TRequest, TResponse> MessageHandler;
+        public class Request
+        {
+            public TRequest Message;
+            public ICcrsSimplexChannel<TResponse> Response;
+        }
+
+        public Action<Request> MessageHandler;
         public bool ProcessSequentially;
         public DispatcherQueue TaskQueue;
     }
