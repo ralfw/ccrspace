@@ -49,13 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\RequestResponseListenerBase.cs" />
     <Compile Include="Api\Actors.cs" />
     <Compile Include="Api\CcrSpace.cs" />
     <Compile Include="Api\Config\CcrsOneWayListenerConfig.cs" />
     <Compile Include="Api\Config\CcrsOneWayListenerFluent.cs" />
     <Compile Include="Api\Config\CcrSpaceFluent.cs" />
+    <Compile Include="Api\Config\CcrsRequestSingleResponseListenerConfig.cs" />
+    <Compile Include="Api\Config\CcrsRequestMultiResponseListenerConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestResponseListenerConfig.cs" />
-    <Compile Include="Api\RequestResponseListener.cs" />
+    <Compile Include="Api\RequestMultiResponseListener.cs" />
+    <Compile Include="Api\RequestSingleResponseListener.cs" />
     <Compile Include="Api\Flows.cs" />
     <Compile Include="Api\Channels.cs" />
     <Compile Include="Api\OneWayListener.cs" />

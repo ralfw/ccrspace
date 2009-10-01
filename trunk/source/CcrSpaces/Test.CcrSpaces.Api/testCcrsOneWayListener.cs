@@ -2,6 +2,7 @@
 using System.Threading;
 using CcrSpaces.Api;
 using CcrSpaces.Api.Config;
+using Microsoft.Ccr.Core;
 using NUnit.Framework;
 
 namespace Test.CcrSpaces.Api
@@ -32,7 +33,7 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Standalone_configuration()
         {
-            var cfg = new CcrsOneWayListenerConfig<int> {MessageHandler = n=>this.are.Set()};
+            var cfg = new CcrsOneWayListenerConfig<int> {MessageHandler = n=>this.are.Set(), TaskQueue=new DispatcherQueue()};
             var sut = new CcrsOneWayListener<int>(cfg);
 
             sut.Post(1);
