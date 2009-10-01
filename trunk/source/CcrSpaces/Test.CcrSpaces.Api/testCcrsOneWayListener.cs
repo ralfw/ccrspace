@@ -59,23 +59,34 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Parallel_processing()
         {
-            List<int> threadHashCodes = new List<int>();
+            const int N = 300;
+
+            List<int> numbers = new List<int>();
 
             var sut = new CcrsOneWayListener<int>(n =>
                               {
-                                  Console.WriteLine("{0} @ {1}", n, Thread.CurrentThread.GetHashCode());
-                                  threadHashCodes.Add(Thread.CurrentThread.GetHashCode());
-                                  Thread.Sleep(500);
-                                  this.are.Set();
+                                  lock (numbers) numbers.Add(n);
+                                  if (n==N) this.are.Set();
+                                  Thread.Sleep(20);
                               });
 
-            sut.Post(1);
-            sut.Post(2);
+            for(int i=0; i<=N; i++)
+                sut.Post(i);
 
-            Assert.IsTrue(this.are.WaitOne(1000));
             Assert.IsTrue(this.are.WaitOne(2000));
-            Assert.AreEqual(2, threadHashCodes.Count);
-            Assert.AreNotEqual(threadHashCodes[0], threadHashCodes[1]);
+
+            bool regressionFound = false;
+            int highestNumberSoFar = -1;
+            for(int i=0; i<numbers.Count; i++)
+            {
+                if (highestNumberSoFar > numbers[i])
+                {
+                    regressionFound = true;
+                    break;
+                }
+                highestNumberSoFar = numbers[i];
+            }
+            Assert.IsTrue(regressionFound);
         }
 
 
