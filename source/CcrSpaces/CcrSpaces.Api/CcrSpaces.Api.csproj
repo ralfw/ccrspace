@@ -8,7 +8,7 @@
     <ProjectGuid>{BA6021D8-FFBF-4997-9E3A-C5381017B608}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CcrSpaces.Api</RootNamespace>
+    <RootNamespace>CcrSpaces</RootNamespace>
     <AssemblyName>CcrSpaces.Api</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,17 +49,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actors.cs" />
-    <Compile Include="CcrSpace.cs" />
-    <Compile Include="Config\CcrsListenerConfig.cs" />
-    <Compile Include="Config\CcrsListenerFluent.cs" />
-    <Compile Include="Config\CcrSpaceFluent.cs" />
-    <Compile Include="Flows.cs" />
-    <Compile Include="Channels.cs" />
-    <Compile Include="Listeners.cs" />
+    <Compile Include="Api\Actors.cs" />
+    <Compile Include="Api\CcrSpace.cs" />
+    <Compile Include="Api\Config\CcrsListenerConfig.cs" />
+    <Compile Include="Api\Config\CcrsListenerFluent.cs" />
+    <Compile Include="Api\Config\CcrSpaceFluent.cs" />
+    <Compile Include="Api\Flows.cs" />
+    <Compile Include="Api\Channels.cs" />
+    <Compile Include="Api\Listeners.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Publisher.cs" />
-    <Compile Include="TryCatch.cs" />
+    <Compile Include="Api\Publisher.cs" />
+    <Compile Include="Api\TryCatch.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
