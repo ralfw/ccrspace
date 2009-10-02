@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\RequestResponseListenerBase.cs" />
+    <Compile Include="Api\Listeners\RequestResponseListenerBase.cs" />
     <Compile Include="Api\Actors.cs" />
     <Compile Include="Api\CcrSpace.cs" />
     <Compile Include="Api\Config\CcrsOneWayListenerConfig.cs" />
@@ -58,11 +58,11 @@
     <Compile Include="Api\Config\CcrsRequestSingleResponseListenerConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestMultiResponseListenerConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestResponseListenerConfig.cs" />
-    <Compile Include="Api\RequestMultiResponseListener.cs" />
-    <Compile Include="Api\RequestSingleResponseListener.cs" />
+    <Compile Include="Api\Listeners\RequestMultiResponseListener.cs" />
+    <Compile Include="Api\Listeners\RequestSingleResponseListener.cs" />
     <Compile Include="Api\Flows.cs" />
-    <Compile Include="Api\Channels.cs" />
-    <Compile Include="Api\OneWayListener.cs" />
+    <Compile Include="Api\Interfaces\Channels.cs" />
+    <Compile Include="Api\Listeners\OneWayListener.cs" />
     <Compile Include="Infrastructure\PortExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Api\Publisher.cs" />
