@@ -48,7 +48,7 @@ namespace Test.CcrSpaces.Api
             var handler = new Action<int>(n => this.are.Set());
 
             var fluent = new CcrsOneWayChannelFluent<int>()
-                .ProcessWith(handler)
+                .Process(handler)
                 .Sequentially();
 
             CcrsOneWayChannelConfig<int> cfg = fluent;

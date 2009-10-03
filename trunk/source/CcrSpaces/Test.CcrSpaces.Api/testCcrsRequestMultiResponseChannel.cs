@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace Test.CcrSpaces.Api
 {
     [TestFixture]
-    public class testCcrsRequestMultiSingleResponseListener
+    public class testCcrsRequestMultiResponseChannel
     {
         private AutoResetEvent are;
 

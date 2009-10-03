@@ -2,15 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api.Config
 {
     public class CcrsOneWayChannelFluent<TMessage>
     {
-        private readonly CcrsOneWayChannelConfig<TMessage> cfg = new CcrsOneWayChannelConfig<TMessage>();
+        private Dispatcher defaultDispatcher;
+
+        private readonly CcrsOneWayChannelConfig<TMessage> cfg = new CcrsOneWayChannelConfig<TMessage>
+                                                                    {
+                                                                        ProcessSequentially = false         
+                                                                    };
 
 
-        public CcrsOneWayChannelFluent<TMessage> ProcessWith(Action<TMessage> messageHandler)
+        public CcrsOneWayChannelFluent() : this(null, null)
+        {}
+        internal CcrsOneWayChannelFluent(Dispatcher defaultDispatcher, DispatcherQueue defaultTaskQueue)
+        {
+            this.defaultDispatcher = defaultDispatcher;
+            this.cfg.TaskQueue = defaultTaskQueue ?? new DispatcherQueue();
+        }
+
+
+
+        public CcrsOneWayChannelFluent<TMessage> Process(Action<TMessage> messageHandler)
         {
             this.cfg.MessageHandler = messageHandler;
             return this;
@@ -23,9 +39,16 @@ namespace CcrSpaces.Api.Config
             return this;
         }
 
-        public CcrsOneWayChannelFluent<TMessage> Sequentially(bool processMessagesSequentially)
+
+        public CcrsOneWayChannelFluent<TMessage> WithOwnTaskQueue()
         {
-            this.cfg.ProcessSequentially = processMessagesSequentially;
+            if (this.defaultDispatcher != null)
+            {
+                this.cfg.TaskQueue = new DispatcherQueue(string.Format("Dpq{0}.Dpq{1}",
+                                                                       this.defaultDispatcher.Name,
+                                                                       this.defaultDispatcher.DispatcherQueues.Count + 1),
+                                                         this.defaultDispatcher);
+            }
             return this;
         }
 
@@ -39,6 +62,11 @@ namespace CcrSpaces.Api.Config
         public static implicit operator CcrsOneWayChannelConfig<TMessage>(CcrsOneWayChannelFluent<TMessage> source)
         {
             return source.cfg;            
+        }
+
+        public static implicit operator CcrsOneWayChannel<TMessage>(CcrsOneWayChannelFluent<TMessage> source)
+        {
+            return source.Create();
         }
     }
 }

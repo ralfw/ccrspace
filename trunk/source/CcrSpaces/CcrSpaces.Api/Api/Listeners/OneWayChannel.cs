@@ -13,6 +13,7 @@ namespace CcrSpaces.Api
         public CcrsOneWayChannel(Action<TMessage> messageHandler)
             : this(new CcrsOneWayChannelConfig<TMessage> { MessageHandler = messageHandler, TaskQueue = new DispatcherQueue(), ProcessSequentially = false })
         { }
+
         public CcrsOneWayChannel(CcrsOneWayChannelConfig<TMessage> cfg)
         {
             this.channel = new Port<TMessage>();

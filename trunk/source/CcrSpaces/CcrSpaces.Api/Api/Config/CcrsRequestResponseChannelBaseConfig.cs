@@ -6,7 +6,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api.Config
 {
-    public class CcrsRequestResponseChannelConfig<TRequest, TResponse>
+    public class CcrsRequestResponseChannelBaseConfig<TRequest, TResponse>
     {
         public class Request
         {
