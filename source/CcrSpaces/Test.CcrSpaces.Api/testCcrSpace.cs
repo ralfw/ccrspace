@@ -28,7 +28,7 @@ namespace Test.CcrSpaces.Api
         }
 
         [Test]
-        public void Create_oneway_listener()
+        public void Create_oneway_channel()
         {
             using(var s = new CcrSpace())
             {
@@ -42,7 +42,7 @@ namespace Test.CcrSpaces.Api
 
 
         [Test]
-        public void Create_reqSingleResp_listener()
+        public void Create_reqSingleResp_channel()
         {
             using (var s = new CcrSpace())
             {
@@ -56,7 +56,7 @@ namespace Test.CcrSpaces.Api
 
 
         [Test]
-        public void Create_reqMultiResp_listener()
+        public void Create_reqMultiResp_channel()
         {
             using (var s = new CcrSpace())
             {
@@ -65,6 +65,23 @@ namespace Test.CcrSpaces.Api
                 ch.Post(1, r => this.are.Set());
 
                 Assert.IsTrue(this.are.WaitOne(500));
+                Assert.IsTrue(this.are.WaitOne(500));
+            }
+        }
+
+
+        [Test]
+        public void Fleuent_creation_of_oneWayChannel()
+        {
+            using(var space = new CcrSpace())
+            {
+                CcrsOneWayChannel<int> ch = space.CreateChannel<int>()
+                    .Process(n => this.are.Set())
+                    .Sequentially()
+                    .WithOwnTaskQueue();
+
+                ch.Post(1);
+
                 Assert.IsTrue(this.are.WaitOne(500));
             }
         }

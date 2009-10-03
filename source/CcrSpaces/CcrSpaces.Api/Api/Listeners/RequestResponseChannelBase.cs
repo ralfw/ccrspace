@@ -10,15 +10,15 @@ namespace CcrSpaces.Api
 {
     public class CcrsRequestResponseChannelBase<TRequest, TResponse> : ICcrsDuplexChannel<TRequest, TResponse>
     {
-        private readonly Port<CcrsRequestResponseChannelConfig<TRequest, TResponse>.Request> channel;
+        private readonly Port<CcrsRequestResponseChannelBaseConfig<TRequest, TResponse>.Request> channel;
         private readonly DispatcherQueue taskQueue;
 
 
-        protected CcrsRequestResponseChannelBase(CcrsRequestResponseChannelConfig<TRequest, TResponse> cfg)
+        protected CcrsRequestResponseChannelBase(CcrsRequestResponseChannelBaseConfig<TRequest, TResponse> cfg)
         {
             this.taskQueue = cfg.TaskQueue;
 
-            this.channel = new Port<CcrsRequestResponseChannelConfig<TRequest, TResponse>.Request>();
+            this.channel = new Port<CcrsRequestResponseChannelBaseConfig<TRequest, TResponse>.Request>();
             this.channel.RegisterHandler(cfg.MessageHandler, this.taskQueue, cfg.ProcessSequentially);
         }
 
@@ -37,7 +37,7 @@ namespace CcrSpaces.Api
         }
         public void Post(TRequest message, ICcrsSimplexChannel<TResponse> responseSimplexChannel)
         {
-            var req = new CcrsRequestResponseChannelConfig<TRequest, TResponse>.Request
+            var req = new CcrsRequestResponseChannelBaseConfig<TRequest, TResponse>.Request
                           {
                               Message = message,
                               Response = responseSimplexChannel

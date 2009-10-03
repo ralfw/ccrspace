@@ -57,7 +57,7 @@
     <Compile Include="Api\Config\CcrSpaceFluent.cs" />
     <Compile Include="Api\Config\CcrsRequestSingleResponseChannelConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestMultiResponseChannelConfig.cs" />
-    <Compile Include="Api\Config\CcrsRequestResponseChannelConfig.cs" />
+    <Compile Include="Api\Config\CcrsRequestResponseChannelBaseConfig.cs" />
     <Compile Include="Api\Listeners\RequestMultiResponseChannel.cs" />
     <Compile Include="Api\Listeners\RequestSingleResponseChannel.cs" />
     <Compile Include="Api\Flows.cs" />

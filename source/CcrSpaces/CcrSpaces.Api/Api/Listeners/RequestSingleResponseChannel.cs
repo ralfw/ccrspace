@@ -10,8 +10,9 @@ namespace CcrSpaces.Api
         public CcrsRequestSingleResponseChannel(Func<TRequest, TResponse> messageHandler) :
             this(new CcrsRequestSingleResponseChannelConfig<TRequest, TResponse>{MessageHandler=messageHandler, TaskQueue=new DispatcherQueue(), ProcessSequentially=false})
         {}
+
         public CcrsRequestSingleResponseChannel(CcrsRequestSingleResponseChannelConfig<TRequest, TResponse> cfg) :
-            base(new CcrsRequestResponseChannelConfig<TRequest,TResponse>
+            base(new CcrsRequestResponseChannelBaseConfig<TRequest,TResponse>
                      {
                          MessageHandler = req =>
                                              {

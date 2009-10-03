@@ -10,8 +10,9 @@ namespace CcrSpaces.Api
         public CcrsRequestMultiResponseChannel(Action<TRequest, ICcrsSimplexChannel<TResponse>> messageHandler) :
             this(new CcrsRequestMultiResponseChannelConfig<TRequest, TResponse>{MessageHandler=messageHandler, TaskQueue=new DispatcherQueue(), ProcessSequentially=false})
         {}
+
         public CcrsRequestMultiResponseChannel(CcrsRequestMultiResponseChannelConfig<TRequest, TResponse> cfg) : 
-            base(new CcrsRequestResponseChannelConfig<TRequest,TResponse>
+            base(new CcrsRequestResponseChannelBaseConfig<TRequest,TResponse>
                      {
                          MessageHandler = req => cfg.MessageHandler(req.Message, req.Response),
                          TaskQueue = cfg.TaskQueue,
