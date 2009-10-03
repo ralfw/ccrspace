@@ -6,9 +6,9 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api.Config
 {
-    public class CcrsOneWayListenerConfig<TMessage>
+    public class CcrsRequestSingleResponseChannelConfig<TRequest, TResponse>
     {
-        public Action<TMessage> MessageHandler;
+        public Func<TRequest, TResponse> MessageHandler;
         public bool ProcessSequentially;
         public DispatcherQueue TaskQueue;
     }

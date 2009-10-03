@@ -8,17 +8,17 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api
 {
-    public class CcrsRequestResponseListenerBase<TRequest, TResponse> : ICcrsDuplexChannel<TRequest, TResponse>
+    public class CcrsRequestResponseChannelBase<TRequest, TResponse> : ICcrsDuplexChannel<TRequest, TResponse>
     {
-        private readonly Port<CcrsRequestResponseListenerConfig<TRequest, TResponse>.Request> channel;
+        private readonly Port<CcrsRequestResponseChannelConfig<TRequest, TResponse>.Request> channel;
         private readonly DispatcherQueue taskQueue;
 
 
-        protected CcrsRequestResponseListenerBase(CcrsRequestResponseListenerConfig<TRequest, TResponse> cfg)
+        protected CcrsRequestResponseChannelBase(CcrsRequestResponseChannelConfig<TRequest, TResponse> cfg)
         {
             this.taskQueue = cfg.TaskQueue;
 
-            this.channel = new Port<CcrsRequestResponseListenerConfig<TRequest, TResponse>.Request>();
+            this.channel = new Port<CcrsRequestResponseChannelConfig<TRequest, TResponse>.Request>();
             this.channel.RegisterHandler(cfg.MessageHandler, this.taskQueue, cfg.ProcessSequentially);
         }
 
@@ -28,7 +28,7 @@ namespace CcrSpaces.Api
         {
             this.Post(
                 message,
-                new CcrsOneWayListener<TResponse>(new CcrsOneWayListenerConfig<TResponse>
+                new CcrsOneWayChannel<TResponse>(new CcrsOneWayChannelConfig<TResponse>
                                                       {
                                                           MessageHandler = responseHandler,
                                                           TaskQueue = this.taskQueue
@@ -37,7 +37,7 @@ namespace CcrSpaces.Api
         }
         public void Post(TRequest message, ICcrsSimplexChannel<TResponse> responseSimplexChannel)
         {
-            var req = new CcrsRequestResponseListenerConfig<TRequest, TResponse>.Request
+            var req = new CcrsRequestResponseChannelConfig<TRequest, TResponse>.Request
                           {
                               Message = message,
                               Response = responseSimplexChannel

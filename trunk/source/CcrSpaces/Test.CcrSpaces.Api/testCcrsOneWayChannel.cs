@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Test.CcrSpaces.Api
 {
     [TestFixture]
-    public class testCcrsOneWayListener
+    public class testCcrsOneWayChannel
     {
         private AutoResetEvent are;
 
@@ -22,7 +22,7 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Standalone_creation()
         {
-            var sut = new CcrsOneWayListener<int>(n => this.are.Set());
+            var sut = new CcrsOneWayChannel<int>(n => this.are.Set());
 
             sut.Post(1);
             
@@ -33,8 +33,8 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Standalone_configuration()
         {
-            var cfg = new CcrsOneWayListenerConfig<int> {MessageHandler = n=>this.are.Set(), TaskQueue=new DispatcherQueue()};
-            var sut = new CcrsOneWayListener<int>(cfg);
+            var cfg = new CcrsOneWayChannelConfig<int> {MessageHandler = n=>this.are.Set(), TaskQueue=new DispatcherQueue()};
+            var sut = new CcrsOneWayChannel<int>(cfg);
 
             sut.Post(1);
 
@@ -47,11 +47,11 @@ namespace Test.CcrSpaces.Api
         {
             var handler = new Action<int>(n => this.are.Set());
 
-            var fluent = new CcrsOneWayListenerFluent<int>()
+            var fluent = new CcrsOneWayChannelFluent<int>()
                 .ProcessWith(handler)
                 .Sequentially();
 
-            CcrsOneWayListenerConfig<int> cfg = fluent;
+            CcrsOneWayChannelConfig<int> cfg = fluent;
             Assert.AreSame(handler, cfg.MessageHandler);
             Assert.IsTrue(cfg.ProcessSequentially);
         }

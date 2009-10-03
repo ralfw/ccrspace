@@ -32,9 +32,9 @@ namespace Test.CcrSpaces.Api
         {
             using(var s = new CcrSpace())
             {
-                var l = s.CreateListener<int>(n => this.are.Set());
+                var ch = s.CreateChannel<int>(n => this.are.Set());
 
-                l.Post(1);
+                ch.Post(1);
 
                 Assert.IsTrue(this.are.WaitOne(500));
             }
@@ -46,9 +46,9 @@ namespace Test.CcrSpaces.Api
         {
             using (var s = new CcrSpace())
             {
-                var l = s.CreateListener<int, bool>(n => true);
+                var ch = s.CreateChannel<int, bool>(n => true);
 
-                l.Post(1, r => this.are.Set());
+                ch.Post(1, r => this.are.Set());
 
                 Assert.IsTrue(this.are.WaitOne(500));
             }
@@ -60,9 +60,9 @@ namespace Test.CcrSpaces.Api
         {
             using (var s = new CcrSpace())
             {
-                var l = s.CreateListener<int, int>((n,p) => { p.Post(n + 1); p.Post(n + 2);});
+                var ch = s.CreateChannel<int, int>((n,p) => { p.Post(n + 1); p.Post(n + 2);});
 
-                l.Post(1, r => this.are.Set());
+                ch.Post(1, r => this.are.Set());
 
                 Assert.IsTrue(this.are.WaitOne(500));
                 Assert.IsTrue(this.are.WaitOne(500));
@@ -77,11 +77,11 @@ namespace Test.CcrSpaces.Api
             {
                 s.Try(() =>
                           {
-                              var l = s.CreateListener<bool>(b =>
+                              var ch = s.CreateChannel<bool>(b =>
                                          {
                                              throw new ApplicationException("extest");
                                          });
-                              l.Post(true);
+                              ch.Post(true);
                           })
                     .Catch(ex =>
                                {

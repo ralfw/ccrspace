@@ -20,13 +20,13 @@ namespace CcrSpaces.Api
 
         public void Catch(Action<Exception> exceptionHandler)
         {
-            var cfg = new CcrsOneWayListenerConfig<Exception>
+            var cfg = new CcrsOneWayChannelConfig<Exception>
                           {
                               MessageHandler = exceptionHandler,
                               TaskQueue = new DispatcherQueue(),
                               ProcessSequentially = true
                           };
-            var exListener = new CcrsOneWayListener<Exception>(cfg);
+            var exListener = new CcrsOneWayChannel<Exception>(cfg);
             Catch(exListener);
         }
 
