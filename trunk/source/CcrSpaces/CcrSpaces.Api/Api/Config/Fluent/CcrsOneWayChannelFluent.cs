@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Api.Config
+namespace CcrSpaces.Api.Config.Fluent
 {
     public class CcrsOneWayChannelFluent<TMessage>
     {
-        private Dispatcher defaultDispatcher;
+        private readonly Dispatcher defaultDispatcher;
 
         private readonly CcrsOneWayChannelConfig<TMessage> cfg = new CcrsOneWayChannelConfig<TMessage>
                                                                     {

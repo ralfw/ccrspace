@@ -53,8 +53,8 @@
     <Compile Include="Api\Actors.cs" />
     <Compile Include="Api\CcrSpace.cs" />
     <Compile Include="Api\Config\CcrsOneWayChannelConfig.cs" />
-    <Compile Include="Api\Config\CcrsOneWayChannelFluent.cs" />
-    <Compile Include="Api\Config\CcrSpaceFluent.cs" />
+    <Compile Include="Api\Config\Fluent\CcrsOneWayChannelFluent.cs" />
+    <Compile Include="Api\Config\Fluent\CcrSpaceFluent.cs" />
     <Compile Include="Api\Config\CcrsRequestSingleResponseChannelConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestMultiResponseChannelConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestResponseChannelBaseConfig.cs" />
