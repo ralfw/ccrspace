@@ -5,15 +5,15 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api
 {
-    public class CcrsOneWayListener<TMessage> : ICcrsSimplexChannel<TMessage>
+    public class CcrsOneWayChannel<TMessage> : ICcrsSimplexChannel<TMessage>
     {
         private readonly Port<TMessage> channel;
 
 
-        public CcrsOneWayListener(Action<TMessage> messageHandler)
-            : this(new CcrsOneWayListenerConfig<TMessage> { MessageHandler = messageHandler, TaskQueue = new DispatcherQueue(), ProcessSequentially = false })
+        public CcrsOneWayChannel(Action<TMessage> messageHandler)
+            : this(new CcrsOneWayChannelConfig<TMessage> { MessageHandler = messageHandler, TaskQueue = new DispatcherQueue(), ProcessSequentially = false })
         { }
-        public CcrsOneWayListener(CcrsOneWayListenerConfig<TMessage> cfg)
+        public CcrsOneWayChannel(CcrsOneWayChannelConfig<TMessage> cfg)
         {
             this.channel = new Port<TMessage>();
             this.channel.RegisterHandler(cfg.MessageHandler, cfg.TaskQueue, cfg.ProcessSequentially);

@@ -12,6 +12,7 @@ namespace CcrSpaces.Api
         private readonly Dispatcher defaultDispatcher;
         private readonly DispatcherQueue defaultDispatcherQueue;
 
+
         public CcrSpace()
         {
             this.defaultDispatcher = new Dispatcher();
@@ -19,20 +20,20 @@ namespace CcrSpaces.Api
         }
 
 
-        public CcrsOneWayListener<TMessage> CreateListener<TMessage>(Action<TMessage> messageHandler)
+        public ICcrsSimplexChannel<TMessage> CreateChannel<TMessage>(Action<TMessage> messageHandler)
         {
-            var cfg = new CcrsOneWayListenerConfig<TMessage> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue};
-            return new CcrsOneWayListener<TMessage>(cfg);
+            var cfg = new CcrsOneWayChannelConfig<TMessage> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue};
+            return new CcrsOneWayChannel<TMessage>(cfg);
         }
-        public CcrsRequestResponseListenerBase<TRequest, TResponse> CreateListener<TRequest, TResponse>(Func<TRequest, TResponse> messageHandler)
+        public ICcrsDuplexChannel<TRequest, TResponse> CreateChannel<TRequest, TResponse>(Func<TRequest, TResponse> messageHandler)
         {
-            var cfg = new CcrsRequestSingleResponseListenerConfig<TRequest, TResponse> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue};
-            return new CcrsRequestSingleResponseListener<TRequest, TResponse>(cfg);
+            var cfg = new CcrsRequestSingleResponseChannelConfig<TRequest, TResponse> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue};
+            return new CcrsRequestSingleResponseChannel<TRequest, TResponse>(cfg);
         }
-        public CcrsRequestResponseListenerBase<TRequest, TResponse> CreateListener<TRequest, TResponse>(Action<TRequest, ICcrsSimplexChannel<TResponse>> messageHandler)
+        public ICcrsDuplexChannel<TRequest, TResponse> CreateChannel<TRequest, TResponse>(Action<TRequest, ICcrsSimplexChannel<TResponse>> messageHandler)
         {
-            var cfg = new CcrsRequestMultiResponseListenerConfig<TRequest, TResponse> { MessageHandler = messageHandler, TaskQueue = this.defaultDispatcherQueue };
-            return new CcrsRequestMultiResponseListener<TRequest, TResponse>(cfg);
+            var cfg = new CcrsRequestMultiResponseChannelConfig<TRequest, TResponse> { MessageHandler = messageHandler, TaskQueue = this.defaultDispatcherQueue };
+            return new CcrsRequestMultiResponseChannel<TRequest, TResponse>(cfg);
         }
 
 

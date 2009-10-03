@@ -5,13 +5,13 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api
 {
-    public class CcrsRequestSingleResponseListener<TRequest, TResponse> : CcrsRequestResponseListenerBase<TRequest, TResponse>
+    public class CcrsRequestSingleResponseChannel<TRequest, TResponse> : CcrsRequestResponseChannelBase<TRequest, TResponse>
     {
-        public CcrsRequestSingleResponseListener(Func<TRequest, TResponse> messageHandler) :
-            this(new CcrsRequestSingleResponseListenerConfig<TRequest, TResponse>{MessageHandler=messageHandler, TaskQueue=new DispatcherQueue(), ProcessSequentially=false})
+        public CcrsRequestSingleResponseChannel(Func<TRequest, TResponse> messageHandler) :
+            this(new CcrsRequestSingleResponseChannelConfig<TRequest, TResponse>{MessageHandler=messageHandler, TaskQueue=new DispatcherQueue(), ProcessSequentially=false})
         {}
-        public CcrsRequestSingleResponseListener(CcrsRequestSingleResponseListenerConfig<TRequest, TResponse> cfg) :
-            base(new CcrsRequestResponseListenerConfig<TRequest,TResponse>
+        public CcrsRequestSingleResponseChannel(CcrsRequestSingleResponseChannelConfig<TRequest, TResponse> cfg) :
+            base(new CcrsRequestResponseChannelConfig<TRequest,TResponse>
                      {
                          MessageHandler = req =>
                                              {

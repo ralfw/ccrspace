@@ -25,7 +25,7 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Standalone_creation()
         {
-            var sut = new CcrsRequestMultiResponseListener<int, bool>((n, p) => this.are.Set());
+            var sut = new CcrsRequestMultiResponseChannel<int, bool>((n, p) => this.are.Set());
 
             sut.Post(1);
 
@@ -36,7 +36,7 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Receive_single_response()
         {
-            var sut = new CcrsRequestMultiResponseListener<int, bool>((n,p) => p.Post(n%2==0));
+            var sut = new CcrsRequestMultiResponseChannel<int, bool>((n,p) => p.Post(n%2==0));
 
             sut.Post(1, b =>
                             {
@@ -51,7 +51,7 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Receive_multiple_responses()
         {
-            var cfg = new CcrsRequestMultiResponseListenerConfig<int, int>
+            var cfg = new CcrsRequestMultiResponseChannelConfig<int, int>
                           {
                               MessageHandler = (n, p) =>
                               {
@@ -61,7 +61,7 @@ namespace Test.CcrSpaces.Api
                               TaskQueue = new DispatcherQueue(),
                               ProcessSequentially = true
                           };
-            var sut = new CcrsRequestMultiResponseListener<int, int>(cfg);
+            var sut = new CcrsRequestMultiResponseChannel<int, int>(cfg);
 
             List<int> numbers = new List<int>();
             sut.Post(1, n =>
@@ -79,8 +79,8 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Standalone_config()
         {
-            var cfg = new CcrsRequestMultiResponseListenerConfig<int, bool> {MessageHandler = (n, p)=>this.are.Set(), TaskQueue=new DispatcherQueue()};
-            var sut = new CcrsRequestMultiResponseListener<int, bool>(cfg);
+            var cfg = new CcrsRequestMultiResponseChannelConfig<int, bool> {MessageHandler = (n, p)=>this.are.Set(), TaskQueue=new DispatcherQueue()};
+            var sut = new CcrsRequestMultiResponseChannel<int, bool>(cfg);
 
             sut.Post(1);
 

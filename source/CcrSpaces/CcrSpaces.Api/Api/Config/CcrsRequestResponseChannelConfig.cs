@@ -6,7 +6,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api.Config
 {
-    public class CcrsRequestResponseListenerConfig<TRequest, TResponse>
+    public class CcrsRequestResponseChannelConfig<TRequest, TResponse>
     {
         public class Request
         {

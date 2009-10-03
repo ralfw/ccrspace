@@ -3,6 +3,12 @@ Pub/sub
 Actor: Send/Receive
 Actor: Reply
 
+Req/Resp
+	Post with timeout for response
+
+Wait for message arriving on listener
+Wait for response
+
 Worker (CCR interleave interface)
 	
 Config: Listeners with individual dispQueues
