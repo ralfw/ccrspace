@@ -2,6 +2,7 @@
 using System.Threading;
 using CcrSpaces.Api;
 using CcrSpaces.Api.Config;
+using CcrSpaces.Api.Config.Fluent;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
 

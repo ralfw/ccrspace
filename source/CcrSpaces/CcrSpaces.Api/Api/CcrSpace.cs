@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CcrSpaces.Api.Config;
+using CcrSpaces.Api.Config.Fluent;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api
