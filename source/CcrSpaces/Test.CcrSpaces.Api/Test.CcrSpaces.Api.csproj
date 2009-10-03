@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="testCcrsPublisher.cs" />
     <Compile Include="testCcrsRequestMultiResponseChannel.cs" />
     <Compile Include="testCcrsOneWayChannel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
