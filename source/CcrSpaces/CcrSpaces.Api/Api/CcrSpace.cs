@@ -48,7 +48,7 @@ namespace CcrSpaces.Api
 
         public CcrsPublisher<TBroadcastMessage> CreatePublisher<TBroadcastMessage>()
         {
-            return new CcrsPublisher<TBroadcastMessage>();
+            return new CcrsPublisher<TBroadcastMessage>(this.defaultDispatcherQueue);
         }
 
 
