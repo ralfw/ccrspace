@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CcrSpaces.Api.Config;
 using Microsoft.Ccr.Core;
 
@@ -12,17 +10,34 @@ namespace CcrSpaces.Api
         private readonly Dictionary<Action<TBroadcastMessage>, ICcrsSimplexChannel<TBroadcastMessage>> subscriptionHandlers;
         protected readonly List<ICcrsSimplexChannel<TBroadcastMessage>> subscribers;
 
+        private readonly DispatcherQueue taskQueue;
 
-        public CcrsPublisher()
+
+        public CcrsPublisher() : this(new DispatcherQueue())
+        {}
+
+        internal CcrsPublisher(DispatcherQueue taskQueue)
         {
             this.subscriptionHandlers = new Dictionary<Action<TBroadcastMessage>, ICcrsSimplexChannel<TBroadcastMessage>>();
             this.subscribers = new List<ICcrsSimplexChannel<TBroadcastMessage>>();
+
+            this.taskQueue = taskQueue;
         }
 
 
         #region Implementation of ICcrsSimplexChannel<TBroadcastMessage>
+
+        public DispatcherQueue TaskQueue
+        {
+            get { return taskQueue; }
+        }
+
         public void Post(TBroadcastMessage message)
-        {}
+        {
+            lock (this.subscribers)
+                foreach (ICcrsSimplexChannel<TBroadcastMessage> subscriber in this.subscribers)
+                    subscriber.Post(message);
+        }
         #endregion
 
 
@@ -35,7 +50,7 @@ namespace CcrSpaces.Api
                 var cfg = new CcrsOneWayChannelConfig<TBroadcastMessage>
                               {
                                   MessageHandler = subscriptionHandler,
-                                  TaskQueue = new DispatcherQueue(),
+                                  TaskQueue = this.taskQueue,
                                   ProcessSequentially = true
                               };
                 var ch = new CcrsOneWayChannel<TBroadcastMessage>(cfg);

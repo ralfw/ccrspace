@@ -71,7 +71,7 @@ namespace Test.CcrSpaces.Api
 
 
         [Test]
-        public void Fleuent_creation_of_oneWayChannel()
+        public void Fluent_creation_of_oneWayChannel()
         {
             using(var space = new CcrSpace())
             {
@@ -81,6 +81,21 @@ namespace Test.CcrSpaces.Api
                     .WithOwnTaskQueue();
 
                 ch.Post(1);
+
+                Assert.IsTrue(this.are.WaitOne(500));
+            }
+        }
+
+
+        [Test]
+        public void Create_publisher()
+        {
+            using(var space = new CcrSpace())
+            {
+                var pub = space.CreatePublisher<int>();
+                pub.Subscribe(n => this.are.Set());
+
+                pub.Post(1);
 
                 Assert.IsTrue(this.are.WaitOne(500));
             }
