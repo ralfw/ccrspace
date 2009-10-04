@@ -49,20 +49,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Listeners\RequestResponseChannelBase.cs" />
     <Compile Include="Api\Actors.cs" />
     <Compile Include="Api\CcrSpace.cs" />
+    <Compile Include="Api\Channels\OneWayChannel.cs" />
+    <Compile Include="Api\Channels\RequestMultiResponseChannel.cs" />
+    <Compile Include="Api\Channels\RequestResponseChannelBase.cs" />
+    <Compile Include="Api\Channels\RequestSingleResponseChannel.cs" />
     <Compile Include="Api\Config\CcrsOneWayChannelConfig.cs" />
     <Compile Include="Api\Config\Fluent\CcrsOneWayChannelFluent.cs" />
     <Compile Include="Api\Config\Fluent\CcrSpaceFluent.cs" />
     <Compile Include="Api\Config\CcrsRequestSingleResponseChannelConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestMultiResponseChannelConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestResponseChannelBaseConfig.cs" />
-    <Compile Include="Api\Listeners\RequestMultiResponseChannel.cs" />
-    <Compile Include="Api\Listeners\RequestSingleResponseChannel.cs" />
     <Compile Include="Api\Flows.cs" />
     <Compile Include="Api\Interfaces\Channels.cs" />
-    <Compile Include="Api\Listeners\OneWayChannel.cs" />
     <Compile Include="Infrastructure\PortExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Api\Publisher.cs" />

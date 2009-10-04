@@ -1,25 +1,23 @@
 Pub/sub
+	publishing is oneway msg processing (derive from oneway channel?)
+	implement simplex ch. interface
+	
+Concat() for duplex channels
+	accepts duplex or simplex channel as next stage
+	
+Timeout duplex channel (stage)
 
+Multiplex channel (generic duplex)
+	with interleave constraints
+
+Scatter/Gather (duplex)
+
+Switch channel (generic duplex)	
+	
 Actor: Send/Receive
 Actor: Reply
-
-Req/Resp
-	Post with timeout for response
-
-Wait for message arriving on listener
-Wait for response
-
-Worker (CCR interleave interface)
 	
-Config: Listeners with individual dispQueues
-
 Config: Ccrspace with multiple dispatchers
-
-Config: Sequential message processing
-
-Flows: Concatenating listeners
-
-Flows: Scatter/Gather
 
 Pub/sub: with filter
 
