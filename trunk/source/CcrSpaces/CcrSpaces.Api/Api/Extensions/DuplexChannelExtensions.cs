@@ -4,7 +4,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api.Extensions
 {
-    public static class ChannelExtensions
+    public static class DuplexChannelExtensions
     {
         public static void Post<TRequest, TResponse>(this ICcrsDuplexChannel<TRequest, TResponse> channel, TRequest request, Action<TResponse> responseHandler, bool processInCurrentSyncContext)
         {

@@ -51,10 +51,10 @@
   <ItemGroup>
     <Compile Include="Api\Actors.cs" />
     <Compile Include="Api\CcrSpace.cs" />
-    <Compile Include="Api\Channels\OneWayChannel.cs" />
-    <Compile Include="Api\Channels\RequestMultiResponseChannel.cs" />
-    <Compile Include="Api\Channels\RequestResponseChannelBase.cs" />
-    <Compile Include="Api\Channels\RequestSingleResponseChannel.cs" />
+    <Compile Include="Api\Channels\CcrsOneWayChannel.cs" />
+    <Compile Include="Api\Channels\CcrsRequestMultiResponseChannel.cs" />
+    <Compile Include="Api\Channels\CcrsRequestResponseChannelBase.cs" />
+    <Compile Include="Api\Channels\CcrsRequestSingleResponseChannel.cs" />
     <Compile Include="Api\Config\CcrsFlowConfig.cs" />
     <Compile Include="Api\Config\CcrsOneWayChannelConfig.cs" />
     <Compile Include="Api\Config\Fluent\CcrsFlowFluent.cs" />
@@ -63,14 +63,14 @@
     <Compile Include="Api\Config\CcrsRequestSingleResponseChannelConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestMultiResponseChannelConfig.cs" />
     <Compile Include="Api\Config\CcrsRequestResponseChannelBaseConfig.cs" />
-    <Compile Include="Api\Extensions\ChannelExtensions.cs" />
+    <Compile Include="Api\Extensions\DuplexChannelExtensions.cs" />
     <Compile Include="Api\Flows\CcrsFlowBase.cs" />
-    <Compile Include="Api\Flows\CcrsOnwWayFlow.cs" />
-    <Compile Include="Api\Flows\CcrsRequestResponseFlow.cs" />
+    <Compile Include="Api\Flows\OneWayFlow.cs" />
+    <Compile Include="Api\Flows\RequestResponseFlow.cs" />
     <Compile Include="Api\Interfaces\Channels.cs" />
     <Compile Include="Infrastructure\PortExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Api\Publisher.cs" />
+    <Compile Include="Api\CcrsPublisher.cs" />
     <Compile Include="Api\TryCatch.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
