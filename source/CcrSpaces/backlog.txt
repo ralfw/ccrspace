@@ -1,6 +1,6 @@
-Concat() for duplex channels
-	accepts duplex or simplex channel as next stage
-	
+fluent one way: on current sync context
+		sequential == true
+
 Timeout duplex channel (stage)
 
 Multiplex channel (generic duplex)
@@ -19,6 +19,18 @@ Pub/sub: with filter
 
 Named listeners and name resolution
 
+======
+Issues
+======
+
+When constructing flows from sequential stages the processing is not sequential
+	e.g. split line into words | count num of chars in word | check for even num | output result
+	splitting is a scatter op, but the following stages are seq
+	nonetheless the results for each word may come in arbitrary order	
+	
+	is sth wrong with the seq processing strategy?
+	or is CCR Post() on a channel running on a separate thread?
+	
 
 ===================
 Done
@@ -36,3 +48,7 @@ Exception handling
 Pub/sub
 	publishing is oneway msg processing (derive from oneway channel?)
 	implement simplex ch. interface
+
+Concat() for duplex channels
+	accepts duplex or simplex channel as next stage
+	
