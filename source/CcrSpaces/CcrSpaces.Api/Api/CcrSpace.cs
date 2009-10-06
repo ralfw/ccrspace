@@ -63,6 +63,12 @@ namespace CcrSpaces.Api
             return new CcrsFlowFluent<TInput>();
         }
 
+        
+        public CcrsFlowFluent<TInput, TOutput> CreateFlow<TInput, TOutput>()
+        {
+            return new CcrsFlowFluent<TInput, TOutput>();
+        }
+
 
         public CcrsActor CreateActor(Func<CcrsActorContext, IEnumerator<ITask>> actorMethod)
         {
