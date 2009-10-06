@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CcrSpaces.Api.Config;
 using CcrSpaces.Api.Config.Fluent;
+using CcrSpaces.Api.Flows;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api
@@ -54,6 +55,12 @@ namespace CcrSpaces.Api
         public CcrsPublisher<TBroadcastMessage> CreatePublisher<TBroadcastMessage>()
         {
             return new CcrsPublisher<TBroadcastMessage>(this.defaultDispatcherQueue);
+        }
+
+
+        public CcrsFlowFluent<TInput> CreateFlow<TInput>()
+        {
+            return new CcrsFlowFluent<TInput>();
         }
 
 
