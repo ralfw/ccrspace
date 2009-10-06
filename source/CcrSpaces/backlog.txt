@@ -1,9 +1,11 @@
-fluent one way: on current sync context
-		sequential == true
-
 Create flow from duplex channel
 	.Do() (one way) -> CcrsFlowFluent
 	.Do<TOutput>() (req resp)
+
+Scatter/Gather (duplex)
+
+Actor: Send/Receive
+Actor: Reply
 
 Timeout duplex channel (stage)
 
@@ -12,12 +14,7 @@ Logger channel to insert into flows
 Multiplex channel (generic duplex)
 	with interleave constraints
 
-Scatter/Gather (duplex)
-
 Switch channel (generic duplex)	
-	
-Actor: Send/Receive
-Actor: Reply
 	
 Flow tracing
 	log a message on each stage transition

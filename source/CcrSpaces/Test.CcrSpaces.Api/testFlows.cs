@@ -44,6 +44,7 @@ namespace Test.CcrSpaces.Api
         {
             var cfg = new CcrsOneWayFlowConfig();
             cfg.AddStage(new CcrsRequestSingleResponseChannel<string, int>(s => s.Length));
+            cfg.AddStage(new CcrsRequestSingleResponseChannel<int, int>(n => n+1));
             cfg.AddStage(new CcrsRequestSingleResponseChannel<int, bool>(n => n % 2 == 0));
             cfg.AddStage(new CcrsOneWayChannel<bool>(b => { Console.WriteLine(b); this.are.Set(); }));
 
