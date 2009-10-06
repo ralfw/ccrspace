@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using CcrSpaces.Api;
+using CcrSpaces.Api.Flows;
 using NUnit.Framework;
 
 namespace Test.CcrSpaces.Api
@@ -120,6 +121,22 @@ namespace Test.CcrSpaces.Api
                                    Assert.AreEqual("extest", ex.Message);
                                    this.are.Set();
                                });
+
+                Assert.IsTrue(this.are.WaitOne(500));
+            }
+        }
+
+
+        [Test]
+        public void Fluent_creation_of_onewayflow()
+        {
+            using(var space = new CcrSpace())
+            {
+                CcrsFlow<string> f = space.CreateFlow<string>()
+                    .Do(space.CreateChannel<string, int>(s => s.Length))
+                    .Do(space.CreateChannel<int>(n => { Console.WriteLine(n); this.are.Set(); }));
+
+                f.Post("hello");
 
                 Assert.IsTrue(this.are.WaitOne(500));
             }
