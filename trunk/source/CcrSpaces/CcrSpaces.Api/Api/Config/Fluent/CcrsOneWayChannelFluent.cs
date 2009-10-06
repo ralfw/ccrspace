@@ -9,7 +9,8 @@ namespace CcrSpaces.Api.Config.Fluent
 
         private readonly CcrsOneWayChannelConfig<TMessage> cfg = new CcrsOneWayChannelConfig<TMessage>
                                                                     {
-                                                                        ProcessSequentially = false         
+                                                                        ProcessSequentially = false,
+                                                                        ProcessInCurrentSyncContext = false
                                                                     };
 
 
@@ -32,7 +33,16 @@ namespace CcrSpaces.Api.Config.Fluent
 
         public CcrsOneWayChannelFluent<TMessage> Sequentially()
         {
+            if (!this.cfg.ProcessInCurrentSyncContext)
+                this.cfg.ProcessSequentially = true;
+            return this;
+        }
+
+
+        public CcrsOneWayChannelFluent<TMessage> OnCurrentSyncContext()
+        {
             this.cfg.ProcessSequentially = true;
+            this.cfg.ProcessInCurrentSyncContext = true;
             return this;
         }
 

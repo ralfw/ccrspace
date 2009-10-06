@@ -10,14 +10,15 @@ namespace CcrSpaces.Api
         private readonly Port<TMessage> channel;
 
 
-        public CcrsOneWayChannel(Action<TMessage> messageHandler)
-            : this(new CcrsOneWayChannelConfig<TMessage> { MessageHandler = messageHandler, TaskQueue = new DispatcherQueue(), ProcessSequentially = false })
+        public CcrsOneWayChannel(Action<TMessage> messageHandler) : this(messageHandler, false) {}
+        public CcrsOneWayChannel(Action<TMessage> messageHandler, bool processSequentially)
+            : this(new CcrsOneWayChannelConfig<TMessage> { MessageHandler = messageHandler, TaskQueue = new DispatcherQueue(), ProcessSequentially = processSequentially })
         { }
 
         public CcrsOneWayChannel(CcrsOneWayChannelConfig<TMessage> cfg)
         {
             this.channel = new Port<TMessage>();
-            this.channel.RegisterHandler(cfg.MessageHandler, cfg.TaskQueue, cfg.ProcessSequentially);
+            this.channel.RegisterHandler(cfg.MessageHandler, cfg.TaskQueue, cfg.ProcessSequentially, cfg.ProcessInCurrentSyncContext);
         }
 
 
