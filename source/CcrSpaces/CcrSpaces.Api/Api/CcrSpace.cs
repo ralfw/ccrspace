@@ -62,7 +62,6 @@ namespace CcrSpaces.Api
         {
             return new CcrsFlowFluent<TInput>();
         }
-
         
         public CcrsFlowFluent<TInput, TOutput> CreateFlow<TInput, TOutput>()
         {

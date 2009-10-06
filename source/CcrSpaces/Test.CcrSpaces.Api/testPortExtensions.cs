@@ -25,7 +25,7 @@ namespace Test.CcrSpaces.Api
         public void Port_handles_multiple_messages()
         {
             var p = new Port<int>();
-            p.RegisterHandler(n => this.are.Set(), new DispatcherQueue(), false);
+            p.RegisterHandler(n => this.are.Set(), new DispatcherQueue(), false, false);
 
             p.Post(1);
             Assert.IsTrue(this.are.WaitOne(500));
@@ -65,7 +65,8 @@ namespace Test.CcrSpaces.Api
                                     if (s == 1) this.are.Set();
                                 }, 
                                 new DispatcherQueue(), 
-                                processSequentially);
+                                processSequentially,
+                                false);
 
             p.Post(1);
             p.Post(10000);

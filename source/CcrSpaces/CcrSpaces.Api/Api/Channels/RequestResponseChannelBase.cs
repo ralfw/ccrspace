@@ -19,7 +19,7 @@ namespace CcrSpaces.Api
             this.taskQueue = cfg.TaskQueue;
 
             this.channel = new Port<CcrsRequestResponseChannelBaseConfig<TRequest, TResponse>.Request>();
-            this.channel.RegisterHandler(cfg.MessageHandler, this.taskQueue, cfg.ProcessSequentially);
+            this.channel.RegisterHandler(cfg.MessageHandler, this.taskQueue, cfg.ProcessSequentially, false);
         }
 
 

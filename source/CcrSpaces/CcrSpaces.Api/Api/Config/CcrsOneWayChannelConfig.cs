@@ -9,7 +9,8 @@ namespace CcrSpaces.Api.Config
     public class CcrsOneWayChannelConfig<TMessage>
     {
         public Action<TMessage> MessageHandler;
-        public bool ProcessSequentially;
         public DispatcherQueue TaskQueue;
+        public bool ProcessSequentially;
+        public bool ProcessInCurrentSyncContext;
     }
 }

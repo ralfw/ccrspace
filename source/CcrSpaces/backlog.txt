@@ -1,7 +1,13 @@
 fluent one way: on current sync context
 		sequential == true
 
+Create flow from duplex channel
+	.Do() (one way) -> CcrsFlowFluent
+	.Do<TOutput>() (req resp)
+
 Timeout duplex channel (stage)
+
+Logger channel to insert into flows
 
 Multiplex channel (generic duplex)
 	with interleave constraints
@@ -12,6 +18,9 @@ Switch channel (generic duplex)
 	
 Actor: Send/Receive
 Actor: Reply
+	
+Flow tracing
+	log a message on each stage transition
 	
 Config: Ccrspace with multiple dispatchers
 
@@ -30,6 +39,10 @@ When constructing flows from sequential stages the processing is not sequential
 	
 	is sth wrong with the seq processing strategy?
 	or is CCR Post() on a channel running on a separate thread?
+	
+	***maybe the problem lies with the internal response handler
+	used within flows? it´s defined as an Action without a sequentiality information.
+	it would need to be created using the sequentiality info of the next stage.
 	
 
 ===================
