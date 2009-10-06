@@ -23,7 +23,6 @@ namespace CcrSpaces.Api
         }
 
 
-        public void Post(TRequest message) { this.Post(message, resp => { }); }
         public void Post(TRequest message, Action<TResponse> responseHandler)
         {
             this.Post(
@@ -46,11 +45,17 @@ namespace CcrSpaces.Api
         }
 
 
+        public void PostUnknownType(object message, Action<object> responseHandler)
+        {
+            this.Post((TRequest)message, o => responseHandler(o));
+        }
+
+
         #region Implementation of IPort
 
         public void PostUnknownType(object item)
         {
-            this.Post((TRequest)item);
+            this.Post((TRequest)item, o => {});
         }
 
         public bool TryPostUnknownType(object item)

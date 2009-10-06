@@ -28,19 +28,24 @@ namespace CcrSpaces.Api
         }
 
 
-        public ICcrsSimplexChannel<TMessage> CreateChannel<TMessage>(Action<TMessage> messageHandler)
+        public ICcrsSimplexChannel<TMessage> CreateChannel<TMessage>(Action<TMessage> messageHandler) { return CreateChannel(messageHandler, false); }
+        public ICcrsSimplexChannel<TMessage> CreateChannel<TMessage>(Action<TMessage> messageHandler, bool processSequentially)
         {
-            var cfg = new CcrsOneWayChannelConfig<TMessage> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue, ProcessSequentially=false};
+            var cfg = new CcrsOneWayChannelConfig<TMessage> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue, ProcessSequentially=processSequentially};
             return new CcrsOneWayChannel<TMessage>(cfg);
         }
-        public ICcrsDuplexChannel<TRequest, TResponse> CreateChannel<TRequest, TResponse>(Func<TRequest, TResponse> messageHandler)
+
+        public ICcrsDuplexChannel<TRequest, TResponse> CreateChannel<TRequest, TResponse>(Func<TRequest, TResponse> messageHandler) { return CreateChannel(messageHandler, false); }
+        public ICcrsDuplexChannel<TRequest, TResponse> CreateChannel<TRequest, TResponse>(Func<TRequest, TResponse> messageHandler, bool processSequentially)
         {
-            var cfg = new CcrsRequestSingleResponseChannelConfig<TRequest, TResponse> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue, ProcessSequentially=false};
+            var cfg = new CcrsRequestSingleResponseChannelConfig<TRequest, TResponse> {MessageHandler=messageHandler, TaskQueue=this.defaultDispatcherQueue, ProcessSequentially=processSequentially};
             return new CcrsRequestSingleResponseChannel<TRequest, TResponse>(cfg);
         }
-        public ICcrsDuplexChannel<TRequest, TResponse> CreateChannel<TRequest, TResponse>(Action<TRequest, ICcrsSimplexChannel<TResponse>> messageHandler)
+
+        public ICcrsDuplexChannel<TRequest, TResponse> CreateChannel<TRequest, TResponse>(Action<TRequest, ICcrsSimplexChannel<TResponse>> messageHandler) { return CreateChannel(messageHandler, false); }
+        public ICcrsDuplexChannel<TRequest, TResponse> CreateChannel<TRequest, TResponse>(Action<TRequest, ICcrsSimplexChannel<TResponse>> messageHandler, bool processSequentially)
         {
-            var cfg = new CcrsRequestMultiResponseChannelConfig<TRequest, TResponse> { MessageHandler = messageHandler, TaskQueue = this.defaultDispatcherQueue, ProcessSequentially=false };
+            var cfg = new CcrsRequestMultiResponseChannelConfig<TRequest, TResponse> { MessageHandler = messageHandler, TaskQueue = this.defaultDispatcherQueue, ProcessSequentially=processSequentially };
             return new CcrsRequestMultiResponseChannel<TRequest, TResponse>(cfg);
         }
 

@@ -27,7 +27,7 @@ namespace Test.CcrSpaces.Api
         {
             var sut = new CcrsRequestSingleResponseChannel<int, bool>(n => { this.are.Set(); return true; });
 
-            sut.Post(1);
+            sut.PostUnknownType(1);
 
             Assert.IsTrue(this.are.WaitOne(500));
         }
@@ -54,7 +54,7 @@ namespace Test.CcrSpaces.Api
             var cfg = new CcrsRequestSingleResponseChannelConfig<int, bool> {MessageHandler = n=>{this.are.Set(); return true;}, TaskQueue=new DispatcherQueue()};
             var sut = new CcrsRequestSingleResponseChannel<int, bool>(cfg);
 
-            sut.Post(1);
+            sut.PostUnknownType(1);
 
             Assert.IsTrue(this.are.WaitOne(500));
         }
