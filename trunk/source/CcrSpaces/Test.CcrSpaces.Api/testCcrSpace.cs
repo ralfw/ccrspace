@@ -141,5 +141,25 @@ namespace Test.CcrSpaces.Api
                 Assert.IsTrue(this.are.WaitOne(500));
             }
         }
+
+
+        [Test]
+        public void Fluent_creation_of_reqrespflow()
+        {
+            using(var space = new CcrSpace())
+            {
+                CcrsFlow<string, int> f = space.CreateFlow<string, int>()
+                    .Do(space.CreateChannel<string, int>(s => s.Length))
+                    .Do(space.CreateChannel<int, int>(n => -n));
+                    
+
+                f.Post("hello", n =>{
+                                        Console.WriteLine(n);
+                                        this.are.Set();
+                                    });
+
+                Assert.IsTrue(this.are.WaitOne(500));
+            }
+        }
     }
 }
