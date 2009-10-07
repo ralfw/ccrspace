@@ -1,7 +1,13 @@
-﻿using System;
+﻿/*
+ * CCR Space
+ * (c) 2009 by Ralf Westphal
+ * http://code.google.com/p/ccrspace
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CcrSpaces.Api.Actors;
 using CcrSpaces.Api.Config;
 using CcrSpaces.Api.Config.Fluent;
 using CcrSpaces.Api.Flows;
@@ -62,22 +68,25 @@ namespace CcrSpaces.Api
         {
             return new CcrsFlowFluent<TInput>();
         }
-        
         public CcrsFlowFluent<TInput, TOutput> CreateFlow<TInput, TOutput>()
         {
             return new CcrsFlowFluent<TInput, TOutput>();
         }
 
 
-        public CcrsActor CreateActor(Func<CcrsActorContext, IEnumerator<ITask>> actorMethod)
+        public CcrsActorChannel CreateActor(CcrsActorBase objectActor)
         {
-            return new CcrsActor();
+            return new CcrsActorChannel(objectActor, this.defaultDispatcherQueue);
+        }
+        public CcrsActorChannel CreateActor(Func<CcrsActorContext, IEnumerator<ITask>> methodActor)
+        {
+            return new CcrsActorChannel(methodActor, this.defaultDispatcherQueue);
         }
 
 
         public CcrsTry Try(Action tryThis)
         {
-            return new CcrsTry(tryThis);
+            return new CcrsTry(tryThis, this.defaultDispatcherQueue);
         }
 
 

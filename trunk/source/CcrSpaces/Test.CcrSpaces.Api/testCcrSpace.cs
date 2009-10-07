@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using CcrSpaces.Api;
 using CcrSpaces.Api.Flows;
+using Microsoft.Ccr.Core;
 using NUnit.Framework;
 
 namespace Test.CcrSpaces.Api
@@ -122,6 +123,7 @@ namespace Test.CcrSpaces.Api
                                    this.are.Set();
                                });
 
+                Assert.AreEqual(0, Dispatcher.ActiveCausalities.Count);
                 Assert.IsTrue(this.are.WaitOne(500));
             }
         }

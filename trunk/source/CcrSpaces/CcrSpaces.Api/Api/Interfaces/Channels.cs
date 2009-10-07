@@ -20,7 +20,10 @@ namespace CcrSpaces.Api
         void PostUnknownType(object request, Action<object> responseHandler);
     }
 
-    public interface ICcrsDuplexChannel<TRequest, TResponse> : ICcrsDuplexChannel
+    public interface ICcrsDuplexChannel<TInput> : ICcrsDuplexChannel
+    {}
+
+    public interface ICcrsDuplexChannel<TRequest, TResponse> : ICcrsDuplexChannel<TRequest>
     {
         void Post(TRequest request, Action<TResponse> responseHandler);
         void Post(TRequest request, ICcrsSimplexChannel<TResponse> responseSimplexChannel);

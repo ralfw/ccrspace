@@ -1,5 +1,7 @@
 ﻿using System;
 using CcrSpaces.Api.Config;
+using CcrSpaces.Api.Config.Fluent;
+using CcrSpaces.Api.Flows;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Api.Extensions
@@ -15,6 +17,23 @@ namespace CcrSpaces.Api.Extensions
                                                                            ProcessInCurrentSyncContext = processInCurrentSyncContext,
                                                                            TaskQueue = new DispatcherQueue()
                                                                        }));
+        }
+
+
+        public static CcrsFlow<TRequest> Do<TRequest>(this ICcrsDuplexChannel<TRequest> headStage, ICcrsSimplexChannel finalStage)
+        {
+            return new CcrsFlowFluent<TRequest>().Do(headStage).Do(finalStage);
+        }
+
+        public static CcrsFlowFluent<TRequest> Do<TRequest>(this ICcrsDuplexChannel<TRequest> headStage, ICcrsDuplexChannel nextStage)
+        {
+            return new CcrsFlowFluent<TRequest>().Do(headStage).Do(nextStage);
+        }
+
+
+        public static CcrsFlow<TInput, TOutput> Do<TInput, TOutput>(this ICcrsDuplexChannel<TInput> headStage, ICcrsDuplexChannel nextStage)
+        {
+            return new CcrsFlowFluent<TInput, TOutput>().Do(headStage).Do(nextStage);
         }
     }
 }
