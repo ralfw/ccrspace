@@ -82,5 +82,32 @@ namespace Test.CcrSpaces.Api
 
             assertListWasFilledCorrectly(j, numbers.Count);
         }
+
+
+        [Test]
+        public void Processing_with_iterator()
+        {
+            Arbiter.Activate(
+                new DispatcherQueue(),
+                new IterativeTask<int>(10, Count)
+                );
+
+            Assert.IsTrue(this.are.WaitOne(500));
+        }
+
+        IEnumerator<ITask> Count(int start)
+        {
+            int n = 0;
+            var p = new Port<object>();
+
+            p.Post("hello");
+            p.Post(start);
+            yield return new Receiver<object>(false, p, o=>o is int, new Task<object>(o => n=(int)o));
+
+            yield return new Receiver<object>(false, p, o => o is string, new Task<object>(Console.WriteLine));
+
+            Console.WriteLine("received: {0}", n);
+            this.are.Set();
+        }
     }
 }

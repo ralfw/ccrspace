@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using CcrSpaces.Api;
 using CcrSpaces.Api.Config;
 using CcrSpaces.Api.Flows;
-using Microsoft.Ccr.Core;
 using NUnit.Framework;
+using CcrSpaces.Api.Extensions;
 
 namespace Test.CcrSpaces.Api
 {
@@ -58,7 +54,7 @@ namespace Test.CcrSpaces.Api
         [Test]
         public void Create_reqrespflow_from_config()
         {
-            using (var space = new CcrSpace())
+            using (new CcrSpace())
             {
                 var cfg = new CcrsRequestResponseFlowConfig();
                 cfg.AddStage(new CcrsRequestSingleResponseChannel<string, int>(s => s.Length));
@@ -68,10 +64,36 @@ namespace Test.CcrSpaces.Api
                 flow.Post("hello", n =>{
                                            Console.WriteLine(n);
                                            this.are.Set();
-                                       });
+                });
 
                 Assert.IsTrue(this.are.WaitOne(500));
             }
+        }
+
+
+        [Test]
+        public void Create_onewayflow_from_duplexchannel()
+        {
+            var ch = new CcrsRequestSingleResponseChannel<string, int>(s => s.Length);
+            var f = ch
+                .Do(new CcrsRequestSingleResponseChannel<int, int>(n => -n))
+                .Do(new CcrsOneWayChannel<int>(n => { Console.WriteLine(n); this.are.Set(); }));
+
+            f.Post("hello");
+
+            Assert.IsTrue(this.are.WaitOne(500));
+        }
+
+
+        [Test]
+        public void Create_reqrespflow_from_duplexchannel()
+        {
+            var ch = new CcrsRequestSingleResponseChannel<string, int>(s => s.Length);
+            var f = ch.Do<string, int>(new CcrsRequestSingleResponseChannel<int, int>(n => 2*n));
+
+            f.Post("hello", n => { Console.WriteLine(n); this.are.Set(); });
+
+            Assert.IsTrue(this.are.WaitOne(500));
         }
     }
 

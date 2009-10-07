@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Actors.cs" />
+    <Compile Include="Api\Actors\CcrsActorDialogMessage.cs" />
+    <Compile Include="Api\Actors\CcrsActorBase.cs" />
+    <Compile Include="Api\Actors\CcrsActorChannel.cs" />
+    <Compile Include="Api\Actors\CcrsActorContext.cs" />
     <Compile Include="Api\CcrSpace.cs" />
     <Compile Include="Api\Channels\CcrsOneWayChannel.cs" />
     <Compile Include="Api\Channels\CcrsRequestMultiResponseChannel.cs" />

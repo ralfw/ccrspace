@@ -1,11 +1,4 @@
-Create flow from duplex channel
-	.Do() (one way) -> CcrsFlowFluent
-	.Do<TOutput>() (req resp)
-
 Scatter/Gather (duplex)
-
-Actor: Send/Receive
-Actor: Reply
 
 Timeout duplex channel (stage)
 
@@ -40,6 +33,11 @@ When constructing flows from sequential stages the processing is not sequential
 	***maybe the problem lies with the internal response handler
 	used within flows? it´s defined as an Action without a sequentiality information.
 	it would need to be created using the sequentiality info of the next stage.
+
+Construction of channels from individual parameters is scattered throughout the code.
+	Create a factory class with an interface
+	Let the CcrSpace implement the factory class interface
+	The factory can be primed with a dispatcher and a dpq
 	
 
 ===================
@@ -62,3 +60,12 @@ Pub/sub
 Concat() for duplex channels
 	accepts duplex or simplex channel as next stage
 	
+Standalone CcrsCatch() with using()
+
+Create flow from duplex channel
+	.Do() (one way) -> CcrsFlowFluent
+	.Do<TOutput>() (req resp)
+
+Actor: Send/Receive
+Actor: Reply
+
