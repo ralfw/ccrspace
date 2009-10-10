@@ -1,18 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CcrSpaces.Api", "Test.CcrSpaces.Api\Test.CcrSpaces.Api.csproj", "{A94034C7-79F2-4F1E-A51E-C720B3C5FEE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CcrSpace.Core", "CcrSpace.Core\CcrSpace.Core.csproj", "{3CEDC287-356D-49B3-A752-DCD38D55A5C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CcrSpaces.Api", "CcrSpaces.Api\CcrSpaces.Api.csproj", "{BA6021D8-FFBF-4997-9E3A-C5381017B608}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2EFEBBD9-3CC6-496E-A80C-48BB17BD467E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3729C89E-D374-44A8-B6B3-C92156D7720B}"
-	ProjectSection(SolutionItems) = preProject
-		backlog.txt = backlog.txt
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Channels", "Channels", "{D3528890-6B05-46C4-A7D5-0FCBFD8235AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Design.CcrSpaces.Api", "Design.CcrSpaces.Api\Design.CcrSpaces.Api.csproj", "{B80ECB1B-1CF7-4DF2-B44F-0C0158041E8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CcrSpace.Channels", "CcrSpace.Channels\CcrSpace.Channels.csproj", "{7B0FE665-6715-46D4-87EA-D42219B68CB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CcrSpace.Channels", "Test.CcrSpace.Channels\Test.CcrSpace.Channels.csproj", "{F9CD9D80-4C4E-4519-BBFC-3ABAA7660884}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CcrSpace.Core", "Test.CcrSpace.Core\Test.CcrSpace.Core.csproj", "{81BC718A-493D-4212-9463-6E530F247AEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ChannelWithSyncContext", "Test.ChannelWithSyncContext\Test.ChannelWithSyncContext.csproj", "{87EEAE4C-A9F1-4C76-B0C3-B6A17221BCBF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14D4F206-4DBD-4261-AA7B-3166443FF8E5}"
+	ProjectSection(SolutionItems) = preProject
+		Backlog.txt = Backlog.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,18 +26,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A94034C7-79F2-4F1E-A51E-C720B3C5FEE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A94034C7-79F2-4F1E-A51E-C720B3C5FEE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A94034C7-79F2-4F1E-A51E-C720B3C5FEE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A94034C7-79F2-4F1E-A51E-C720B3C5FEE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA6021D8-FFBF-4997-9E3A-C5381017B608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA6021D8-FFBF-4997-9E3A-C5381017B608}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA6021D8-FFBF-4997-9E3A-C5381017B608}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA6021D8-FFBF-4997-9E3A-C5381017B608}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B80ECB1B-1CF7-4DF2-B44F-0C0158041E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B80ECB1B-1CF7-4DF2-B44F-0C0158041E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B80ECB1B-1CF7-4DF2-B44F-0C0158041E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B80ECB1B-1CF7-4DF2-B44F-0C0158041E8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CEDC287-356D-49B3-A752-DCD38D55A5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CEDC287-356D-49B3-A752-DCD38D55A5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CEDC287-356D-49B3-A752-DCD38D55A5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CEDC287-356D-49B3-A752-DCD38D55A5C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B0FE665-6715-46D4-87EA-D42219B68CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B0FE665-6715-46D4-87EA-D42219B68CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B0FE665-6715-46D4-87EA-D42219B68CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0FE665-6715-46D4-87EA-D42219B68CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9CD9D80-4C4E-4519-BBFC-3ABAA7660884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9CD9D80-4C4E-4519-BBFC-3ABAA7660884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9CD9D80-4C4E-4519-BBFC-3ABAA7660884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9CD9D80-4C4E-4519-BBFC-3ABAA7660884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81BC718A-493D-4212-9463-6E530F247AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BC718A-493D-4212-9463-6E530F247AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BC718A-493D-4212-9463-6E530F247AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BC718A-493D-4212-9463-6E530F247AEF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87EEAE4C-A9F1-4C76-B0C3-B6A17221BCBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87EEAE4C-A9F1-4C76-B0C3-B6A17221BCBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87EEAE4C-A9F1-4C76-B0C3-B6A17221BCBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,5 +49,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3CEDC287-356D-49B3-A752-DCD38D55A5C7} = {2EFEBBD9-3CC6-496E-A80C-48BB17BD467E}
+		{81BC718A-493D-4212-9463-6E530F247AEF} = {2EFEBBD9-3CC6-496E-A80C-48BB17BD467E}
+		{7B0FE665-6715-46D4-87EA-D42219B68CB8} = {D3528890-6B05-46C4-A7D5-0FCBFD8235AA}
+		{F9CD9D80-4C4E-4519-BBFC-3ABAA7660884} = {D3528890-6B05-46C4-A7D5-0FCBFD8235AA}
+		{87EEAE4C-A9F1-4C76-B0C3-B6A17221BCBF} = {D3528890-6B05-46C4-A7D5-0FCBFD8235AA}
 	EndGlobalSection
 EndGlobal

@@ -7,38 +7,50 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using CcrSpaces.Api;
-using CcrSpaces.Api.Extensions;
+using CcrSpace.Channels;
+using Microsoft.Ccr.Core;
 
 namespace Test.ChannelWithSyncContext
 {
     public partial class Form1 : Form
     {
-        private readonly ICcrsDuplexChannel<int, int> chProgress;
+        private Port<int> chMakeProgress;
+        private Port<int> chReportProgress;
 
 
         public Form1()
         {
             InitializeComponent();
 
-            this.chProgress = new CcrsRequestMultiResponseChannel<int, int>(MakeProgress);
+            var cfg = new CcrsChannelConfig<int>
+                          {
+                              MessageHandler = n=>this.textBox1.Text=n.ToString(),
+                              HandlerMode = CcrsChannelHandlerModes.InCreatorSyncContext
+                          };
+            this.chReportProgress = new ChannelFactory().CreateChannel<int>(cfg);
+
+            cfg = new CcrsChannelConfig<int>
+            {
+                MessageHandler = MakeProgress,
+                HandlerMode = CcrsChannelHandlerModes.Parallel
+            };
+            this.chMakeProgress = new ChannelFactory().CreateChannel<int>(cfg);
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.chProgress.Post(50, n => this.textBox1.Text = n.ToString(), true);
+            this.chMakeProgress.Post(50);
         }
 
 
-        private void MakeProgress(int n, ICcrsSimplexChannel<int> showProgress)
+        private void MakeProgress(int n)
         {
             for(int i=0; i<n; i++)
             {
-                showProgress.Post(i);
+                this.chReportProgress.Post(i);
                 Thread.Sleep(100);
             }
         }
-
     }
 }
