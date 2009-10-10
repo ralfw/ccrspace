@@ -97,6 +97,16 @@ namespace Test.CcrSpaces.Api
         }
 
 
+        [Test]
+        public void Fluent_actor_creation()
+        {
+            MyActor a = new MyActor();
+            CcrsActorChannel ch = a;
+            ch.Post(123);
+            Assert.IsTrue(a.are.WaitOne(500));
+        }
+
+
         private class ReceivingActor : TestActorBase
         {
             public readonly List<object> ReceivedValues = new List<object>();
@@ -198,6 +208,22 @@ namespace Test.CcrSpaces.Api
             {
                 return this.are.WaitOne(msec);
             }
+        }
+
+
+        private class MyActor : CcrsActorBaseToChannel
+        {
+            public readonly AutoResetEvent are = new AutoResetEvent(false);
+
+            #region Overrides of CcrsActorBase
+
+            internal override IEnumerator<ITask> Run(CcrsActorContext ctx)
+            {
+                yield return ctx.Receive<int>();
+                this.are.Set();
+            }
+
+            #endregion
         }
     }
 }

@@ -1,5 +1,8 @@
 Scatter/Gather (duplex)
 
+Branches in flows
+	use a custom channel/stage taking one input and several output channels
+	
 Timeout duplex channel (stage)
 
 Logger channel to insert into flows
@@ -17,6 +20,8 @@ Config: Ccrspace with multiple dispatchers
 Pub/sub: with filter
 
 Named listeners and name resolution
+
+Should the default for sequential processing be true?
 
 ======
 Issues

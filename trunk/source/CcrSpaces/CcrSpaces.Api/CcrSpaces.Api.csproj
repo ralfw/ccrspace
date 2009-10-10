@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Actors\CcrsActorBaseToChannel.cs" />
     <Compile Include="Api\Actors\CcrsActorDialogMessage.cs" />
     <Compile Include="Api\Actors\CcrsActorBase.cs" />
     <Compile Include="Api\Actors\CcrsActorChannel.cs" />
