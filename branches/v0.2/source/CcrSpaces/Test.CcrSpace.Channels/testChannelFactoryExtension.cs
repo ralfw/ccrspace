@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CcrSpace.Channels;
-using CcrSpace.Core;
+using CcrSpaces.Channels;
+using CcrSpaces.Core;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
 using Rhino.Mocks;

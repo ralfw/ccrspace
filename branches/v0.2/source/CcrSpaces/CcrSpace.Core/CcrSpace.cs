@@ -1,6 +1,6 @@
 ﻿using Microsoft.Ccr.Core;
 
-namespace CcrSpace.Core
+namespace CcrSpaces.Core
 {
     public class CcrSpace : ICcrSpace
     {

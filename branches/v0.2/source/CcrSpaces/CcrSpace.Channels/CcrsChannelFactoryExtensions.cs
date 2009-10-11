@@ -1,8 +1,8 @@
 ﻿using System;
-using CcrSpace.Core;
+using CcrSpaces.Core;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpace.Channels
+namespace CcrSpaces.Channels
 {
     public static class CcrsChannelFactoryExtensions
     {

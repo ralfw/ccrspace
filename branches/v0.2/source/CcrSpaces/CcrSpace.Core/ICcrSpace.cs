@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpace.Core
+namespace CcrSpaces.Core
 {
     public interface ICcrSpace : IDisposable
     {

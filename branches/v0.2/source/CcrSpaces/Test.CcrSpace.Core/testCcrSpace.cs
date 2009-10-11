@@ -22,7 +22,7 @@ namespace Test.CcrSpace.Core
         }
     }
 
-    class SeeThruCcrSpace : global::CcrSpace.Core.CcrSpace
+    class SeeThruCcrSpace : CcrSpaces.Core.CcrSpace
     {
         public Dispatcher TheDispatcher { get { return base.defaultDispatcher;  } }
     }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using CcrSpace.Channels;
+using CcrSpaces.Channels;
 using Microsoft.Ccr.Core;
 
 namespace Test.ChannelWithSyncContext
