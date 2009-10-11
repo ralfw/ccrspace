@@ -2,7 +2,7 @@
 using System.Threading;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpace.Channels
+namespace CcrSpaces.Channels
 {
     partial class ChannelFactory
     {

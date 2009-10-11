@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using CcrSpace.Core;
-using CcrSpace.Channels;
+using CcrSpaces.Core;
+using CcrSpaces.Channels;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
 
