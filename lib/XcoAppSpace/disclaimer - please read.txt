@@ -1,0 +1,37 @@
+Disclaimer
+----------
+
+Please note that, although Xcoordination (www.xcoordination.com) grants you the right to use the Application Space binaries and sources for free according to the GPLv2 and its special extension, in addition you need to observe the individual licenses of the software packages needed by the Application Space and included in the distribution package!
+
+Since the Application Space does not fully encapsulate all 3rd party libraries, you will access their APIs directly from your application code. This is intended by the Application Space as it is just a thin wrapper around those technologies.
+
+However this entails you need to check the licenses of those packages and possibly explicitly license them yourself for use in your application. This especially pertains to the following 3rd party packages:
+
+
+-Microsoft Concurrency Coordination Runtime (CCR)
+In order to use the CCR - either on its own or in conjunction with the
+Application Space - you need to license it appropriately with regard to the software you are writing. Please see the CCR download and license conditions at http://www.microsoft.com/ccrdss/ or http://msdn.microsoft.com/en-us/robotics/default.aspx for any details.
+
+The Application Space license expressly does not grant you any rights for using the CCR!
+
+
+-agsXMPP SDK (Jabber API)
+In order to use the Jabber communication service with the Application Space you need to comply with the license of the agsXMPP SDK. It is offered under both GPL and commercial license. Depending on your software’s license you need to explicitly license the agsXMPP SDK. Please see the agsXMPP manufacturer´s site for details: http://www.ag-software.de/index.php?page=agsxmpp-sdk.
+The Application Space license expressly does not grant you any rights in addition to the agsXMPP SDK´s license. Please support the manufacturer by licensing it properly.
+
+
+
+No Warranty
+-----------
+
+Xcoordination explicitly does not provide any warranty on software that you find in the Application Space package or that you download from this site.
+
+
+
+What Does It Mean in Plain Words?
+---------------------------------
+
+Once you leave the evaluation phase of the Application Space check the licenses of CCR and agsXMPP SDK if you need to pay royalties to Microsoft or AG Software for using their libraries. 
+
+
+

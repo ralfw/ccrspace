@@ -1,1 +1,17 @@
-Request/response channel
+exception handling on ccr space
+
+ccr port host
+	use appspace
+		Host<T>, Host<T0, T1, ...>
+		Connect<T>, Connect<T0, T1, ...>
+		
+services on ccr space?
+	ICcrsService
+	ICcrsResourcefulService
+	
+	RegisterService<TService>(service [, name])
+	ResolveService<TService([name])
+	EnumServices<TService>() -> IEnum<TService>
+	
+register config string interpreters statically on ccr space
+	
