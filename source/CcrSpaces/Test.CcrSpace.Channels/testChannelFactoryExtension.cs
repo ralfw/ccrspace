@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using CcrSpaces.Channels;
 using CcrSpaces.Core;
@@ -40,7 +37,7 @@ namespace Test.CcrSpace.Channels
 
             ChannelFactory.Instance = mockCf;
 
-            Assert.AreSame(mockCf.POneWay, space.CreateChannel<int>(handler));
+            Assert.AreSame(mockCf.POneWay, space.CreateChannel(handler));
 
             Assert.AreSame(handler, mockCf.CfgOneWay.MessageHandler);
             Assert.AreSame(dpq, mockCf.CfgOneWay.TaskQueue);

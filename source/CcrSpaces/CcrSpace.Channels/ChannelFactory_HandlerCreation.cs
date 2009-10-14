@@ -42,7 +42,9 @@ namespace CcrSpaces.Channels
             sequentialHandler = m =>
                                     {
                                         safeHandler(m);
+// ReSharper disable AccessToModifiedClosure
                                         Register(port, config.TaskQueue, false, sequentialHandler);
+// ReSharper restore AccessToModifiedClosure
                                     };
             Register(port, config.TaskQueue, false, sequentialHandler);
         }

@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using CcrSpaces.Channels;
@@ -14,8 +8,8 @@ namespace Test.ChannelWithSyncContext
 {
     public partial class Form1 : Form
     {
-        private Port<int> chMakeProgress;
-        private Port<int> chReportProgress;
+        private readonly Port<int> chMakeProgress;
+        private readonly Port<int> chReportProgress;
 
 
         public Form1()
@@ -27,14 +21,14 @@ namespace Test.ChannelWithSyncContext
                               MessageHandler = n=>this.textBox1.Text=n.ToString(),
                               HandlerMode = CcrsChannelHandlerModes.InCurrentSyncContext
                           };
-            this.chReportProgress = new ChannelFactory().CreateChannel<int>(cfg);
+            this.chReportProgress = new ChannelFactory().CreateChannel(cfg);
 
             cfg = new CcrsChannelConfig<int>
             {
                 MessageHandler = MakeProgress,
                 HandlerMode = CcrsChannelHandlerModes.Parallel
             };
-            this.chMakeProgress = new ChannelFactory().CreateChannel<int>(cfg);
+            this.chMakeProgress = new ChannelFactory().CreateChannel(cfg);
         }
 
 
