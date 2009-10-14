@@ -1,0 +1,2359 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<doc>
+  <assembly>
+    <name>XcoAppSpaces</name>
+  </assembly>
+  <members>
+    <member name="T:XcoAppSpaces.Core.Extensions.PortExtensions">
+      <summary>
+            Extensions for the Port{T} class.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.PortExtensions.TestSync``1(Microsoft.Ccr.Core.Port{``0})">
+      <summary>
+            Get a message from the port. If the port is currently empty wait for the next message.
+            </summary>
+      <typeparam name="TPortElement">The message type.</typeparam>
+      <param name="port">The port.</param>
+      <returns>The next message in the port.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.PortExtensions.TestSync``1(Microsoft.Ccr.Core.Port{``0},System.Int32)">
+      <summary>
+            Get a message from the port. If the port is currently empty wait for the next message 
+            until the given timeout. An exception is thrown if no message arrives in time.
+            </summary>
+      <typeparam name="TPortElement">The message type.</typeparam>
+      <param name="port">The port.</param>
+      <param name="timeout">The maximum time to wait.</param>
+      <returns>The next message in the port.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.PortExtensions.PostWithCausality``1(Microsoft.Ccr.Core.Port{``0},``0,Microsoft.Ccr.Core.Port{System.Exception})">
+      <summary>
+            Posts a message to the port while using the given exceptionPort as causality.
+            </summary>
+      <typeparam name="TPortElement">The message type.</typeparam>
+      <param name="port">The port.</param>
+      <param name="message">The message to be posted.</param>
+      <param name="exceptionPort">The port where exceptions should be returned.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.PortExtensions.PostWithCausality``1(Microsoft.Ccr.Core.Port{``0},``0,Microsoft.Ccr.Core.Handler{System.Exception})">
+      <summary>
+            Posts a message to the port while using the given exceptionHandler register to a causality 
+            for returning exceptions.
+            </summary>
+      <typeparam name="TPortElement">The message type.</typeparam>
+      <param name="port">The port.</param>
+      <param name="message">The message to be posted.</param>
+      <param name="exceptionHandler">The handler where exceptions should be returned.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.PortExtensions.PostWithCausality``1(Microsoft.Ccr.Core.Port{``0},``0,Microsoft.Ccr.Core.Handler{System.Exception},Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Posts a message to the port while using the given exceptionHandler register to a causality 
+            for returning exceptions.
+            </summary>
+      <typeparam name="TPortElement">The message type.</typeparam>
+      <param name="port">The port.</param>
+      <param name="message">The message to be posted.</param>
+      <param name="exceptionHandler">The handler where exceptions should be returned.</param>
+      <param name="coordinationPort">The port which should registered in the causality as coordination port.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.PortExtensions.PostWithCausality``1(Microsoft.Ccr.Core.Port{``0},``0,Microsoft.Ccr.Core.Port{System.Exception},Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Posts a message to the port while using the given exceptionPort as causality.
+            </summary>
+      <typeparam name="TPortElement">The message type.</typeparam>
+      <param name="port">The port.</param>
+      <param name="message">The message to be posted.</param>
+      <param name="exceptionPort">The port where exceptions should be returned.</param>
+      <param name="coordinationPort">The port which should registered in the causality as coordination port.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.PortExtensions.GetPortInfo(Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Get information about the port concerning remote communication.
+            </summary>
+      <param name="port">The port.</param>
+      <returns>Remote communication information about the port.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Core.CausalitySyncContext">
+      <summary>
+             Using the causalities in the SynchronizationContext
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Core.CausalitySyncContext.NoSyncContext">
+      <summary>
+            No synchronization context used
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Core.CausalitySyncContext.UseCurrentSyncContext">
+      <summary>
+            SynchronizationContext.Current will be used for causalities
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions">
+      <summary>
+            XcoAppSpace extension methods for simplifying usage of the application space.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.Receive``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0})">
+      <summary>
+            Receive messages from the given port. Whenever an element is posted to the port, the given handler is called.
+            </summary>
+      <typeparam name="TMessage">The mesage type of the port.</typeparam>
+      <param name="space">The XcoAppSpace.</param>
+      <param name="port">The port from which the messages should be received.</param>
+      <param name="handler">The method to be called when a message is received from the port.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.Receive``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0},XcoAppSpaces.Core.CausalitySyncContext)">
+      <summary>
+            Receive messages from the given port. Whenever an element is posted to the port, the given handler is called.
+            </summary>
+      <typeparam name="TMessage">The mesage type of the port.</typeparam>
+      <param name="space">The XcoAppSpace.</param>
+      <param name="port">The port from which the messages should be received.</param>
+      <param name="handler">The method to be called when a message is received from the port.</param>
+      <param name="receiveInCurrentSyncContext">If true, the current synchronization context is used for processing the messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.ReceiveSequentially``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0})">
+      <summary>
+            Receive messages from the given port. Whenever an element is posted to the port, the given handler is called.
+            Messages are received sequentially, meaning that the next message is received only after processing of the
+            previous one has been finished.
+            </summary>
+      <typeparam name="TMessage">The mesage type of the port.</typeparam>
+      <param name="space">The XcoAppSpace.</param>
+      <param name="port">The port from which the messages should be received.</param>
+      <param name="handler">The method to be called when a message is received from the port.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.ReceiveSequentially``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0},XcoAppSpaces.Core.CausalitySyncContext)">
+      <summary>
+            Receive messages from the given port. Whenever an element is posted to the port, the given handler is called.
+            Messages are received sequentially, meaning that the next message is received only after processing of the
+            previous one has been finished.
+            </summary>
+      <typeparam name="TMessage">The mesage type of the port.</typeparam>
+      <param name="space">The XcoAppSpace.</param>
+      <param name="port">The port from which the messages should be received.</param>
+      <param name="handler">The method to be called when a message is received from the port.</param>
+      <param name="receiveInCurrentSyncContext">If true, the current synchronization context is used for processing the messages.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Core.CausalityHelpers">
+      <summary>
+            Helper methods for getting and setting the current causalities.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.LocalWorkerRegistry">
+      <summary>
+            Wrapper class for access to the local workers by the Core.Communication components.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.PublishMode">
+      <summary>
+             Defines if a worker should be published so other appspace
+             instances can connnect to it
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Core.PublishMode.Unpublished">
+      <summary>
+             Worker will no be published, invisible for other spaces
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Core.PublishMode.Published">
+      <summary>
+             Worker will be published to other appspace instances
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.Unsubscribe">
+      <summary>
+            Non-generic base class for unsubscribing from events that are published by workers
+            using the XcoPublisher class.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.Unsubscribe`1">
+      <summary>
+            Class for unsubscribing from events that are published by workers
+            using the XcoPublisher class.
+            </summary>
+      <typeparam name="T">The type of event.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Unsubscribe`1.#ctor(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Creates a new Unsubscribe message.
+            </summary>
+      <param name="eventPort">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Unsubscribe`1.#ctor(Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Creates a new Unsubscribe message.
+            </summary>
+      <param name="eventPort">The port that should be unsubscribed.</param>
+    </member>
+    <member name="P:XcoAppSpaces.Core.Unsubscribe`1.EventPort">
+      <summary>
+            The port that should be unsubscribed.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.Subscribe">
+      <summary>
+            Non-generic base class for subscribing to events that are published by workers
+            using the XcoPublisher class.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.Subscribe`1">
+      <summary>
+            Class for Subscribing to events that are published by workers
+            using the XcoPublisher class.
+            </summary>
+      <typeparam name="T">The type of event.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Subscribe`1.#ctor(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Creates a new Subscribe message.
+            </summary>
+      <param name="eventPort">The port that should be subscribed to receive events.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Subscribe`1.#ctor(Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Creates a new Subscribe message.
+            </summary>
+      <param name="eventPort">The port that should be subscribed to receive events.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Subscribe`1.#ctor(Microsoft.Ccr.Core.Port{`0},System.Linq.Expressions.Expression{System.Predicate{`0}})">
+      <summary>
+            Creates a new Subscribe message.
+            </summary>
+      <param name="eventPort">The port that should be subscribed to receive events.</param>
+      <param name="filterExpr">Predicate that can be used for filtering the event messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Subscribe`1.#ctor(Microsoft.Ccr.Core.IPort,System.Linq.Expressions.Expression{System.Predicate{`0}})">
+      <summary>
+            Creates a new Subscribe message.
+            </summary>
+      <param name="eventPort">The port that should be subscribed to receive events.</param>
+      <param name="filterExpr">Predicate that can be used for filtering the event messages.</param>
+    </member>
+    <member name="P:XcoAppSpaces.Core.Subscribe`1.EventPort">
+      <summary>
+            The port that should be subscribed to to receive events.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoSpaceInfo">
+      <summary>
+            Class that presents meta information about the space.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoSpaceInfo.Workers">
+      <summary>
+            Information about the workers of this space instance.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoSpaceInfo.CommunicationServices">
+      <summary>
+            Information about the communication services of this space instance.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoSpaceInfo.SecurityService">
+      <summary>
+            The security service that is used by this space instance.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoWorkerInfo">
+      <summary>
+            Presents information about a worker in the space.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.Name">
+      <summary>
+            The name of the worker.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.IsPublished">
+      <summary>
+            True if the worker is published (reachable by other appspace instances).
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.IsRemote">
+      <summary>
+            True if the worker is not local, but actually hosted by another appspace instance.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.RemoteAddress">
+      <summary>
+            The remote address of the worker, or null if the worker is local.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.CommService">
+      <summary>
+            Information about the communication service that the worker uses, or null
+            if the worker is local.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.Worker">
+      <summary>
+            The worker instance.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.NumberOfConnections">
+      <summary>
+            The number of connections to the worker (= how many times the "ConnectWorker" method
+            was called to connect to this worker).
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoAppSpace">
+      <summary>
+            The main class of XcoAppSpaces. XcoAppSpace represents the application space
+            and allows running workers, as well as resolving worker that have already been
+            started and connecting to workers running at a remote space. It also provides
+            basic dependency injection container functionality.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.#ctor">
+      <summary>
+            Creates a new XcoAppSpace without remote communication functionality.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.#ctor(System.String)">
+      <summary>
+            Creates a new XcoAppSpace by using the given config string.
+            </summary>
+      <param name="configString">The config string to configure the appspace instance.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.Resolve``1">
+      <summary>
+            Resolves an instance of the requested type with the given name from the appspace's 
+            DI container.
+            </summary>
+      <typeparam name="TContract">The type that is requested.</typeparam>
+      <returns>The resolved object.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.Resolve``1(System.String)">
+      <summary>
+            Resolves worker of the requested type with the given name from the local appspace
+            </summary>
+      <typeparam name="TContract">The type that is requested.</typeparam>
+      <param name="name">The name of the object to retreive.</param>
+      <returns>The resolved object.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2">
+      <summary>
+            Runs a worker within the appspace. The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace. The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(System.String)">
+      <summary>
+            Runs a worker within the appspace. The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="name">The name under which the worker should be registered.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace. The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="name">The name under which the worker should be registered.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Core.PublishMode)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Core.PublishMode,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Core.PublishMode,System.String)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Core.PublishMode,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0)">
+      <summary>
+            Runs a worker within the appspace.  The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,System.String)">
+      <summary>
+            Runs a worker within the appspace.  The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace.  The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Core.PublishMode)">
+      <summary>
+            Runs a worker within the appspace. 
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Core.PublishMode,System.String)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Core.PublishMode,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.DisposeWorker(Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Disposes the given worker instance and removes it from the appspace.
+            </summary>
+      <param name="worker">The worker to be removed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.DisposeWorker``1">
+      <summary>
+            Disposes a worker instance and removes it from the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The type of the worker.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.DisposeWorker``1(System.String)">
+      <summary>
+            Disposes a worker instance and removes it from the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The type of the worker.</typeparam>
+      <param name="name">The name of the worker.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space.  After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(System.String,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space. After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <param name="localName">The name under which the worker should be registered locally.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(System.String,System.String,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space. After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="commServiceName">The name of the communication service that should be used for communication with the worker.</param>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <param name="localName">The name under which the worker should be registered locally.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Core.PublishMode,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space.  After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="publish">Defines if the created worker proxy should be published so other appspace instances can connnect to it, and by that use the appspace instance to connect to the original worker.</param>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Core.PublishMode,System.String,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space. After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="publish">Defines if the created worker proxy should be published so other appspace instances can connnect to it, and by that use the appspace instance to connect to the original worker.</param>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <param name="localName">The name under which the worker should be registered locally.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Core.PublishMode,System.String,System.String,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space. After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="publish">Defines if the created worker proxy should be published so other appspace instances can connnect to it, and by that use the appspace instance to connect to the original worker.</param>
+      <param name="commServiceName">The name of the communication service that should be used for communication with the worker.</param>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <param name="localName">The name under which the worker should be registered locally.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.Dispose">
+      <summary>
+            Closes the appspace and disposes the CCR dispatcher and DI container if they were not handed in at startup.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoAppSpace.Credentials">
+      <summary>
+            The credentials that are used by the space to connect to remote workers.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoAppSpace.DefaultDispatcher">
+      <summary>
+            The CCR dispatcher that is used by the appspace.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoAppSpace.DefaultDispatcherQueue">
+      <summary>
+            The CCR dispatcher queue taht is used by the appspace.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoAppSpace.Address">
+      <summary>
+            The address of the space (that can be used by other spaces to connect to this space)
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoAppSpace.Info">
+      <summary>
+            Provides meta information about the XcoAppSpace instance, e.g. information about 
+            running workers and communication services.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoAppSpace.Errors">
+      <summary>
+            Port where errors are posted that occur during commmunication with Fother space instances
+            and that have not been caught by causalities (e.g. errors during message deserialization 
+            or security errors).
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoPublisher">
+      <summary>
+            The XcoPublisher manages a list of subscriptions in form of ports. It handles the
+            processing of Subscribe and Unsubscribe messages, and the publishing messages
+            to all subscribed ports.
+            Is the base class for all generic XcoPublisher classes.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher.PublishUnknownType(System.Object)">
+      <summary>
+            Tries to publish a message of unknown type. An exception is thrown if the type
+            of message is not supported by the XcoPublisher instance.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher.PublishWithType``1(``0)">
+      <summary>
+            Tries to publish a message with the given type. An exception is thrown if the type
+            of message is not supported by the XcoPublisher instance.
+            </summary>
+      <param name="msg">The message to be published.</param>
+      <typeparam name="T">The type under which the message should be published (msg must be assignable to this type).</typeparam>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoPublisher`1">
+      <summary>
+            The XcoPublisher is a worker extension that manages a list of subscriptions in 
+            form of ports. It handles the processing of Subscribe and Unsubscribe messages, 
+            and provides methods to publish messages to all subscribed ports.
+            The the message types that can be published are defined by the XcoPublisher's
+            generic types.
+            </summary>
+      <typeparam name="T">The type of message to be published.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`1.#ctor">
+      <summary>
+            Creates a new XcoPublisher.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`1.Publish(`0)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`1.Subscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`1.Subscribe(Microsoft.Ccr.Core.Port{`0},System.Linq.Expressions.Expression{System.Predicate{`0}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`1.Unsubscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoPublisher`2">
+      <summary>
+            The XcoPublisher is a worker extension that manages a list of subscriptions in 
+            form of ports. It handles the processing of Subscribe and Unsubscribe messages, 
+            and provides methods to publish messages to all subscribed ports.
+            The the message types that can be published are defined by the XcoPublisher's
+            generic types.
+            </summary>
+      <typeparam name="T0">The first message type to be published.</typeparam>
+      <typeparam name="T1">The second message type to be published.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.#ctor">
+      <summary>
+            Creates a new XcoPublisher.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.Publish(`0)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.Publish(`1)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.Subscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.Subscribe(Microsoft.Ccr.Core.Port{`0},System.Linq.Expressions.Expression{System.Predicate{`0}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.Unsubscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.Subscribe(Microsoft.Ccr.Core.Port{`1})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.Subscribe(Microsoft.Ccr.Core.Port{`1},System.Linq.Expressions.Expression{System.Predicate{`1}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`2.Unsubscribe(Microsoft.Ccr.Core.Port{`1})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoPublisher`3">
+      <summary>
+            The XcoPublisher is a worker extension that manages a list of subscriptions in 
+            form of ports. It handles the processing of Subscribe and Unsubscribe messages, 
+            and provides methods to publish messages to all subscribed ports.
+            The the message types that can be published are defined by the XcoPublisher's
+            generic types.
+            </summary>
+      <typeparam name="T0">The first message type to be published.</typeparam>
+      <typeparam name="T1">The second message type to be published.</typeparam>
+      <typeparam name="T2">The third message type to be published.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.#ctor">
+      <summary>
+            Creates a new XcoPublisher.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Publish(`0)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Publish(`1)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Publish(`2)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Subscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Subscribe(Microsoft.Ccr.Core.Port{`0},System.Linq.Expressions.Expression{System.Predicate{`0}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Unsubscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Subscribe(Microsoft.Ccr.Core.Port{`1})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Subscribe(Microsoft.Ccr.Core.Port{`1},System.Linq.Expressions.Expression{System.Predicate{`1}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Unsubscribe(Microsoft.Ccr.Core.Port{`1})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Subscribe(Microsoft.Ccr.Core.Port{`2})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Subscribe(Microsoft.Ccr.Core.Port{`2},System.Linq.Expressions.Expression{System.Predicate{`2}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`3.Unsubscribe(Microsoft.Ccr.Core.Port{`2})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoPublisher`4">
+      <summary>
+            The XcoPublisher is a worker extension that manages a list of subscriptions in 
+            form of ports. It handles the processing of Subscribe and Unsubscribe messages, 
+            and provides methods to publish messages to all subscribed ports.
+            The the message types that can be published are defined by the XcoPublisher's
+            generic types.
+            </summary>
+      <typeparam name="T0">The first message type to be published.</typeparam>
+      <typeparam name="T1">The second message type to be published.</typeparam>
+      <typeparam name="T2">The third message type to be published.</typeparam>
+      <typeparam name="T3">The fourth message type to be published.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.#ctor">
+      <summary>
+            Creates a new XcoPublisher.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Publish(`0)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Publish(`1)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Publish(`2)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Publish(`3)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Subscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Subscribe(Microsoft.Ccr.Core.Port{`0},System.Linq.Expressions.Expression{System.Predicate{`0}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Unsubscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Subscribe(Microsoft.Ccr.Core.Port{`1})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Subscribe(Microsoft.Ccr.Core.Port{`1},System.Linq.Expressions.Expression{System.Predicate{`1}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Unsubscribe(Microsoft.Ccr.Core.Port{`1})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Subscribe(Microsoft.Ccr.Core.Port{`2})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Subscribe(Microsoft.Ccr.Core.Port{`2},System.Linq.Expressions.Expression{System.Predicate{`2}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Unsubscribe(Microsoft.Ccr.Core.Port{`2})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Subscribe(Microsoft.Ccr.Core.Port{`3})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Subscribe(Microsoft.Ccr.Core.Port{`3},System.Linq.Expressions.Expression{System.Predicate{`3}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`4.Unsubscribe(Microsoft.Ccr.Core.Port{`3})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoPublisher`5">
+      <summary>
+            The XcoPublisher is a worker extension that manages a list of subscriptions in 
+            form of ports. It handles the processing of Subscribe and Unsubscribe messages, 
+            and provides methods to publish messages to all subscribed ports.
+            The the message types that can be published are defined by the XcoPublisher's
+            generic types.
+            </summary>
+      <typeparam name="T0">The first message type to be published.</typeparam>
+      <typeparam name="T1">The second message type to be published.</typeparam>
+      <typeparam name="T2">The third message type to be published.</typeparam>
+      <typeparam name="T3">The fourth message type to be published.</typeparam>
+      <typeparam name="T4">The fifth message type to be published.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.#ctor">
+      <summary>
+            Creates a new XcoPublisher.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Publish(`0)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Publish(`1)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Publish(`2)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Publish(`3)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Publish(`4)">
+      <summary>
+            Publishes the given message to all subscribed ports.
+            </summary>
+      <param name="msg">The message to be published.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`0},System.Linq.Expressions.Expression{System.Predicate{`0}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Unsubscribe(Microsoft.Ccr.Core.Port{`0})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`1})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`1},System.Linq.Expressions.Expression{System.Predicate{`1}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Unsubscribe(Microsoft.Ccr.Core.Port{`1})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`2})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`2},System.Linq.Expressions.Expression{System.Predicate{`2}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Unsubscribe(Microsoft.Ccr.Core.Port{`2})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`3})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`3},System.Linq.Expressions.Expression{System.Predicate{`3}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Unsubscribe(Microsoft.Ccr.Core.Port{`3})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`4})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Subscribe(Microsoft.Ccr.Core.Port{`4},System.Linq.Expressions.Expression{System.Predicate{`4}})">
+      <summary>
+            Subscribes the given port to receive published messages of the given port message type.
+            </summary>
+      <param name="port">The port that should receive published messages.</param>
+      <param name="filterFunc">Predicate that can be used for filtering the published messages.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoPublisher`5.Unsubscribe(Microsoft.Ccr.Core.Port{`4})">
+      <summary>
+            Unsubscribes the given port from receiving published messages.
+            </summary>
+      <param name="port">The port that should be unsubscribed.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Exceptions.XcoException">
+      <summary>
+            XcoException is the base class for all Exceptions thrown in XcoAppSpaces.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoException.#ctor(System.String)">
+      <summary>
+            Creates a new XcoException.
+            </summary>
+      <param name="message">The error message.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoException.#ctor(System.String,System.Exception)">
+      <summary>
+            Creates a new XcoException.
+            </summary>
+      <param name="message">The error message.</param>
+      <param name="innerException">Inner Exception.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+            Creates a new XcoException. Needed for serialization.
+            </summary>
+      <param name="info">SerializationInfo for handling type-specific serialization information.</param>
+      <param name="context">StreamingContext for handling type-specific serialization information.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Exceptions.XcoSecurityException">
+      <summary>
+            Exception that is thrown when communication with a worker is not correctly authenticated or authorized.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoSecurityException.#ctor(System.String)">
+      <summary>
+            Creates a new XcoSecurityException.
+            </summary>
+      <param name="message">The error message.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoSecurityException.#ctor(System.String,System.Exception)">
+      <summary>
+            Creates a new XcoSecurityException.
+            </summary>
+      <param name="message">The error message.</param>
+      <param name="innerException">The inner exception that has been thrown.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoSecurityException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+            Creates a new XcoSecurityException. This constructor is needed for serialization.
+            </summary>
+      <param name="info">SerializationInfo for handling type-specific serialization information.</param>
+      <param name="context">StreamingContext for handling type-specific serialization information.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Exceptions.XcoConfigurationException">
+      <summary>
+            Exception that is thrown when there is an error with the XcoAppSpace configuration.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoConfigurationException.#ctor(System.String)">
+      <summary>
+            Creates a new XcoConfigurationException.
+            </summary>
+      <param name="message">The error message.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoConfigurationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+            Creates a new XcoConfigurationException. This constructor is needed for serialization.
+            </summary>
+      <param name="info">SerializationInfo for handling type-specific serialization information.</param>
+      <param name="context">StreamingContext for handling type-specific serialization information.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Exceptions.XcoWorkerException">
+      <summary>
+            Exception that is thrown when there is an error instantiating a worker.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoWorkerException.#ctor(System.String)">
+      <summary>
+            Creates a new XcoWorkerException.
+            </summary>
+      <param name="message">The error message.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoWorkerException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+            Creates a new XcoWorkerException. This constructor is needed for serialization.
+            </summary>
+      <param name="info">SerializationInfo for handling type-specific serialization information.</param>
+      <param name="context">StreamingContext for handling type-specific serialization information.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Exceptions.XcoSubscriptionException">
+      <summary>
+            Exception that is thrown in case of an error when subscribing to a worker (e.g. the type of message that is subscribed
+            to is unknown to the XcoPublisher).
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoSubscriptionException.#ctor(System.String)">
+      <summary>
+            Creates a new XcoSubscriptionException.
+            </summary>
+      <param name="message">The error message.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoSubscriptionException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+            Creates a new XcoSubscriptionException. This constructor is needed for serialization.
+            </summary>
+      <param name="info">SerializationInfo for handling type-specific serialization information.</param>
+      <param name="context">StreamingContext for handling type-specific serialization information.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Exceptions.XcoPublishException">
+      <summary>
+            Exception that is thrown in case of an error when publishing a message (e.g. the type of message to
+            be published is unknown by the XcoPublisher).
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoPublishException.#ctor(System.String)">
+      <summary>
+            Creates a new XcoPublishException.
+            </summary>
+      <param name="message">The error message.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoPublishException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+            Creates a new XcoPublishException. This constructor is needed for serialization.
+            </summary>
+      <param name="info">SerializationInfo for handling type-specific serialization information.</param>
+      <param name="context">StreamingContext for handling type-specific serialization information.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Exceptions.XcoCommunicationException">
+      <summary>
+            Exception that is thrown in case of an error related to remote communication (e.g. problems
+            connecting to a remote worker).
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoCommunicationException.#ctor(System.String)">
+      <summary>
+            Creates a new XcoCommunicationException.
+            </summary>
+      <param name="message">The error message.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoCommunicationException.#ctor(System.String,System.Exception)">
+      <summary>
+            Creates a new XcoCommunicationException.
+            </summary>
+      <param name="message">The error message.</param>
+      <param name="innerException">The inner exception that has been thrown.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoCommunicationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+            Creates a new XcoCommunicationException. This constructor is needed for serialization.
+            </summary>
+      <param name="info">SerializationInfo for handling type-specific serialization information.</param>
+      <param name="context">StreamingContext for handling type-specific serialization information.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Exceptions.XcoSerializationException">
+      <summary>
+            Exception that is thrown in case of errors related to serialization or deserialization of messages
+            that are sent to other spaces.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoSerializationException.#ctor(System.String)">
+      <summary>
+            Creates a new XcoSerializationException.
+            </summary>
+      <param name="message">The error message.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoSerializationException.#ctor(System.String,System.Exception)">
+      <summary>
+            Creates a new XcoSerializationException.
+            </summary>
+      <param name="message">The error message.</param>
+      <param name="innerException">The inner exception that has been thrown.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Exceptions.XcoSerializationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+            Creates a new XcoSerializationException. This constructor is needed for serialization.
+            </summary>
+      <param name="info">SerializationInfo for handling type-specific serialization information.</param>
+      <param name="context">StreamingContext for handling type-specific serialization information.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Core.Communication.Connector">
+      <summary>
+            Remote communication component for AppSpace. Handles the transport of messages
+            from/to remote workers and ports.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Communication.Connector.#ctor">
+      <summary>
+            Creates a new Connector.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Communication.Connector.IsLocal(System.String)">
+      <summary>
+            Checks a certain address if it is the address of the local space. This is the case if the
+            address is either NULL of if it is equal (ignoring case) to the local address.
+            </summary>
+      <param name="address">The address to be checked.</param>
+      <returns>True if the address refers to the local space.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Communication.Connector.Start">
+      <summary>
+            Starts the connector by starting all communicaton services.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Communication.Connector.ConnectWorker``1(System.String,System.String,System.Net.ICredentials,XcoAppSpaces.Contracts.Communication.XcoCommunicationServiceInfo@)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space. Creates a local
+            proxy of the worker that allows posting messages that are automatically transported
+            to the worker.
+            If the worker does't exist or the connection to the space cannot be established, an
+            XcoCommunicationException is thrown.
+            This method is an alternative to the method taking an URI as address, being more flexible
+            and therefore allowing things like Jabber usernames to be used.
+            </summary>
+      <typeparam name="TContract">The contract type of the worker to connect to.</typeparam>
+      <param name="workerAddress">The address of the worker in den form "address/workername"</param>
+      <param name="commServiceName">The name of the communication service that should be used to communicate with the worker (or null if the default communication service should be used).</param>
+      <param name="credentials">The credentials that should be used to connect to the worker.</param>
+      <param name="commServiceInfo">Information about the communication service that the proxy will use to communicate with the worker.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Communication.Connector.ConnectWorker``1(System.String,System.String,System.String,System.Net.ICredentials,XcoAppSpaces.Contracts.Communication.XcoCommunicationServiceInfo@)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space. Creates a local
+            proxy of the worker that allows posting messages that are automatically transported
+            to the worker.
+            If the worker does't exist or the connection to the space cannot be established, an
+            XcoCommunicationException is thrown.
+            </summary>
+      <typeparam name="TContract">The contract type of the worker to connect to.</typeparam>
+      <param name="name">The name of the worker.</param>
+      <param name="address">The address of the space where the worker is running (in form hostname:port).</param>
+      <param name="commServiceName">The name of the communication service that should be used to communicate with the worker (or null if the default communication service should be used).</param>
+      <param name="credentials">The credentials that should be used to connect to the worker.</param>
+      <param name="commServiceInfo">Information about the communication service that the proxy will use to communicate with the worker.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.Communication.Connector.Dispose">
+      <summary>
+            Stops the communication service.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.Communication.Connector.LocalAddress">
+      <summary>
+            The local address of the space (in form hostname:port).
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.Communication.Connector.CommServices">
+      <summary>
+            The list of registered communication services.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.Communication.Connector.Errors">
+      <summary>
+            Port where communication errors are posted that are not caught by causalities.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.Sockets.Config">
+      <summary>
+            Configuration contains settings that are target for possible later outsourcing
+            into a settings file.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.Sockets.ConfigStringInterpreter">
+      <summary>
+            Configuration string interpreter for the XcoTCPTransportService.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.Sockets.ConfigStringInterpreter.ConfigPort">
+      <summary>
+            Config key for setting the port.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.Sockets.ConfigStringInterpreter.ConfigName">
+      <summary>
+            Config key for setting the name.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.Sockets.ConfigStringInterpreter.ConfigIsDefault">
+      <summary>
+            Config key for setting if the service is the default communication service.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.Sockets.ConfigStringInterpreter.InterpretDefinition">
+      <summary>
+            Action definition for interpretion
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.Sockets.ConfigStringInterpreter.GetService">
+      <summary>
+            Get the current tcp service
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.Sockets.FluentConfigExtensions">
+      <summary>
+            Defines extension methods for configuration of an XcoTCPTransportService using the fluent interface.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.FluentConfigExtensions.OnPort``1(XcoAppSpaces.Contracts.Service.IXcoServiceFluentConfiguration{XcoAppSpaces.Transport.Sockets.XcoTCPTransportService,``0},System.Int32)">
+      <summary>
+            Defines on which port the communication service should be running.
+            </summary>
+      <typeparam name="T">The type of the configuration object.</typeparam>
+      <param name="config">The configuration object.</param>
+      <param name="port">The port on which the communication service should be running.</param>
+      <returns>The configuration object for further configuration with the fluent interface.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.FluentConfigExtensions.OnRandomPort``1(XcoAppSpaces.Contracts.Service.IXcoServiceFluentConfiguration{XcoAppSpaces.Transport.Sockets.XcoTCPTransportService,``0})">
+      <summary>
+            Defines that the communication service should be running on a random port.
+            </summary>
+      <typeparam name="T">The type of the configuration object.</typeparam>
+      <param name="config">The configuration object.</param>
+      <returns>The configuration object for further configuration with the fluent interface.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService">
+      <summary>
+            Communication Service that send/receives messages to/from remote spaces via
+            TCP sockets. The service is able to either use connections only one-way, meaning
+            two spaces communicating with each other always use two channels (one for sending
+            and one for receiving), or two-way, where a single connection between to spaces
+            is used to transfer messages in both ways.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.#ctor">
+      <summary>
+            Creates a new XcoTCPTransportService.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.#ctor(System.Int32)">
+      <summary>
+            Creates a new XcoTCPTransportService.
+            </summary>
+      <param name="port">The port where the service should be running.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.#ctor(System.String,System.Int32)">
+      <summary>
+            Creates a new XcoTCPTransportService.
+            </summary>
+      <param name="ipAddress">The local ip address where the service should be running.</param>
+      <param name="port">The port where the service should be running.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.Start">
+      <summary>
+            Starts the communication service.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.Stop">
+      <summary>
+            Stops the service and closes all open connections.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.ReleaseConnections">
+      <summary>
+            Releases all currently active connections.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.Send(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+      <summary>
+            Sends a message to a remote space.
+            </summary>
+      <param name="msg">The messages that should be sent.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.CheckConnectionTimeouts(System.Object)">
+      <summary>
+            Checks if any TCPClients have run into a timeout (not sent any message for a 
+            defined amount of time), and removes these clients and closes their connections.
+            </summary>
+      <param name="timerInfo">Field for additional info from the timer that starts the method (is ignored because not additional info needed).</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.Dispose">
+      <summary>
+            Stops the service and closes all open connections.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.Port">
+      <summary>
+            The port on which the service is running.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.LocalAddress">
+      <summary>
+            The Address of the server.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.MSMQ.ConfigStringInterpreter">
+      <summary>
+            Configuration string interpreter for the XcoMSMQTransportService.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.MSMQ.ConfigStringInterpreter.ConfigQueueName">
+      <summary>
+            Config key for setting the queue name.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.MSMQ.ConfigStringInterpreter.ConfigName">
+      <summary>
+            Configuration key for setting the name.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.MSMQ.ConfigStringInterpreter.ConfigIsDefault">
+      <summary>
+            Configuration key for setting if the service is the default communication service.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.MSMQ.ConfigStringInterpreter.ConfigDisposeQueue">
+      <summary>
+            Remove queue after using
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.MSMQ.ConfigStringInterpreter.InterpretDefinition">
+      <summary>
+            Action definition for interpretion
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.MSMQ.ConfigStringInterpreter.GetService">
+      <summary>
+            Get the current tcp service
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.MSMQ.FluentConfigExtensions">
+      <summary>
+            Defines extension methods for configuration of an XcoMSMQTransportService using the fluent interface.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.FluentConfigExtensions.WithQueueName``1(XcoAppSpaces.Contracts.Service.IXcoServiceFluentConfiguration{XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService,``0},System.String)">
+      <summary>
+            Defines on which queue-name the communication service should be read from.
+            </summary>
+      <typeparam name="T">The type of the configuration object.</typeparam>
+      <param name="config">The configuration object.</param>
+      <param name="queuename">The queue name on which the communication service should be read from.</param>
+      <returns>The configuration object for further configuration with the fluent interface.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService">
+      <summary>
+            Communication Service that send/receives messages to/from remote spaces via
+            MSMQ. The service uses one queue for reading messages.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.#ctor">
+      <summary>
+            Creates a new XcoMSMQTransportService.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.#ctor(System.String)">
+      <summary>
+            Creates a new XcoMSMQTransportService.
+            </summary>
+      <param name="queueName">The queueName where the service should read from.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.#ctor(System.String,System.Boolean)">
+      <summary>
+            Creates a new XcoMSMQTransportService.
+            </summary>
+      <param name="queueName">The queueName where the service should read from.</param>
+      <param name="removeQueueOnStop">If true the queue will be removed upon disposal of communication service</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.DeleteQueue">
+      <summary>
+            Delete queue 
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.Start">
+      <summary>
+            Starts the communication service.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.Stop">
+      <summary>
+            Stops the service and closes all open connections.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.ReleaseConnections">
+      <summary>
+            Releases all currently active connections.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.Send(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+      <summary>
+            Sends a message to a remote space.
+            </summary>
+      <param name="msg">The messages that should be sent.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.CheckConnectionTimeouts(System.Object)">
+      <summary>
+            Checks if any TCPClients have run into a timeout (not sent any message for a 
+            defined amount of time), and removes these clients and closes their connections.
+            </summary>
+      <param name="timerInfo">Field for additional info from the timer that starts the method (is ignored because not additional info needed).</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.Dispose">
+      <summary>
+            Stops the service and closes all open connections.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.RemoveQueueOnStop">
+      <summary>
+            Remove Queue after use if true
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.QueueName">
+      <summary>
+            The message queue on which the service reads from.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.LocalAddress">
+      <summary>
+            Returns the MSMQ name
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.BindingsHelper">
+      <summary>
+            Helper for different WCF Bindings
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.WCF.BindingsHelper.usedBindingScheme">
+      <summary>
+            Get the current binding scheme
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.BindingsHelper.GenerateStandardNetTcp(System.Int32)">
+      <summary>
+            Generates an Uri for NetTcp binding.
+            </summary>
+      <param name="port">The port for the uri.</param>
+      <returns>The generated uri.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.BindingsHelper.Convert(System.String)">
+      <summary>
+            Converts an address to be correct for current binding.
+            </summary>
+      <param name="address">The address to be converted.</param>
+      <returns>The converted address.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.BindingsHelper.Convert(System.ServiceModel.Channels.Binding,System.String)">
+      <summary>
+            Converts the given address for the given binding type.
+            </summary>
+      <param name="bindingType">The binding type to be used.</param>
+      <param name="address">The address to be converted.</param>
+      <returns>The converted address.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.BindingsHelper.Convert(System.ServiceModel.NetNamedPipeBinding,System.String)">
+      <summary>
+            Converts the given address for the NetNamedPipeBinding.
+            </summary>
+      <param name="bindingType">The NetNamedPipeBinding type-information.</param>
+      <param name="address">The address to be converted.</param>
+      <returns>The converted address.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.BindingsHelper.Convert(System.ServiceModel.NetTcpBinding,System.String)">
+      <summary>
+            Converts the given address for the NetTcpBinding.
+            </summary>
+      <param name="bindingType">The NetTcpBinding type-information.</param>
+      <param name="address">The address to be converted.</param>
+      <returns>The converted address.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.BindingsHelper.ServerAddr(System.Uri)">
+      <summary>
+            Gets the address value that should be returned by the communication
+            service's ServerAdress property (binding info is removed from the address).
+            </summary>
+      <param name="addr">The address.</param>
+      <returns>The value for the ServerAddress property.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.BindingsHelper.Port(System.Uri)">
+      <summary>
+            Extracts the port value from the given address.
+            </summary>
+      <param name="addr">The address.</param>
+      <returns>The port value.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.ConfigStringInterpreter">
+      <summary>
+            Configuration string interpreter for the XcoWCFTransportService
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.WCF.ConfigStringInterpreter.ConfigPort">
+      <summary>
+            Configuration key for setting the port.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.WCF.ConfigStringInterpreter.ConfigName">
+      <summary>
+            Configuration key for setting the name.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Transport.WCF.ConfigStringInterpreter.ConfigIsDefault">
+      <summary>
+            Configuration key for setting if the service is the default communication service.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.ConfigStringInterpreter.InterpretDefinition">
+      <summary>
+            Action definition for interpretion
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.ConfigStringInterpreter.GetService">
+      <summary>
+            Get the current WCF service
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.FluentConfigExtensions">
+      <summary>
+            Defines extension methods for configuration of an XcoWCFTransportService using the fluent interface.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.FluentConfigExtensions.OnPort``1(XcoAppSpaces.Contracts.Service.IXcoServiceFluentConfiguration{XcoAppSpaces.Transport.WCF.XcoWCFTransportService,``0},System.Int32)">
+      <summary>
+            Defines on which port the communication service should be running.
+            </summary>
+      <typeparam name="T">The type of the configuration object.</typeparam>
+      <param name="config">The configuration object.</param>
+      <param name="port">The port on which the communication service should be running.</param>
+      <returns>The configuration object for further configuration with the fluent interface.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.FluentConfigExtensions.OnRandomPort``1(XcoAppSpaces.Contracts.Service.IXcoServiceFluentConfiguration{XcoAppSpaces.Transport.WCF.XcoWCFTransportService,``0})">
+      <summary>
+            Defines that the communication service should be running on a random port.
+            </summary>
+      <typeparam name="T">The type of the configuration object.</typeparam>
+      <param name="config">The configuration object.</param>
+      <returns>The configuration object for further configuration with the fluent interface.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.IRemoteSpaceService">
+      <summary>
+            Interface definition for the WCF service used to communication with remote spaces.
+            All communication is one-way and session oriented.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.IRemoteSpaceService.Connect">
+      <summary>
+            Initiates a connection to a remote space. This is always the first Method that
+            has to be called when wanting to communicate with a remote space.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.IRemoteSpaceService.Disconnect">
+      <summary>
+            Terminates the connection to a remote space. This is always the last Method that
+            has to be called when wanting to communicate with a remote space.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.IRemoteSpaceService.SendMessage(System.Byte[])">
+      <summary>
+            Sends a message to a remote space (serialized into a byte array).
+            </summary>
+      <param name="data">The message to be sent, serialized into a byte array.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.SpaceServiceChannel">
+      <summary>
+            Interface definition for the service channel of the space.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.RemoteSender">
+      <summary>
+            Sender for communication with remote spaces. Uses an IRemoteSpaceService to communicate
+            with service hosts of remote spaces.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.RemoteSender.LoadConfigurationDelegate">
+      <summary>
+            Supports different sender-configurations
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.#ctor(System.String,XcoAppSpaces.Contracts.Serialization.IXcoSerializer,XcoAppSpaces.Contracts.Logging.IXcoLogger)">
+      <summary>
+            Creates a new RemoteSender. A new IRemoteSpaceService object is created that communicates
+            with the given address, with help of the ChannelFactory class.
+            </summary>
+      <param name="address">The address of the remote space, in binding form.</param>
+      <param name="serializationHelper">SerializationHelper that should be used for serialization of messages.</param>
+      <param name="log">Logger to use for logging.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.Connect">
+      <summary>
+            Initiates a connection by calling the Connect method of the IRemoteSpaceService object.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.SendDisable">
+      <summary>
+            Test - After channel shutdown, sending is not allowed
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.Disconnect">
+      <summary>
+            Terminates the connection by calling the Disconnect method of the IRemoteSpaceService object.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.SendMessage(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+      <summary>
+            Sends a message by first serializing it and the using the IRemoteSpaceService object to send it.
+            The last send time is set to the current time.
+            </summary>
+      <param name="msg">The Message to be sent.</param>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.RemoteSender.SessionID">
+      <summary>
+            The session id of the client channel that is used by communicating with the remote space service.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.RemoteSender.LastSendTime">
+      <summary>
+            The time when this RemoteSender has last sent a message.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.SpacePortal">
+      <summary>
+            Implementation for the server side endpoint of the WCF service for communication with remote
+            spaces. Named SpacePortal, because it provides a portal to the space for any incoming remote
+            communication.
+            Definition of the service behavior: Only one instance is running at the server, but can be
+            used concurrent.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.#ctor(System.Uri,XcoAppSpaces.Contracts.Transport.MessageReceivedMethod,XcoAppSpaces.Contracts.Transport.IXcoTransportService,XcoAppSpaces.Contracts.Serialization.IXcoSerializer,XcoAppSpaces.Contracts.Logging.IXcoLogger)">
+      <summary>
+            Creates a new SpacePortal.
+            </summary>
+      <param name="addr">The address in which the service host is running (here only needed for information purposes).</param>
+      <param name="messageReceived">The method that should be called when a message arrives.</param>
+      <param name="commService">The communication service.</param>
+      <param name="serializer">SerializationHelper that should be used for serialization and deserialization of messages.</param>
+      <param name="log">Logger to be used for logging.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.Connect">
+      <summary>
+            Does nothing, because it is only needed for connection initiation (which is managed
+            internally by WCF).
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.Disconnect">
+      <summary>
+            Does nothing, because it is only needed for connection termination (which is managed
+            internally by WCF).
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.SendMessage(System.Byte[])">
+      <summary>
+            Processes a message that has been received. The message is deserialized and the corresponding
+            process method is called.
+            </summary>
+      <param name="data">The serialized message that has been received.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.XcoWCFTransportService">
+      <summary>
+            Service that manages incoming and outgoing messages from/to remote spaces by use of WCF. Incoming
+            messages are received by a hosted SpacePortal service. Outgoing messages are sent by RemoteSender 
+            objects, the currently open RemoteSenders are managed in a list. A Timer regularly checks if any 
+            connections to remote spaces have run into a timeout, and closes and removes such connections.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.LoadHostConfigurationDelegate">
+      <summary>
+            Supports different host-configurations
+            </summary>
+      <param name="coreUri">Uri from core</param>
+      <param name="spacePortal">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.NewRemoteSenderDelegate">
+      <summary>
+            Supports different constructors
+            </summary>
+      <param name="addr">
+      </param>
+      <param name="serializationHelper">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.#ctor(System.Int32)">
+      <summary>
+            Creates a new XcoWCFTransportService.
+            </summary>
+      <param name="port">The port that should be used (net.tcp).</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.#ctor(System.String)">
+      <summary>
+            Creates a new XcoWCFTransportService.
+            </summary>
+      <param name="address">The address that should be used (binding-specific).</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.GenerateAddrUri(System.Int32)">
+      <summary>
+            Generate address uri from port definition
+            </summary>
+      <param name="port">
+      </param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.#ctor">
+      <summary>
+            Creates a new RemoteServer.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.Start">
+      <summary>
+            Starts the service host in an own Thread, and waits until the service host is opened. 
+            An exception is thrown if an error occured while opening the service host.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.CreateRandomPort">
+      <summary>
+            Creates Random-Port for the WCF-Service
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.LoadConfiguration(System.Uri,XcoAppSpaces.Transport.WCF.SpacePortal)">
+      <summary>
+            Load specific configuration settings.       
+            </summary>
+      <param name="coreUri">Baseaddress for the wcf-service</param>
+      <param name="_spacePortal">The space-portal instance for WCF hosting</param>
+      <returns>ServiceHost from the SpacePortal</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.InitDefaultWCFConnection(System.Uri,XcoAppSpaces.Transport.WCF.SpacePortal)">
+      <summary>
+            Init default wcf-properties
+            </summary>
+      <param name="coreUri">
+      </param>
+      <param name="_spacePortal">
+      </param>
+      <returns>Default WCF-Service-Host</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.CheckAddressForSharedPort">
+      <summary>
+            Check if shared port is in use
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.RunServiceHost">
+      <summary>
+            Method to start in an own thread, that opens a new service host at the given port to receive
+            messages from remote kernels. The SpacePortal class is used as service.
+            Note: ServiceHost must run in an own thread, otherwise the host will not work when used in
+            Windows Forms Applications. This seems to be the case because of some collision with messaging
+            in WCF and Windows Forms.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.CheckConnectionTimeouts(System.Object)">
+      <summary>
+            Checks if any RemoteSenders have run into a timeout (not sent any message for a 
+            defined amount of time), and removes these senders and closes their connections.
+            </summary>
+      <param name="timerInfo">Field for additional info from the timer that starts the method (is ignored because not additional info needed).</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.Send(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+      <summary>
+            Sends a message to a remote space. If no remote sender for this message exists yet,
+            a new RemoteSender is created and stored in the list of currently open RemoteSenders.
+            If a RequestMessage can not be sent, an ResponseMessage with an error is created and given
+            back to the Request by using the processResponse method.
+            </summary>
+      <param name="msg">The message to be sent.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.Stop">
+      <summary>
+            Closes the service host, stops the timeout checking and disconnects all senders that 
+            are currently connected to other spaces.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.Dispose">
+      <summary>
+            Closes the service host, stops the timeout checking and disconnects all senders that 
+            are currently connected to other spaces.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.ReleaseConnections">
+      <summary>
+            Release current active connections.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.ShutdownRemoteSender(System.String)">
+      <summary>
+            Close the RemoteSender because the connected channel has closed
+            </summary>
+      <param name="channelSessionID">sessionID of closed channel</param>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.ConfigLoader">
+      <summary>
+            Load different WCF-Configurations for the servicehost.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.CreateNewRemoteSender">
+      <summary>
+            Load different RemoteSender instances
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.SharedPortName">
+      <summary>
+            Name for this instance on the used port
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.Port">
+      <summary>
+            The port on which the service host is running.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.LocalAddress">
+      <summary>
+            The Address of the Server.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Logging.IXcoLogger">
+      <summary>
+            Interface definition for Class used for Logging in the appspace. Defines methods
+            for all needed message severity levels.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.IXcoLogger.Debug(System.String)">
+      <summary>
+            Logs a debug message.
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.IXcoLogger.Info(System.String)">
+      <summary>
+            Logs an Info message.
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.IXcoLogger.Warn(System.String)">
+      <summary>
+            Logs a warning message.
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.IXcoLogger.Error(System.String)">
+      <summary>
+            Logs an error message.
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.IXcoLogger.Error(System.String,System.Exception)">
+      <summary>
+            Logs an error message.
+            </summary>
+      <param name="msg">The message to be logged.</param>
+      <param name="ex">The exception that was thrown.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.IXcoLogger.Fatal(System.String)">
+      <summary>
+            Logs a fatal error message.
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.IXcoLogger.Fatal(System.String,System.Exception)">
+      <summary>
+            Logs a fatal error message.
+            </summary>
+      <param name="msg">The message to be logged.</param>
+      <param name="ex">The exception that was thrown.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Logging.XcoLoggerFactory">
+      <summary>
+            Factory for creating Loggers. (Logger factory is needed because the different
+            components within the appspace require loggers with different names and types,
+            so adding a single logger instance to the space is not sufficient.)
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Contracts.Logging.XcoLoggerFactory.CreateInstanceDefault">
+      <summary>
+            Default function for creating a new IXcoLogger Instance
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Contracts.Logging.XcoLoggerFactory.CreateInstance">
+      <summary>
+            Function for creating a new IXcoLogger Instance. Can be overwritten.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Logging.TraceSourceLogger">
+      <summary>
+            Logger class used for logging in the Kernel. Uses the .Net TraceSource class to output 
+            the log messages. Settings for this Logger can be easily done in the App.config.
+            By default the Logger only outputs messages logged as fatal.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.TraceSourceLogger.#ctor(System.String,System.Diagnostics.SourceLevels)">
+      <summary>
+            Creates a new Logger.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.TraceSourceLogger.Debug(System.String)">
+      <summary>
+            Logs a debug message (using TraceEventType.Verbose).
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.TraceSourceLogger.Info(System.String)">
+      <summary>
+            Logs an Info message (using TraceEventType.Information).
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.TraceSourceLogger.Warn(System.String)">
+      <summary>
+            Logs a warning message (using TraceEventType.Warning).
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.TraceSourceLogger.Error(System.String)">
+      <summary>
+            Logs an error message (using TraceEventType.Error).
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.TraceSourceLogger.Error(System.String,System.Exception)">
+      <summary>
+            Logs an error message (using TraceEventType.Error).
+            </summary>
+      <param name="msg">The message to be logged.</param>
+      <param name="ex">The exception that was thrown.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.TraceSourceLogger.Fatal(System.String)">
+      <summary>
+            Logs a fatal error message (using TraceEventType.Critical).
+            </summary>
+      <param name="msg">The message to be logged.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Logging.TraceSourceLogger.Fatal(System.String,System.Exception)">
+      <summary>
+            Logs a fatal error message (using TraceEventType.Critical).
+            </summary>
+      <param name="msg">The message to be logged.</param>
+      <param name="ex">The exception that was thrown.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Security.IXcoClientCredentials">
+      <summary>
+            Credentials that can be used to authenticate a user.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Security.IXcoClientCredentials.User">
+      <summary>
+            The username.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Security.IXcoClientCredentials.Password">
+      <summary>
+            The (encrypted) password.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Security.IXcoSecurityService">
+      <summary>
+            Interface 
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.AddWorker(Microsoft.Ccr.Core.IPort,System.Collections.Generic.List{XcoAppSpaces.Contracts.Service.XcoServiceAttributeInfo})">
+      <summary>
+            Adds a worker to the security service. This method is called for every worker that is added to the space using RunWorker().
+            </summary>
+      <param name="worker">The worker that should be added.</param>
+      <param name="attributes">A list of attributes that apply to the worker and could contain information that is important to the security service, e.g. security permission attributes.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.RemoveWorker(Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Removes a worker from the security service. This method is called for every worker that is removed from the space using DisposeWorker().
+            </summary>
+      <param name="worker">The worker that should be removed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.GetClientCredentials(System.Net.ICredentials,System.String)">
+      <summary>
+            Gets xco client credentials from a given credentials object and for the given address, that can be 
+            transfered to a remote space and used to authenticate a user at a remote space.
+            </summary>
+      <param name="credentials">The ICredentials object where to read the credentials from.</param>
+      <param name="address">The address for which the credentials are needed.</param>
+      <returns>A new IXcoClientCredentials instance containing the needed authentication information.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.Authenticate(System.String,XcoAppSpaces.Contracts.Security.IXcoClientCredentials)">
+      <summary>
+            Authenticates access for the given user to the space. It is checked if the username and password
+            are valid. A sessionID is generated if authentication is successful. If the user already has an open
+            session, the id of the existing session is returned.
+            </summary>
+      <param name="address">The host address of the user.</param>
+      <param name="credentials">The credentials of the user.</param>
+      <returns>The Guid of the user session, or Guid.Empty if authentication has failed.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.Authorize(System.String,System.Guid,Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Authorizes access for the user of the given session to the given worker. Authorization is successful
+            if the user is allowed to access at least one port of the worker.
+            </summary>
+      <param name="address">The host address of the user.</param>
+      <param name="sessionID">The sessionID of the user (that was generated during user authentication).</param>
+      <param name="worker">The worker instance.</param>
+      <returns>True if the user is authorized to access the worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.CheckPermission(Microsoft.Ccr.Core.IPort,System.Object,System.String,System.Guid)">
+      <summary>
+            Checks if certain port of a worker can be accessed by a specific session. An XcoSecurityException is thrown
+            if the operation is not permitted.
+            </summary>
+      <param name="worker">The worker that should be accessed.</param>
+      <param name="message">The message that should be posted to the worker.</param>
+      <param name="address">The address ot the sender of the message.</param>
+      <param name="sessionID">The ID of the session that the sender uses for communication.</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Security.XcoAuthenticationResult">
+      <summary>
+            Result of an authentication with an IXcoSecurityService instance.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Security.XcoAuthenticationResult.IsAuthenticated">
+      <summary>
+            True if the authentication was successful (meaning username and password were correct).
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Security.XcoAuthenticationResult.SessionID">
+      <summary>
+            The session id that the user must use to access the worker.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Security.XcoSecurityPermissionAttribute">
+      <summary>
+            Attribute that can be added to a worker or one of its message processor methods to
+            allow a certain role to access this worker (or only certain ports of the worker).
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Security.XcoSecurityPermissionAttribute.#ctor(System.String)">
+      <summary>
+            Creates a new XcoSecurityPermissionAttribute.
+            </summary>
+      <param name="rolename">The rolename that should have permission.</param>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Security.XcoSecurityPermissionAttribute.Rolename">
+      <summary>
+            The rolename that should have permission.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Security.XcoSecurityPolicy">
+      <summary>
+            List of security policies for handling remote access to workers.
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Contracts.Security.XcoSecurityPolicy.Permissive">
+      <summary>
+            Anonymous users are allowed (can access all workers/ports that are not restricted to certain roles).
+            </summary>
+    </member>
+    <member name="F:XcoAppSpaces.Contracts.Security.XcoSecurityPolicy.Restrictive">
+      <summary>
+            No anonymous users are allowed.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Serialization.IXcoSerializer">
+      <summary>
+            Interface definition for classes used for serialization and deserialization of 
+            objects (used for remote communication and for serialized data storage).
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Serialization.IXcoSerializer.Serialize(System.Object)">
+      <summary>
+            Serializes an object into a byte array.
+            </summary>
+      <param name="element">The object to be serialized.</param>
+      <returns>The serialized object.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Serialization.IXcoSerializer.Deserialize(System.Byte[])">
+      <summary>
+            Deserializes an object from a byte array.
+            </summary>
+      <param name="element">The serialized object.</param>
+      <returns>The object that has been deserialized.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Serialization.IXcoSerializer.Deserialize(System.IO.Stream)">
+      <summary>
+            Deserializes an object from a stream.
+            </summary>
+      <param name="stream">The stream that contains the serialized object.</param>
+      <returns>The object that has been deserialized.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Serialization.Binary.XcoBinarySerializer">
+      <summary>
+            Helper class for serialization and deserialization of objects (used in
+            communication with remote spaces). Uses the BinaryFormatter.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Serialization.Binary.XcoBinarySerializer.Serialize(System.Object)">
+      <summary>
+            Serializes an object into a byte array.
+            </summary>
+      <param name="element">The object to be serialized.</param>
+      <returns>The serialized object.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Serialization.Binary.XcoBinarySerializer.Deserialize(System.Byte[])">
+      <summary>
+            Deserializes an object from a byte array.
+            </summary>
+      <param name="element">The serialized object.</param>
+      <returns>The object that has been deserialized.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Serialization.Binary.XcoBinarySerializer.Deserialize(System.IO.Stream)">
+      <summary>
+            Deserializes an object from a byte array.
+            </summary>
+      <param name="stream">The serialized object.</param>
+      <returns>The object that has been deserialized.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoWorkerExtensionAttribute">
+      <summary>
+            Marks a class as worker extension. When creating a worker, all methods
+            of a worker extension class that are marked with XcoConcurrent, XcoExclusive
+            or XcoTeardown are also taken into account as message processing methods.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoWorkerExtensionAttribute.#ctor">
+      <summary>
+            Creates a new XcoWorkerExtensionAttribute.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoWorkerExtensionAttribute.#ctor(System.Type[])">
+      <summary>
+            Creates a new XcoWorkerExtensionAttribute.
+            </summary>
+      <param name="required">The list of types for which a port must exist at the worker.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoWorkerExtensionAttribute.IsTypeRequired(System.Type)">
+      <summary>
+            Checks if the given type is required, meaning if a Port{Type} must exist at the worker for this type.
+            </summary>
+      <param name="type">The type to be checked.</param>
+      <returns>True if the type is required.</returns>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerExtensionAttribute.Required">
+      <summary>
+            The list of required types (only either the required types or the optional types should be set).
+            For all types in this list the worker must have a port in its contract (an exception will be thrown
+            during instantiation of the worker when a port with one of these types is missing).
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoWorkerExtensionAttribute.Optional">
+      <summary>
+            The list of optional types (only either the required types or the optional types should be set).
+            For these types the worker does not require to have a port, but the port will be used by the worker
+            extension if it exists.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoConcurrentAttribute">
+      <summary>
+            Marks a Method of a Worker for processing objects of a certain type
+            that are posted to the worker concurrently. (Method and fitting port
+            of the worker are added to a CCR ConcurrentReceiverGroup.)
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoExclusiveAttribute">
+      <summary>
+            Marks a Method of a Worker for processing objects of a certain type
+            that are posted to the worker exclusively. (Method and fitting port
+            of the worker are added to a CCR ExclusiveReceiverGroup.)
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoTeardownAttribute">
+      <summary>
+            Marks a Method of a Worker for processing objects of a certain type
+            that are posted to the worker. As soon as an object is processed by
+            this method, all CCR ReceiverTasks that are bound to the worker's
+            PortSet are shut down. (Method and fitting port of the worker are 
+            added to a CCR TeardownReceiverGroup)
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Core.CcrWiring.PortHelpers">
+      <summary>
+            This class adds extension methods to the port that are needed at the appspace for working with local and remote ports.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.CcrWiring.PortHelpers.GetPortSerializationInfo(Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Gets infos that are available for this port about remote communication.
+            </summary>
+      <param name="port">The port.</param>
+      <returns>Remote communication information about this port.</returns>
+    </member>
+  </members>
+</doc>
