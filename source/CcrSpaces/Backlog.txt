@@ -22,4 +22,6 @@ flows
 actors
 
 register config string interpreters statically on ccr space
+
+move all API classes to a common namespace, eg CcrSpace.Core
 	
