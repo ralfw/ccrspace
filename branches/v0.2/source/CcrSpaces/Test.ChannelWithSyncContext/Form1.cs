@@ -25,7 +25,7 @@ namespace Test.ChannelWithSyncContext
             var cfg = new CcrsChannelConfig<int>
                           {
                               MessageHandler = n=>this.textBox1.Text=n.ToString(),
-                              HandlerMode = CcrsChannelHandlerModes.InCreatorSyncContext
+                              HandlerMode = CcrsChannelHandlerModes.InCurrentSyncContext
                           };
             this.chReportProgress = new ChannelFactory().CreateChannel<int>(cfg);
 

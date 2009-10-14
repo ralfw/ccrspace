@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace Test.CcrSpace.Channels
 {
     [TestFixture]
-    public class testChannelFactory
+    public class testChannelFactoryOneWay
     {
         private AutoResetEvent are;
         private ChannelFactory sut;

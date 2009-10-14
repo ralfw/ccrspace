@@ -6,10 +6,22 @@ namespace CcrSpaces.Channels
 {
     partial class ChannelFactory
     {
+        private void ConfigurePort<T>(Port<T> port, CcrsChannelConfig<T> config)
+        {
+            if (config.HandlerMode == CcrsChannelHandlerModes.Sequential || config.HandlerMode == CcrsChannelHandlerModes.InCurrentSyncContext)
+            {
+                Action<T> safeHandler = CreateInSynContextHandler(config);
+                CreateSequentialHandler(config, safeHandler, port);
+            }
+            else
+                CreateParallelHandler(config, port);
+        }
+
+
         private Action<T> CreateInSynContextHandler<T>(CcrsChannelConfig<T> config)
         {
             Action<T> safeHandler = config.MessageHandler;
-            if (config.HandlerMode == CcrsChannelHandlerModes.InCreatorSyncContext)
+            if (config.HandlerMode == CcrsChannelHandlerModes.InCurrentSyncContext)
             {
                 SynchronizationContext currentContext = SynchronizationContext.Current;
                 safeHandler = m =>
