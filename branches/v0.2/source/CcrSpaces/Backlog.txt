@@ -13,5 +13,13 @@ services on ccr space?
 	ResolveService<TService([name])
 	EnumServices<TService>() -> IEnum<TService>
 	
+response timeout
+
+pub/sub
+
+flows
+
+actors
+
 register config string interpreters statically on ccr space
 	

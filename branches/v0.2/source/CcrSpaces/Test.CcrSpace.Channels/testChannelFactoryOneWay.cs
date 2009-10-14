@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using CcrSpaces.Core;
 using CcrSpaces.Channels;
-using Microsoft.Ccr.Core;
 using NUnit.Framework;
 
 namespace Test.CcrSpace.Channels
@@ -28,7 +24,7 @@ namespace Test.CcrSpace.Channels
         public void Create_persistent_port_with_handler()
         {
             var cfg = new CcrsChannelConfig<int> {MessageHandler = n => this.are.Set()};
-            var p = this.sut.CreateChannel<int>(cfg);
+            var p = this.sut.CreateChannel(cfg);
 
             p.Post(1);
             p.Post(2);
@@ -69,7 +65,7 @@ namespace Test.CcrSpace.Channels
                                                     },
                                                     HandlerMode = mode
                           };
-            var p = this.sut.CreateChannel<int>(cfg);
+            var p = this.sut.CreateChannel(cfg);
 
             p.Post(1);
             p.Post(10000);
