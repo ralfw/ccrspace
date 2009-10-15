@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Threading;
 using CcrSpaces.Channels;
+using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
 
 namespace Test.CcrSpace.Channels
 {
     [TestFixture]
-    public class testChannelFactoryRequestResponse
+    public class testChannelFactoryRequestResponse : TestFixtureBase
     {
-        private AutoResetEvent are;
         private ChannelFactory sut;
 
-        [SetUp]
-        public void GlobalArrange()
+        protected override void FixtureArrange()
         {
-            this.are = new AutoResetEvent(false);
             this.sut = new ChannelFactory();
         }
+
         
         [Test]
         public void Create_handler_and_continuation()
@@ -29,14 +28,14 @@ namespace Test.CcrSpace.Channels
                                  InputMessageHandler = (s, pi) => pi.Post(s.Length),
                                  OutputMessageHandler = n => {
                                                                output = n;
-                                                               this.are.Set(); 
+                                                               base.are.Set(); 
                                                              }
                              };
             var p = this.sut.CreateChannel(config);
 
             p.Post("hello");
 
-            Assert.IsTrue(this.are.WaitOne(500));
+            Assert.IsTrue(base.are.WaitOne(500));
             Assert.AreEqual(5, output);
         }
 
@@ -58,13 +57,13 @@ namespace Test.CcrSpace.Channels
                 responses.Receive(n =>
                     {
                         output = n;
-                        this.are.Set();
+                        base.are.Set();
                     })
                 );
 
             p.Post(new CcrsRequest<string, int>("hello", responses));
 
-            Assert.IsTrue(this.are.WaitOne(500));
+            Assert.IsTrue(base.are.WaitOne(500));
             Assert.AreEqual(5, output);
         }
 
@@ -85,14 +84,14 @@ namespace Test.CcrSpace.Channels
                 pEx.Receive(ex =>
                                 {
                                     Console.WriteLine(ex.Message);
-                                    this.are.Set();
+                                    base.are.Set();
                                 })
                 );
             ICausality c = new Causality("ex", pEx);
             Dispatcher.AddCausality(c);
             {
                 p.Post("hello");
-                Assert.IsTrue(this.are.WaitOne(500));
+                Assert.IsTrue(base.are.WaitOne(500));
             }
             Dispatcher.RemoveCausality(c);
         }

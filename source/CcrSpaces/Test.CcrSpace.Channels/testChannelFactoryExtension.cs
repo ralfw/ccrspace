@@ -2,6 +2,7 @@
 using System.Threading;
 using CcrSpaces.Channels;
 using CcrSpaces.Core;
+using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -9,26 +10,11 @@ using Rhino.Mocks;
 namespace Test.CcrSpace.Channels
 {
     [TestFixture]
-    public class testChannelFactoryExtension
+    public class testChannelFactoryExtension : TestFixtureBase
     {
-        private AutoResetEvent are;
-
-        [SetUp]
-        public void GlobalArrange()
-        {
-            this.are = new AutoResetEvent(false);
-        }
-
-
         [Test]
         public void Create_oneway_port()
         {
-            MockRepository mocks = new MockRepository();
-
-            ICcrSpace space = mocks.Stub<ICcrSpace>();
-            DispatcherQueue dpq = new DispatcherQueue();
-            space.Expect(x => x.DefaultTaskQueue).Return(dpq);
-
             mocks.ReplayAll();
 
             var mockCf = new MockChannelFactory();
@@ -37,7 +23,7 @@ namespace Test.CcrSpace.Channels
 
             ChannelFactory.Instance = mockCf;
 
-            Assert.AreSame(mockCf.POneWay, space.CreateChannel(handler));
+            Assert.AreSame(mockCf.POneWay, base.mockSpace.CreateChannel(handler));
 
             Assert.AreSame(handler, mockCf.CfgOneWay.MessageHandler);
             Assert.AreSame(dpq, mockCf.CfgOneWay.TaskQueue);
@@ -48,12 +34,6 @@ namespace Test.CcrSpace.Channels
         [Test]
         public void Create_reqresp_port()
         {
-            MockRepository mocks = new MockRepository();
-
-            ICcrSpace space = mocks.Stub<ICcrSpace>();
-            DispatcherQueue dpq = new DispatcherQueue();
-            space.Expect(x => x.DefaultTaskQueue).Return(dpq);
-
             mocks.ReplayAll();
 
             var mockCf = new MockChannelFactory();
@@ -63,11 +43,11 @@ namespace Test.CcrSpace.Channels
 
             ChannelFactory.Instance = mockCf;
 
-            Assert.AreSame(mockCf.PReqResp, space.CreateChannel(reqHandler, respHandler));
+            Assert.AreSame(mockCf.PReqResp, mockSpace.CreateChannel(reqHandler, respHandler));
 
             Assert.AreSame(reqHandler, mockCf.CgfReqResp.InputMessageHandler);
             Assert.AreSame(respHandler, mockCf.CgfReqResp.OutputMessageHandler);
-            Assert.AreSame(dpq, mockCf.CgfReqResp.TaskQueue);
+            Assert.AreSame(base.dpq, mockCf.CgfReqResp.TaskQueue);
             Assert.AreEqual(CcrsChannelHandlerModes.Sequential, mockCf.CgfReqResp.InputHandlerMode);
             Assert.AreEqual(CcrsChannelHandlerModes.Sequential, mockCf.CgfReqResp.OutputHandlerMode);
         }
@@ -76,17 +56,11 @@ namespace Test.CcrSpace.Channels
         [Test]
         public void Request_receive()
         {
-            MockRepository mocks = new MockRepository();
-
-            ICcrSpace space = mocks.Stub<ICcrSpace>();
-            DispatcherQueue dpq = new DispatcherQueue();
-            space.Expect(x => x.DefaultTaskQueue).Return(dpq);
-
             mocks.ReplayAll();
 
             ChannelFactory.Instance = null;
 
-            var p = space.CreateChannel<string, int>(s => s.Length);
+            var p = base.mockSpace.CreateChannel<string, int>(s => s.Length);
 
             p.Request("the").Receive(n => this.are.Set());
 
