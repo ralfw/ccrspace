@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CcrSpaces.Channels;
+using CcrSpaces.Core.Services;
 using Microsoft.Ccr.Core;
 using XcoAppSpaces.Core;
 
 namespace CcrSpaces.Hosting
 {
-    internal class CcrsHost : IDisposable
+    internal class CcrsHost : ICcrsResourcefulService
     {
         private readonly XcoAppSpace appSpace;
 

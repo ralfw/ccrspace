@@ -3,7 +3,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Core
 {
-    public class CcrSpace : ICcrSpace, ICcrsServiceRegistry
+    public class CcrSpace : ICcrSpace
     {
         protected readonly Dispatcher defaultDispatcher;
         protected readonly DispatcherQueue defaultTaskQueue;
@@ -34,6 +34,7 @@ namespace CcrSpaces.Core
 
         public void Dispose()
         {
+            this.serviceRegistry.Dispose();
             this.defaultDispatcher.Dispose();
         }
 
