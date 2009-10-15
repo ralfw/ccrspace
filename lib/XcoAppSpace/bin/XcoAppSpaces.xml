@@ -2355,5 +2355,158 @@
       <param name="port">The port.</param>
       <returns>Remote communication information about this port.</returns>
     </member>
+    <member name="T:XcoAppSpaces.Contracts.Service.IXcoServiceFluentConfiguration`2">
+      <summary>
+            Interface that is implemented by classes allowing fluent service configuration. Allows
+            service implementations to extend the configuration of their own service with additional
+            extension methods.
+            </summary>
+      <typeparam name="TService">The type of service that is getting configured.</typeparam>
+      <typeparam name="TConfig">The type of configuration object that should be returned for further configuration with the fluent interface.</typeparam>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.IXcoServiceFluentConfiguration`2.Service">
+      <summary>
+            The service that is getting configured.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.IXcoServiceFluentConfiguration`2.Config">
+      <summary>
+            The configuration object that should be returned for further configuration with the fluent interface.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Service.IXcoAppSpaceConfiguration">
+      <summary>
+            Definition for an XcoAppSpace configuration that is used together with IXcoConfigStringInterpreters.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.IXcoAppSpaceConfiguration.Services">
+      <summary>
+            The list of services that should be part of an XcoAppSpace instance that is created with this
+            configuration.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Service.IXcoConfigStringInterpreter">
+      <summary>
+            Interface for classes that are able to interpret a space configuration.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Service.IXcoConfigStringInterpreter.Interpret(System.Collections.Generic.Dictionary{System.String,System.String})">
+      <summary>
+            Interprets the given configuration string and, according to the configuration string elements,
+            alters the space configuration (e.g. by adding new services or altering the configuration of already
+            added services).
+            </summary>
+      <param name="configStringElements">Dictionary of configuration elements (key-value pairs)</param>
+      <returns>Configuration for the service</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Service.IXcoService">
+      <summary>
+            Interface for services that can be used by an XcoAppSpace.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Service.XcoConfigStringInterpreterBase">
+      <summary>
+            Basic interpreter for service config strings
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Service.XcoConfigStringInterpreterBase.Interpret(System.Collections.Generic.Dictionary{System.String,System.String})">
+      <summary>
+            Interprets the given configuration string and, according to the configuration string elements
+            </summary>
+      <param name="configStringElements">Dictionary of configuration elements (key-value pairs)</param>
+      <returns>Configuration for the service</returns>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.XcoConfigStringInterpreterBase.ServiceConfig">
+      <summary>
+            Configuration of the service
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.XcoConfigStringInterpreterBase.InterpretDefinition">
+      <summary>
+            The interpret definition for all config strings 
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.XcoConfigStringInterpreterBase.GetService">
+      <summary>
+            Get serviceinstance
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Service.XcoServiceAttribute">
+      <summary>
+            Base class for attributes that can be added to Workers (and/or their Methods/Fields)
+            and should be recognized when instantiating a worker because a service
+            needs them (e.g. security service).
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Service.XcoServiceAttributeInfo">
+      <summary>
+            Information about a service attribute that belongs to a certain worker or one of its message processor methods.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.XcoServiceAttributeInfo.Attr">
+      <summary>
+            The attribute instance.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.XcoServiceAttributeInfo.WorkerMessageType">
+      <summary>
+            The message type the given attribute was assigned to, or null if the attribute belongs to the worker directly.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Service.XcoServiceConfiguration">
+      <summary>
+            Configuration for an IXcoService instance.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.XcoServiceConfiguration.Name">
+      <summary>
+            The name of the service.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.XcoServiceConfiguration.IsDefault">
+      <summary>
+            True if the service is a default service. (E.g. default communication service which
+            is used as default by the space if no other communication service is chosen)
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Service.XcoServiceConfiguration.Service">
+      <summary>
+            The service instance.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Transport.MessageReceivedMethod">
+      <summary>
+            Definition for a method to process a message received from a remote Space.
+            </summary>
+      <param name="msg">The message that has been received.</param>
+      <param name="commService">The communication service that received the message</param>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Transport.IXcoTransportService">
+      <summary>
+            Interface definition for Services that can be used for communication between application spaces.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Contracts.Transport.IXcoTransportService.Send(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+      <summary>
+            Sends a message to a remote space.
+            </summary>
+      <param name="msg">The messages that should be sent.</param>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Transport.IXcoTransportService.LocalAddress">
+      <summary>
+            The Address of the server.
+            </summary>
+    </member>
+    <member name="T:XcoAppSpaces.Contracts.Transport.IXcoMessage">
+      <summary>
+            Interface definition for a message to be sent by remote communication.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Contracts.Transport.IXcoMessage.RemoteAddress">
+      <summary>
+            The address of the remote space where the message should be sent to,
+            or the message is received from.
+            </summary>
+    </member>
   </members>
 </doc>

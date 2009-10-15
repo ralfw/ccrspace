@@ -8,9 +8,10 @@ namespace CcrSpaces.Core
         protected readonly DispatcherQueue defaultTaskQueue;
 
 
-        public CcrSpace()
+        public CcrSpace() : this(new Dispatcher()) {}
+        public CcrSpace(Dispatcher defaultDispatcher)
         {
-            this.defaultDispatcher = new Dispatcher();
+            this.defaultDispatcher = defaultDispatcher;
             this.defaultTaskQueue = new DispatcherQueue("DefaultTaskQueue", this.defaultDispatcher);
         }
 

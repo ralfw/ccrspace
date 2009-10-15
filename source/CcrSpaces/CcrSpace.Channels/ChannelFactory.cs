@@ -3,6 +3,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Channels
 {
+    [Serializable]
     public class CcrsRequest<TInput, TOutput>
     {
         internal CcrsRequest(TInput request, Port<TOutput> responses)
