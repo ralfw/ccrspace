@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using CcrSpace.ExceptionHandling;
+using CcrSpaces.ExceptionHandling;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
@@ -21,13 +21,9 @@ namespace Test.CcrSpace.ExceptionHandling
 
             new CcrsTryCatch(() =>
                              {
-                                 base.are.Set();
-
                                  Arbiter.Activate(
                                      new DispatcherQueue(),
-                                     p.Receive(n =>
-                                                   {
-                                                       base.are.Set();
+                                     p.Receive(n =>{
                                                        throw new ApplicationException("error!");
                                                    })
                                      );
@@ -40,9 +36,7 @@ namespace Test.CcrSpace.ExceptionHandling
                                base.are.Set();
                            });
 
-            Assert.IsTrue(base.are.WaitOne(500)); // try is executed
-            Assert.IsTrue(base.are.WaitOne(500)); // port received msg, throws exception
-            Assert.IsTrue(base.are.WaitOne(500)); // exception caught
+            Assert.IsTrue(base.are.WaitOne(500));
             Assert.IsInstanceOf<ApplicationException>(exCaught);
         }
     }

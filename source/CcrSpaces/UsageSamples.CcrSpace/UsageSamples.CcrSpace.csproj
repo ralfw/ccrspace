@@ -66,6 +66,10 @@
       <Project>{3CEDC287-356D-49B3-A752-DCD38D55A5C7}</Project>
       <Name>CcrSpace.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CcrSpace.ExceptionHandling\CcrSpace.ExceptionHandling.csproj">
+      <Project>{4D1A5A15-6A1A-44C1-A56E-775E363834B0}</Project>
+      <Name>CcrSpace.ExceptionHandling</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
