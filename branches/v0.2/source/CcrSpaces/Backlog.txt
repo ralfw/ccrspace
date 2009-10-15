@@ -1,6 +1,4 @@
-exception handling on ccr space
-
-ccr port host
+ccr port hosting
 	use appspace
 		Host<T>, Host<T0, T1, ...>
 		Connect<T>, Connect<T0, T1, ...>
@@ -24,4 +22,9 @@ actors
 register config string interpreters statically on ccr space
 
 move all API classes to a common namespace, eg CcrSpace.Core
-	
+
+
+--------------
+resolved/done
+--------------
+exception handling with try/catch implemented in its own ccr space extension
