@@ -25,6 +25,7 @@ move all API classes to a common namespace, eg CcrSpaces.Core
 	rename projects to CcrsSpaces (plural!)
 	namespace should also start with this prefix
 
+discovery service so ports can be found just by name instead of remote addr
 
 --------------
 resolved/done
