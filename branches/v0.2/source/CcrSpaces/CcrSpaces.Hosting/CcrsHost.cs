@@ -8,7 +8,7 @@ using XcoAppSpaces.Core;
 
 namespace CcrSpaces.Hosting
 {
-    public class CcrsHost : IDisposable
+    internal class CcrsHost : IDisposable
     {
         private readonly XcoAppSpace appSpace;
 

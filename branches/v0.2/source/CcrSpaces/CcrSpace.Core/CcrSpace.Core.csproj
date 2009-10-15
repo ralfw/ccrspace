@@ -52,6 +52,9 @@
     <Compile Include="CcrSpace.cs" />
     <Compile Include="ICcrSpace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ICcrsService.cs" />
+    <Compile Include="Services\ICcrsServiceRegistry.cs" />
+    <Compile Include="Services\ServiceRegistry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

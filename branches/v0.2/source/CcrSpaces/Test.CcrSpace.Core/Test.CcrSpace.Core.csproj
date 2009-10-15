@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="testCcrSpace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testServiceContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CcrSpace.Core\CcrSpace.Core.csproj">
