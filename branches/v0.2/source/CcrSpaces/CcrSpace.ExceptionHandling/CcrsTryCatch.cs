@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using CcrSpaces.ExceptionHandling;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpace.ExceptionHandling
+namespace CcrSpaces.ExceptionHandling
 {
     public class CcrsTryCatch
     {
@@ -18,23 +16,16 @@ namespace CcrSpace.ExceptionHandling
 
 
         public void Catch(Action<Exception> exceptionHandler)
+        { Catch(CausalityFactory.CreateExceptionHandlingCausality(exceptionHandler)); }
+        public void Catch(Port<Exception> exceptionPort)
+        { Catch(CausalityFactory.CreateExceptionHandlingCausality(exceptionPort)); }
+        private void Catch(ICausality causality)
         {
-            var pEx = new Port<Exception>();
-            Arbiter.Activate(
-                new DispatcherQueue(),
-                Arbiter.Receive(
-                    true,
-                    pEx,
-                    new Handler<Exception>(exceptionHandler)
-                    )
-                );
-
-            ICausality cEx = new Causality("ExceptionHandler", pEx);
-            Dispatcher.AddCausality(cEx);
+            Dispatcher.AddCausality(causality);
 
             this.tryThis();
 
-            Dispatcher.RemoveCausality(cEx);
+            Dispatcher.RemoveCausality(causality);
         }
     }
 }

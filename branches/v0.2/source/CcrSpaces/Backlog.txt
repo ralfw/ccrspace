@@ -21,10 +21,14 @@ actors
 
 register config string interpreters statically on ccr space
 
-move all API classes to a common namespace, eg CcrSpace.Core
+move all API classes to a common namespace, eg CcrSpaces.Core
+	rename projects to CcrsSpaces (plural!)
+	namespace should also start with this prefix
 
 
 --------------
 resolved/done
 --------------
 exception handling with try/catch implemented in its own ccr space extension
+
+exception handling with using()
