@@ -19,7 +19,7 @@ namespace Test.CcrSpaces.Hosting
         {
             using (var server = new CcrsHost("tcp.port=9999"))
             {
-                server.Host(base.mockSpace.CreateChannel<int>(n=>base.are.Set()), "myport");
+                server.HostPort(base.mockSpace.CreateChannel<int>(n=>base.are.Set()), "myport");
 
                 using (var client = new CcrsHost("tcp.port=0"))
                 {
@@ -37,7 +37,7 @@ namespace Test.CcrSpaces.Hosting
         {
             using (var server = new CcrsHost("tcp.port=9999"))
             {
-                server.Host(base.mockSpace.CreateChannel<string, int>(s =>
+                server.HostPort(base.mockSpace.CreateChannel<string, int>(s =>
                                                                           {
                                                                               Console.WriteLine("server: {0}", s);
                                                                               return s.Length;
@@ -61,7 +61,7 @@ namespace Test.CcrSpaces.Hosting
         {
             using (var server = new CcrsHost("tcp.port=9999"))
             {
-                server.Host(base.mockSpace.CreateChannel<string, int>(s =>
+                server.HostPort(base.mockSpace.CreateChannel<string, int>(s =>
                                                                           {
                                                                               Console.WriteLine("server: {0}", s);
                                                                               return s.Length;

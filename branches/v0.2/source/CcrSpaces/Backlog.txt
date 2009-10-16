@@ -1,23 +1,10 @@
-ccr port hosting
-	use appspace
-		Host<T>, Host<T0, T1, ...>
-		Connect<T>, Connect<T0, T1, ...>
-		
-services on ccr space?
-	ICcrsService
-	ICcrsResourcefulService
-	
-	RegisterService<TService>(service [, name])
-	ResolveService<TService([name])
-	EnumServices<TService>() -> IEnum<TService>
-	
-response timeout
-
 pub/sub
 
 flows
 
 actors
+
+response timeout
 
 register config string interpreters statically on ccr space
 
@@ -33,3 +20,17 @@ resolved/done
 exception handling with try/catch implemented in its own ccr space extension
 
 exception handling with using()
+
+ccr port hosting
+	use appspace
+		Host<T>, Host<T0, T1, ...>
+		Connect<T>, Connect<T0, T1, ...>
+		
+services on ccr space?
+	ICcrsService
+	ICcrsResourcefulService
+	
+	RegisterService<TService>(service [, name])
+	ResolveService<TService([name])
+	EnumServices<TService>() -> IEnum<TService>
+	

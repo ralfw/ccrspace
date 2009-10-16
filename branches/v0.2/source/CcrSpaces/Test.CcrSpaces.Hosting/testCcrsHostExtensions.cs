@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CcrSpaces.Core;
+﻿using CcrSpaces.Core;
 using CcrSpaces.Channels;
 using CcrSpaces.Hosting;
 using GeneralTestInfrastructure;
@@ -18,7 +14,7 @@ namespace Test.CcrSpaces.Hosting
         {
             using (var server = new CcrSpace().ConfigureAsHost("tcp.port=9999"))
             {
-                server.Host(server.CreateChannel<int>(n => base.are.Set()), "myport");
+                server.HostPort(server.CreateChannel<int>(n => base.are.Set()), "myport");
 
                 using(var client = new CcrSpace().ConfigureAsHost("tcp.port=0"))
                 {

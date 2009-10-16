@@ -51,10 +51,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\XcoAppSpace\bin\XcoAppSpaces.dll</HintPath>
     </Reference>
-    <Reference Include="XcoAppSpaces.Contracts.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\XcoAppSpace\bin\XcoAppSpaces.Contracts.Service.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CcrsHost.cs" />
