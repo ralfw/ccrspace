@@ -56,6 +56,7 @@
     <Compile Include="useCcrSpace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="useChannels.cs" />
+    <Compile Include="useHosting.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CcrSpace.Channels\CcrSpace.Channels.csproj">
@@ -69,6 +70,10 @@
     <ProjectReference Include="..\CcrSpace.ExceptionHandling\CcrSpace.ExceptionHandling.csproj">
       <Project>{4D1A5A15-6A1A-44C1-A56E-775E363834B0}</Project>
       <Name>CcrSpace.ExceptionHandling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CcrSpaces.Hosting\CcrSpaces.Hosting.csproj">
+      <Project>{C28BABF3-48FA-4827-89ED-3FD7D4C94CC1}</Project>
+      <Name>CcrSpaces.Hosting</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
