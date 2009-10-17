@@ -57,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="useChannels.cs" />
     <Compile Include="useHosting.cs" />
+    <Compile Include="usePubSub.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CcrSpace.Channels\CcrSpace.Channels.csproj">
@@ -74,6 +75,10 @@
     <ProjectReference Include="..\CcrSpaces.Hosting\CcrSpaces.Hosting.csproj">
       <Project>{C28BABF3-48FA-4827-89ED-3FD7D4C94CC1}</Project>
       <Name>CcrSpaces.Hosting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CcrSpaces.PubSub\CcrSpaces.PubSub.csproj">
+      <Project>{448239EB-C078-4DEE-912F-709882CBBA1F}</Project>
+      <Name>CcrSpaces.PubSub</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

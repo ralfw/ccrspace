@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using CcrSpaces.Channels;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;

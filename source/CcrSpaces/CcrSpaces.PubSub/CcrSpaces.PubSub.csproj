@@ -52,7 +52,7 @@
     <Compile Include="CcrSpaceExtensions.cs" />
     <Compile Include="CcrsPublicationHub.cs" />
     <Compile Include="CcrsPublicationHubConfig.cs" />
-    <Compile Include="CcrsSubscriptions.cs" />
+    <Compile Include="CcrsSubscriptionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

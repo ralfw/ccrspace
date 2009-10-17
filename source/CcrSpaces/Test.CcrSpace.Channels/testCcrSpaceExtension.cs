@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Threading;
 using CcrSpaces.Channels;
-using CcrSpaces.Core;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
-using Rhino.Mocks;
 
 namespace Test.CcrSpace.Channels
 {
@@ -17,8 +14,7 @@ namespace Test.CcrSpace.Channels
         {
             mocks.ReplayAll();
 
-            var mockCf = new MockChannelFactory();
-            mockCf.POneWay = new Port<int>();
+            var mockCf = new MockChannelFactory {POneWay = new Port<int>()};
             Action<int> handler = n => { };
 
             CcrsChannelFactory.Instance = mockCf;
@@ -36,8 +32,10 @@ namespace Test.CcrSpace.Channels
         {
             mocks.ReplayAll();
 
-            var mockCf = new MockChannelFactory();
-            mockCf.PReqResp = new PortSet<string, CcrsRequest<string, int>>();
+            var mockCf = new MockChannelFactory
+                             {
+                                 PReqResp = new PortSet<string, CcrsRequest<string, int>>()
+                             };
             Action<string, Port<int>> reqHandler = (s, pi) => { };
             Action<int> respHandler = n => { };
 

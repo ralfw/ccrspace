@@ -1,7 +1,5 @@
 ﻿using System;
-using CcrSpaces.ExceptionHandling;
 using CcrSpaces.Core;
-using CcrSpaces.ExceptionHandling;
 
 namespace CcrSpaces.ExceptionHandling
 {
