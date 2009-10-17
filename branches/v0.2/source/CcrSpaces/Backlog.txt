@@ -1,7 +1,3 @@
-pub/sub
-	local
-	remote
-
 flows
 	oneway
 	request/response
@@ -40,3 +36,6 @@ services on ccr space?
 	ResolveService<TService([name])
 	EnumServices<TService>() -> IEnum<TService>
 	
+pub/sub
+	local
+	remote

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using CcrSpaces.Channels;
 using CcrSpaces.PubSub;
 using GeneralTestInfrastructure;
-using Microsoft.Ccr.Core;
 using NUnit.Framework;
 
 namespace Test.CcrSpaces.PubSub
@@ -17,16 +12,16 @@ namespace Test.CcrSpaces.PubSub
         [Test]
         public void Subscribe_and_Publish()
         {
-            var sut = new CcrsPublicationHub<string>(new CcrsPublicationHubConfig<string>());
+            var sut = new CcrsPublicationHub<string>(new CcrsPublicationHubConfig());
 
             var chf = new CcrsChannelFactory();
-            var sub1 = chf.CreateChannel<string>(new CcrsChannelConfig<string>
+            var sub1 = chf.CreateChannel(new CcrsChannelConfig<string>
                                                    {
                                                        MessageHandler = s => base.are.Set()
                                                    });
 
             var are2 = new AutoResetEvent(false);
-            var sub2 = chf.CreateChannel<string>(new CcrsChannelConfig<string>
+            var sub2 = chf.CreateChannel(new CcrsChannelConfig<string>
                                                     {
                                                         MessageHandler = s => are2.Set()
                                                     });
@@ -46,10 +41,10 @@ namespace Test.CcrSpaces.PubSub
         [Test]
         public void Remove_subscription()
         {
-            var sut = new CcrsPublicationHub<string>(new CcrsPublicationHubConfig<string>());
+            var sut = new CcrsPublicationHub<string>(new CcrsPublicationHubConfig());
 
             var chf = new CcrsChannelFactory();
-            var sub1 = chf.CreateChannel<string>(new CcrsChannelConfig<string>
+            var sub1 = chf.CreateChannel(new CcrsChannelConfig<string>
                             {
                                 MessageHandler = s => base.are.Set()
                             });

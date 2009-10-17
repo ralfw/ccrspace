@@ -1,15 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using CcrSpaces.Channels;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.PubSub
 {
+    [Serializable]
     public class CcrsSubscribe<T>
     {
         public string Key;
         public Port<T> Subscriber;
 
+        public CcrsSubscribe(string key, Action<T> subscriptionHandler)
+            : this(key, new CcrsChannelFactory().CreateChannel(new CcrsChannelConfig<T>
+                                                                      {
+                                                                          MessageHandler = subscriptionHandler
+                                                                      })) {}
         public CcrsSubscribe(string key, Port<T> subscriber)
         {
             this.Key = key;
@@ -17,6 +24,7 @@ namespace CcrSpaces.PubSub
         }
     }
 
+    [Serializable]
     public class CcrsUnsubscribe
     {
         public string Key;
@@ -25,14 +33,16 @@ namespace CcrSpaces.PubSub
 
 
 
-    public class CcrsSubscriptions<T> : PortSet<CcrsSubscribe<T>, CcrsUnsubscribe>
+    public class CcrsSubscriptionManager<T> : PortSet<CcrsSubscribe<T>, CcrsUnsubscribe>
     {
         private readonly ReaderWriterLock rwl = new ReaderWriterLock();
 
         private readonly Dictionary<string, Port<T>> subscribers = new Dictionary<string, Port<T>>();
 
 
-        internal CcrsSubscriptions(CcrsPublicationHubConfig<T> config)
+        public CcrsSubscriptionManager(){}
+
+        internal CcrsSubscriptionManager(CcrsPublicationHubConfig config)
         {
             var chf = new CcrsChannelFactory();
 

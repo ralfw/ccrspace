@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CcrSpaces.Channels;
+﻿using CcrSpaces.Channels;
 using CcrSpaces.Core;
 
 namespace CcrSpaces.PubSub
@@ -14,7 +10,7 @@ namespace CcrSpaces.PubSub
 
         public static CcrsPublicationHub<T> CreatePublicationHub<T>(this ICcrSpace space, CcrsChannelHandlerModes handlerMode)
         {
-            return new CcrsPublicationHub<T>(new CcrsPublicationHubConfig<T>
+            return new CcrsPublicationHub<T>(new CcrsPublicationHubConfig
                                                  {
                                                      TaskQueue = space.DefaultTaskQueue,
                                                      HandlerMode = handlerMode

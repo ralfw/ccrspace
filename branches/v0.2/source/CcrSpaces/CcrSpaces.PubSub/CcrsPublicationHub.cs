@@ -1,20 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using CcrSpaces.Channels;
+﻿using CcrSpaces.Channels;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.PubSub
 {
     public class CcrsPublicationHub<T> : Port<T>
     {
-        private readonly CcrsSubscriptions<T> subscriptions;
+        private readonly CcrsSubscriptionManager<T> subscriptions;
 
 
-        internal CcrsPublicationHub(CcrsPublicationHubConfig<T> config)
+        internal CcrsPublicationHub(CcrsPublicationHubConfig config)
         {
-            this.subscriptions = new CcrsSubscriptions<T>(config);
+            this.subscriptions = new CcrsSubscriptionManager<T>(config);
 
-            new CcrsChannelFactory().ConfigureChannel<T>(
+            new CcrsChannelFactory().ConfigureChannel(
                         this,
                         new CcrsChannelConfig<T>{
                                                     MessageHandler = this.subscriptions.ProcessPublish,
@@ -24,7 +22,7 @@ namespace CcrSpaces.PubSub
         }
 
 
-        public CcrsSubscriptions<T> Subscriptions
+        public CcrsSubscriptionManager<T> Subscriptions
         {
             get { return this.subscriptions; }
         }
