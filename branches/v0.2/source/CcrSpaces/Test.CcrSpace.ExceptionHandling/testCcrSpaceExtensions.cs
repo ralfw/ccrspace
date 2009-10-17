@@ -12,7 +12,7 @@ using CcrSpaces.ExceptionHandling;
 namespace Test.CcrSpace.ExceptionHandling
 {
     [TestFixture]
-    public class testCcrsTryCatchExtensions : TestFixtureBase
+    public class testCcrSpaceExtensions : TestFixtureBase
     {
         [Test]
         public void Try_and_catch()

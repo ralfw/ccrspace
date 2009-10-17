@@ -49,14 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CcrsChannelFactoryExtensions.cs" />
+    <Compile Include="CcrSpaceExtensions.cs" />
     <Compile Include="CcrsChannelConfig.cs" />
-    <Compile Include="ChannelFactory.cs" />
+    <Compile Include="CcrsPendingRequest.cs" />
+    <Compile Include="Extensions\PortExtensions.cs" />
+    <Compile Include="CcrsChannelFactory.cs" />
     <Compile Include="ChannelFactory_HandlerCreation.cs">
-      <DependentUpon>ChannelFactory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ChannelFactory_HandlerRegistration.cs">
-      <DependentUpon>ChannelFactory_HandlerCreation.cs</DependentUpon>
+      <DependentUpon>CcrsChannelFactory.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

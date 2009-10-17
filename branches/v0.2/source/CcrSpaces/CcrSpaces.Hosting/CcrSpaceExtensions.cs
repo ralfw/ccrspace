@@ -4,7 +4,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Hosting
 {
-    public static class CcrsHostExtensions
+    public static class CcrSpaceExtensions
     {
         public static ICcrSpace ConfigureAsHost(this ICcrSpace space, string configurationString)
         {

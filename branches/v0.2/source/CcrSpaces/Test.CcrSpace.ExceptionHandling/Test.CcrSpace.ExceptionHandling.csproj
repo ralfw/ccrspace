@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="testCcrsTryCatchExtensions.cs" />
+    <Compile Include="testCcrSpaceExtensions.cs" />
     <Compile Include="testTryCatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

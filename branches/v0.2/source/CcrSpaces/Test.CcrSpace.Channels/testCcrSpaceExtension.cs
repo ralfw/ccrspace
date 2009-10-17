@@ -10,7 +10,7 @@ using Rhino.Mocks;
 namespace Test.CcrSpace.Channels
 {
     [TestFixture]
-    public class testChannelFactoryExtension : TestFixtureBase
+    public class testCcrSpaceExtension : TestFixtureBase
     {
         [Test]
         public void Create_oneway_port()
@@ -21,7 +21,7 @@ namespace Test.CcrSpace.Channels
             mockCf.POneWay = new Port<int>();
             Action<int> handler = n => { };
 
-            ChannelFactory.Instance = mockCf;
+            CcrsChannelFactory.Instance = mockCf;
 
             Assert.AreSame(mockCf.POneWay, base.mockSpace.CreateChannel(handler));
 
@@ -41,7 +41,7 @@ namespace Test.CcrSpace.Channels
             Action<string, Port<int>> reqHandler = (s, pi) => { };
             Action<int> respHandler = n => { };
 
-            ChannelFactory.Instance = mockCf;
+            CcrsChannelFactory.Instance = mockCf;
 
             Assert.AreSame(mockCf.PReqResp, mockSpace.CreateChannel(reqHandler, respHandler));
 
@@ -58,7 +58,7 @@ namespace Test.CcrSpace.Channels
         {
             mocks.ReplayAll();
 
-            ChannelFactory.Instance = null;
+            CcrsChannelFactory.Instance = null;
 
             var p = base.mockSpace.CreateChannel<string, int>(s => s.Length);
 
@@ -69,7 +69,7 @@ namespace Test.CcrSpace.Channels
     }
 
 
-    public class MockChannelFactory : IChannelFactory
+    public class MockChannelFactory : ICcrsChannelFactory
     {
         public Port<int> POneWay;
         public CcrsChannelConfig<int> CfgOneWay;
@@ -77,7 +77,7 @@ namespace Test.CcrSpace.Channels
         public PortSet<string, CcrsRequest<string, int>> PReqResp;
         public CcrsChannelConfig<string, int> CgfReqResp;
 
-        #region Implementation of IChannelFactory
+        #region Implementation of ICcrsChannelFactory
 
         public Port<T> CreateChannel<T>(CcrsChannelConfig<T> config)
         {

@@ -5,7 +5,7 @@ using CcrSpaces.ExceptionHandling;
 
 namespace CcrSpaces.ExceptionHandling
 {
-    public static class CcrsTryCatchExtensions
+    public static class CcrSpaceExtensions
     {
         public static CcrsTryCatch Try(this ICcrSpace space, Action tryThis)
         {

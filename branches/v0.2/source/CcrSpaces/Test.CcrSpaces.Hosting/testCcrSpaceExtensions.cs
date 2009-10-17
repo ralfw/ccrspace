@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Test.CcrSpaces.Hosting
 {
     [TestFixture]
-    public class testCcrsHostExtensions : TestFixtureBase
+    public class testCcrSpaceExtensions : TestFixtureBase
     {
         [Test]
         public void Configure_space_as_host()

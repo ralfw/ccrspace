@@ -8,13 +8,13 @@ using NUnit.Framework;
 namespace Test.CcrSpace.Channels
 {
     [TestFixture]
-    public class testChannelFactoryOneWay : TestFixtureBase
+    public class testCcrsChannelFactoryOneWay : TestFixtureBase
     {
-        private ChannelFactory sut;
+        private CcrsChannelFactory sut;
 
         protected override void FixtureArrange()
         {
-            this.sut = new ChannelFactory();
+            this.sut = new CcrsChannelFactory();
         }
 
 

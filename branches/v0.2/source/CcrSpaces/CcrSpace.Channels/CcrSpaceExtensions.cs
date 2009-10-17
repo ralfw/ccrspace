@@ -4,30 +4,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Channels
 {
-    public class CcrsPendingRequest<TInput, TOutput>
-    {
-        internal PortSet<TInput, CcrsRequest<TInput, TOutput>> Requests;
-        internal TInput Request;
-
-
-        public void Receive(Action<TOutput> responseHandler)
-        {
-            this.Receive(new ChannelFactory().CreateChannel(new CcrsChannelConfig<TOutput> {MessageHandler = responseHandler}));
-        }
-
-        public void Receive(Action<TOutput> responseHandler, CcrsChannelHandlerModes handlerMode)
-        {
-            this.Receive(new ChannelFactory().CreateChannel(new CcrsChannelConfig<TOutput> { MessageHandler = responseHandler, HandlerMode=handlerMode }));
-        }
-
-        public void Receive(Port<TOutput> responsePort)
-        {
-            this.Requests.Post(new CcrsRequest<TInput, TOutput>(this.Request, responsePort));
-        }
-    }
-
-
-    public static class CcrsChannelFactoryExtensions
+    public static class CcrSpaceExtensions
     {
         #region one way channel
         public static Port<T> CreateChannel<T>(this ICcrSpace space, Action<T> messageHandler)
@@ -47,7 +24,7 @@ namespace CcrSpaces.Channels
         public static Port<T> CreateChannel<T>(this ICcrSpace space, CcrsChannelConfig<T> config)
         {
             config.TaskQueue = config.TaskQueue ?? space.DefaultTaskQueue;
-            return ChannelFactory.Instance.CreateChannel(config);
+            return CcrsChannelFactory.Instance.CreateChannel(config);
         }
         #endregion
 
@@ -91,7 +68,7 @@ namespace CcrSpaces.Channels
         public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, CcrsChannelConfig<TInput, TOutput> config)
         {
             config.TaskQueue = config.TaskQueue ?? space.DefaultTaskQueue;
-            return ChannelFactory.Instance.CreateChannel(config);
+            return CcrsChannelFactory.Instance.CreateChannel(config);
         }
         #endregion
 

@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Channels
+namespace CcrSpaces.Channels.Extensions
 {
-    partial class ChannelFactory
+    internal static class PortExtensions
     {
-        private static void Register<T>(Port<T> port, DispatcherQueue taskQueue, bool persistent, Action<T> handler)
+        public static void WireUpHandler<T>(this Port<T> port, DispatcherQueue taskQueue, bool persistent, Action<T> handler)
         {
             Arbiter.Activate(
                 taskQueue ?? new DispatcherQueue(),

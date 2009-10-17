@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="testCcrsHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="testCcrsHostExtensions.cs" />
+    <Compile Include="testCcrSpaceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CcrSpace.Channels\CcrSpace.Channels.csproj">
