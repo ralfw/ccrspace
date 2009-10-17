@@ -1,8 +1,14 @@
 pub/sub
+	local
+	remote
 
 flows
+	oneway
+	request/response
 
 actors
+	send
+	reply
 
 response timeout
 

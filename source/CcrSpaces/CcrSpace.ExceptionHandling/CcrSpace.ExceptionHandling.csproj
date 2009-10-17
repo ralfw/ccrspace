@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="CausalityFactory.cs" />
     <Compile Include="CcrsCausality.cs" />
-    <Compile Include="CcrsTryCatchExtensions.cs" />
+    <Compile Include="CcrSpaceExtensions.cs" />
     <Compile Include="CcrsTryCatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

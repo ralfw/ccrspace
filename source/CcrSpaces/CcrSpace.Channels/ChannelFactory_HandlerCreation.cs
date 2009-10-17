@@ -1,23 +1,12 @@
 ﻿using System;
 using System.Threading;
 using Microsoft.Ccr.Core;
+using CcrSpaces.Channels.Extensions;
 
 namespace CcrSpaces.Channels
 {
-    partial class ChannelFactory
+    partial class CcrsChannelFactory
     {
-        private void ConfigurePort<T>(Port<T> port, CcrsChannelConfig<T> config)
-        {
-            if (config.HandlerMode == CcrsChannelHandlerModes.Sequential || config.HandlerMode == CcrsChannelHandlerModes.InCurrentSyncContext)
-            {
-                Action<T> safeHandler = CreateInSynContextHandler(config);
-                CreateSequentialHandler(config, safeHandler, port);
-            }
-            else
-                CreateParallelHandler(config, port);
-        }
-
-
         private Action<T> CreateInSynContextHandler<T>(CcrsChannelConfig<T> config)
         {
             Action<T> safeHandler = config.MessageHandler;
@@ -43,16 +32,16 @@ namespace CcrSpaces.Channels
                                     {
                                         safeHandler(m);
 // ReSharper disable AccessToModifiedClosure
-                                        Register(port, config.TaskQueue, false, sequentialHandler);
+                                        port.WireUpHandler(config.TaskQueue, false, sequentialHandler);
 // ReSharper restore AccessToModifiedClosure
                                     };
-            Register(port, config.TaskQueue, false, sequentialHandler);
+            port.WireUpHandler(config.TaskQueue, false, sequentialHandler);
         }
 
 
         private void CreateParallelHandler<T>(CcrsChannelConfig<T> config, Port<T> port)
         {
-            Register(port, config.TaskQueue, true, config.MessageHandler);
+            port.WireUpHandler(config.TaskQueue, true, config.MessageHandler);
         }
     }
 }

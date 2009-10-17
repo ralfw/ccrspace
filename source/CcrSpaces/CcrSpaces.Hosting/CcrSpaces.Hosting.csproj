@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CcrsHost.cs" />
-    <Compile Include="CcrsHostExtensions.cs" />
+    <Compile Include="CcrSpaceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
