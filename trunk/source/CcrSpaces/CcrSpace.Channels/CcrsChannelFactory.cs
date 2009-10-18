@@ -2,25 +2,11 @@
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Channels
-{
-    [Serializable]
-    public class CcrsRequest<TInput, TOutput>
-    {
-        internal CcrsRequest(TInput request, Port<TOutput> responses)
-        {
-            this.Request = request;
-            this.Responses = responses;
-        }
-
-        public TInput Request;
-        public Port<TOutput> Responses;
-    }
-
-    
+{    
     public interface ICcrsChannelFactory
     {
         Port<T> CreateChannel<T>(CcrsChannelConfig<T> config);
-        PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(CcrsChannelConfig<TInput, TOutput> config);
+        PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsChannelConfig<TInput, TOutput> config);
     }
 
 
@@ -51,9 +37,9 @@ namespace CcrSpaces.Channels
         }
 
 
-        public PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(CcrsChannelConfig<TInput, TOutput> config)
+        public PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsChannelConfig<TInput, TOutput> config)
         {
-            var reqRespPort = new PortSet<TInput, CcrsRequest<TInput, TOutput>>();
+            var reqRespPort = new PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType>();
             {
                 Port<TOutput> responses = new Port<TOutput>();
 
@@ -80,6 +66,13 @@ namespace CcrSpaces.Channels
                 ConfigureChannel(reqRespPort.P1, new CcrsChannelConfig<CcrsRequest<TInput, TOutput>>
                                                 {
                                                     MessageHandler = req => config.InputMessageHandler(req.Request, req.Responses),
+                                                    TaskQueue = config.TaskQueue,
+                                                    HandlerMode = config.InputHandlerMode
+                                                });
+
+                ConfigureChannel(reqRespPort.P2, new CcrsChannelConfig<CcrsRequestOfUnknownType>
+                                                {
+                                                    MessageHandler = req => config.InputMessageHandler((TInput)req.Request, (Port<TOutput>)req.Responses),
                                                     TaskQueue = config.TaskQueue,
                                                     HandlerMode = config.InputHandlerMode
                                                 });

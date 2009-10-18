@@ -5,7 +5,7 @@ namespace CcrSpaces.Channels
 {
     public class CcrsPendingRequest<TInput, TOutput>
     {
-        internal PortSet<TInput, CcrsRequest<TInput, TOutput>> Requests;
+        internal PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> Requests;
         internal TInput Request;
 
 
