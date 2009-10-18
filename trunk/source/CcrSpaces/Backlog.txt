@@ -1,0 +1,41 @@
+flows
+	oneway
+	request/response
+
+actors
+	send
+	reply
+
+response timeout
+
+register config string interpreters statically on ccr space
+
+move all API classes to a common namespace, eg CcrSpaces.Core
+	rename projects to CcrsSpaces (plural!)
+	namespace should also start with this prefix
+
+discovery service so ports can be found just by name instead of remote addr
+
+--------------
+resolved/done
+--------------
+exception handling with try/catch implemented in its own ccr space extension
+
+exception handling with using()
+
+ccr port hosting
+	use appspace
+		Host<T>, Host<T0, T1, ...>
+		Connect<T>, Connect<T0, T1, ...>
+		
+services on ccr space?
+	ICcrsService
+	ICcrsResourcefulService
+	
+	RegisterService<TService>(service [, name])
+	ResolveService<TService([name])
+	EnumServices<TService>() -> IEnum<TService>
+	
+pub/sub
+	local
+	remote
