@@ -12,9 +12,9 @@ namespace CcrSpaces.ExceptionHandling
         private readonly ICausality causality;
 
 
-        internal CcrsCausality(Action<Exception> exceptionHandler)
+        public CcrsCausality(Action<Exception> exceptionHandler)
             : this(CausalityFactory.CreateExceptionHandlingCausality(exceptionHandler)) {}
-        internal CcrsCausality(Port<Exception> exceptionPort)
+        public CcrsCausality(Port<Exception> exceptionPort)
             : this(CausalityFactory.CreateExceptionHandlingCausality(exceptionPort)) {}
         private CcrsCausality(ICausality causality)
         {

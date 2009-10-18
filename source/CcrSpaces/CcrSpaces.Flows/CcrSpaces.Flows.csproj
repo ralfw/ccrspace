@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7B0FE665-6715-46D4-87EA-D42219B68CB8}</ProjectGuid>
+    <ProjectGuid>{EE7B2FC4-A49C-4982-8F91-0A620202274D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CcrSpaces.Channels</RootNamespace>
-    <AssemblyName>CcrSpaces.Channels</AssemblyName>
+    <RootNamespace>CcrSpaces.Flows</RootNamespace>
+    <AssemblyName>CcrSpaces.Flows</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="microsoft.ccr.core, Version=2.1.61.2, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\Microsoft.Ccr\microsoft.ccr.core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -49,22 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CcrSpaceExtensions.cs" />
-    <Compile Include="CcrsChannelConfig.cs" />
-    <Compile Include="CcrsPendingRequest.cs" />
-    <Compile Include="CcrsRequest.cs" />
-    <Compile Include="Extensions\PortExtensions.cs" />
-    <Compile Include="CcrsChannelFactory.cs" />
-    <Compile Include="ChannelFactory_HandlerCreation.cs">
-      <DependentUpon>CcrsChannelFactory.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CcrSpace.Core\CcrSpace.Core.csproj">
-      <Project>{3CEDC287-356D-49B3-A752-DCD38D55A5C7}</Project>
-      <Name>CcrSpace.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
