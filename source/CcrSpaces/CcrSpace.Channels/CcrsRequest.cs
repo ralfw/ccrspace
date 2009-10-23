@@ -3,20 +3,12 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Channels
 {
-    [Serializable]
-    public class CcrsRequest<TInput, TOutput>
+    public interface ICcrsConverterToRequestOfUnknownType
     {
-        public CcrsRequest(TInput request, Port<TOutput> responses)
-        {
-            this.Request = request;
-            this.Responses = responses;
-        }
-
-        public TInput Request;
-        public Port<TOutput> Responses;
+        CcrsRequestOfUnknownType ToRequestOfUnknownType();
     }
 
-    
+
     [Serializable]
     public class CcrsRequestOfUnknownType
     {
@@ -29,4 +21,35 @@ namespace CcrSpaces.Channels
         public object Request;
         public IPort Responses;
     }
+
+    
+    [Serializable]
+    public class CcrsRequest<TInput, TOutput> : ICcrsConverterToRequestOfUnknownType
+    {
+        public CcrsRequest(TInput request, Port<TOutput> responses)
+        {
+            this.Request = request;
+            this.Responses = responses;
+        }
+
+        public TInput Request;
+        public Port<TOutput> Responses;
+
+
+        public static implicit operator CcrsRequestOfUnknownType(CcrsRequest<TInput, TOutput> source)
+        {
+            return new CcrsRequestOfUnknownType(source.Request, source.Responses);
+        }
+
+
+        #region Implementation of ICcrsConverterToRequestOfUnknownType
+        public CcrsRequestOfUnknownType ToRequestOfUnknownType()
+        {
+            return new CcrsRequestOfUnknownType(this.Request, this.Responses);
+        }
+        #endregion
+    }
+
+    
+
 }

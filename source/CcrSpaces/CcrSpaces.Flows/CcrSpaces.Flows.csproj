@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="microsoft.ccr.core, Version=2.1.61.2, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Microsoft.Ccr\microsoft.ccr.core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -45,8 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Infrastructure\ConsumingReceiverTask.cs" />
+    <Compile Include="FlowFactory.cs" />
+    <Compile Include="Infrastructure\IPortReceiveExtensions.cs" />
+    <Compile Include="OneWayFlow.cs" />
+    <Compile Include="RequestResponseFlow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CcrSpace.Channels\CcrSpace.Channels.csproj">
+      <Project>{7B0FE665-6715-46D4-87EA-D42219B68CB8}</Project>
+      <Name>CcrSpace.Channels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

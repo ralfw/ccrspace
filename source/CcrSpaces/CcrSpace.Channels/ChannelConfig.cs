@@ -11,7 +11,7 @@ namespace CcrSpaces.Channels
     }
 
 
-    public class CcrsChannelConfig<T>
+    public class CcrsOneWayChannelConfig<T>
     {
         public Action<T> MessageHandler;
         public DispatcherQueue TaskQueue;
@@ -19,7 +19,17 @@ namespace CcrSpaces.Channels
     }
 
 
-    public class CcrsChannelConfig<TInput, TOutput>
+    public class CcrsFilterChannelConfig<TInput, TOutput>
+    {
+        public Action<TInput, Port<TOutput>> InputMessageHandler;
+        public Port<TOutput> OutputPort;
+
+        public DispatcherQueue TaskQueue;
+        public CcrsChannelHandlerModes InputHandlerMode = CcrsChannelHandlerModes.Sequential;
+    }
+
+    
+    public class CcrsRequestResponseChannelConfig<TInput, TOutput>
     {
         public Action<TInput, Port<TOutput>> InputMessageHandler;
         public Action<TOutput> OutputMessageHandler;

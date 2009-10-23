@@ -5,8 +5,9 @@ namespace CcrSpaces.Channels
 {    
     public interface ICcrsChannelFactory
     {
-        Port<T> CreateChannel<T>(CcrsChannelConfig<T> config);
-        PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsChannelConfig<TInput, TOutput> config);
+        Port<T> CreateChannel<T>(CcrsOneWayChannelConfig<T> config);
+        PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config);
+        Port<TInput> CreateChannel<TInput, TOutput>(CcrsFilterChannelConfig<TInput, TOutput> config);
     }
 
 
@@ -27,7 +28,7 @@ namespace CcrSpaces.Channels
         }
 
 
-        public Port<T> CreateChannel<T>(CcrsChannelConfig<T> config)
+        public Port<T> CreateChannel<T>(CcrsOneWayChannelConfig<T> config)
         {
             var port = new Port<T>();
             {
@@ -37,20 +38,20 @@ namespace CcrSpaces.Channels
         }
 
 
-        public PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsChannelConfig<TInput, TOutput> config)
+        public PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config)
         {
             var reqRespPort = new PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType>();
             {
                 Port<TOutput> responses = new Port<TOutput>();
 
-                ConfigureChannel(responses, new CcrsChannelConfig<TOutput>
+                ConfigureChannel(responses, new CcrsOneWayChannelConfig<TOutput>
                                                 {
                                                     MessageHandler = config.OutputMessageHandler ?? (x=>{}),
                                                     TaskQueue = config.TaskQueue,
                                                     HandlerMode = config.OutputHandlerMode
                                                 });
 
-                ConfigureChannel(reqRespPort.P0, new CcrsChannelConfig<TInput>
+                ConfigureChannel(reqRespPort.P0, new CcrsOneWayChannelConfig<TInput>
                                                 {
                                                     MessageHandler = msg =>
                                                                          {
@@ -63,14 +64,14 @@ namespace CcrSpaces.Channels
                                                 });
 
 
-                ConfigureChannel(reqRespPort.P1, new CcrsChannelConfig<CcrsRequest<TInput, TOutput>>
+                ConfigureChannel(reqRespPort.P1, new CcrsOneWayChannelConfig<CcrsRequest<TInput, TOutput>>
                                                 {
                                                     MessageHandler = req => config.InputMessageHandler(req.Request, req.Responses),
                                                     TaskQueue = config.TaskQueue,
                                                     HandlerMode = config.InputHandlerMode
                                                 });
 
-                ConfigureChannel(reqRespPort.P2, new CcrsChannelConfig<CcrsRequestOfUnknownType>
+                ConfigureChannel(reqRespPort.P2, new CcrsOneWayChannelConfig<CcrsRequestOfUnknownType>
                                                 {
                                                     MessageHandler = req => config.InputMessageHandler((TInput)req.Request, (Port<TOutput>)req.Responses),
                                                     TaskQueue = config.TaskQueue,
@@ -81,11 +82,26 @@ namespace CcrSpaces.Channels
         }
 
 
-        public void ConfigureChannel<T>(Port<T> port, CcrsChannelConfig<T> config)
+        public Port<TInput> CreateChannel<TInput, TOutput>(CcrsFilterChannelConfig<TInput, TOutput> config)
+        {
+            var port = new Port<TInput>();
+            {
+                ConfigureChannel(port, new CcrsOneWayChannelConfig<TInput>
+                                                {
+                                                    MessageHandler = msg => config.InputMessageHandler(msg, config.OutputPort),
+                                                    TaskQueue = config.TaskQueue,
+                                                    HandlerMode = config.InputHandlerMode
+                                                });
+            }
+            return port;
+        }
+
+
+        public void ConfigureChannel<T>(Port<T> port, CcrsOneWayChannelConfig<T> config)
         {
             if (config.HandlerMode == CcrsChannelHandlerModes.Sequential || config.HandlerMode == CcrsChannelHandlerModes.InCurrentSyncContext)
             {
-                Action<T> safeHandler = CreateInSynContextHandler(config);
+                Action<T> safeHandler = CreateInSyncContextHandler(config);
                 CreateSequentialHandler(config, safeHandler, port);
             }
             else

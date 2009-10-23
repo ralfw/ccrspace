@@ -7,7 +7,7 @@ namespace CcrSpaces.Channels
 {
     partial class CcrsChannelFactory
     {
-        private Action<T> CreateInSynContextHandler<T>(CcrsChannelConfig<T> config)
+        private Action<T> CreateInSyncContextHandler<T>(CcrsOneWayChannelConfig<T> config)
         {
             Action<T> safeHandler = config.MessageHandler;
             if (config.HandlerMode == CcrsChannelHandlerModes.InCurrentSyncContext)
@@ -25,7 +25,7 @@ namespace CcrSpaces.Channels
         }
 
 
-        private void CreateSequentialHandler<T>(CcrsChannelConfig<T> config, Action<T> safeHandler, Port<T> port)
+        private void CreateSequentialHandler<T>(CcrsOneWayChannelConfig<T> config, Action<T> safeHandler, Port<T> port)
         {
             Action<T> sequentialHandler = null;
             sequentialHandler = m =>
@@ -39,7 +39,7 @@ namespace CcrSpaces.Channels
         }
 
 
-        private void CreateParallelHandler<T>(CcrsChannelConfig<T> config, Port<T> port)
+        private void CreateParallelHandler<T>(CcrsOneWayChannelConfig<T> config, Port<T> port)
         {
             port.WireUpHandler(config.TaskQueue, true, config.MessageHandler);
         }

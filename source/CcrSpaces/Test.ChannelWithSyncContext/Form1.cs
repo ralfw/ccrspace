@@ -16,14 +16,14 @@ namespace Test.ChannelWithSyncContext
         {
             InitializeComponent();
 
-            var cfg = new CcrsChannelConfig<int>
+            var cfg = new CcrsOneWayChannelConfig<int>
                           {
                               MessageHandler = n=>this.textBox1.Text=n.ToString(),
                               HandlerMode = CcrsChannelHandlerModes.InCurrentSyncContext
                           };
             this.chReportProgress = new CcrsChannelFactory().CreateChannel(cfg);
 
-            cfg = new CcrsChannelConfig<int>
+            cfg = new CcrsOneWayChannelConfig<int>
             {
                 MessageHandler = MakeProgress,
                 HandlerMode = CcrsChannelHandlerModes.Parallel

@@ -64,29 +64,50 @@ namespace Test.CcrSpace.Channels
 
             Assert.IsTrue(this.are.WaitOne(500));
         }
+
+
+        [Test]
+        public void Create_filter()
+        {
+            mocks.ReplayAll();
+
+            //TODO: base test on mocks
+            var f = base.mockSpace.CreateChannel<string, int>(
+                        s => s.Length, 
+                        base.mockSpace.CreateChannel<int>(n => base.are.Set()));
+
+            f.Post("hello");
+
+            Assert.IsTrue(base.are.WaitOne(500));
+        }
     }
 
 
     public class MockChannelFactory : ICcrsChannelFactory
     {
         public Port<int> POneWay;
-        public CcrsChannelConfig<int> CfgOneWay;
+        public CcrsOneWayChannelConfig<int> CfgOneWay;
 
         public PortSet<string, CcrsRequest<string, int>, CcrsRequestOfUnknownType> PReqResp;
-        public CcrsChannelConfig<string, int> CgfReqResp;
+        public CcrsRequestResponseChannelConfig<string, int> CgfReqResp;
 
         #region Implementation of ICcrsChannelFactory
 
-        public Port<T> CreateChannel<T>(CcrsChannelConfig<T> config)
+        public Port<T> CreateChannel<T>(CcrsOneWayChannelConfig<T> config)
         {
-            this.CfgOneWay = config as CcrsChannelConfig<int>;
+            this.CfgOneWay = config as CcrsOneWayChannelConfig<int>;
             return this.POneWay as Port<T>;
         }
 
-        public PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsChannelConfig<TInput, TOutput> config)
+        public PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config)
         {
-            this.CgfReqResp = config as CcrsChannelConfig<string, int>;
+            this.CgfReqResp = config as CcrsRequestResponseChannelConfig<string, int>;
             return this.PReqResp as PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType>;
+        }
+
+        public Port<TInput> CreateChannel<TInput, TOutput>(CcrsFilterChannelConfig<TInput, TOutput> config)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

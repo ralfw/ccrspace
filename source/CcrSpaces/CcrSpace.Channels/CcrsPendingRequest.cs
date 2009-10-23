@@ -11,12 +11,12 @@ namespace CcrSpaces.Channels
 
         public void Receive(Action<TOutput> responseHandler)
         {
-            this.Receive(new CcrsChannelFactory().CreateChannel(new CcrsChannelConfig<TOutput> { MessageHandler = responseHandler }));
+            this.Receive(new CcrsChannelFactory().CreateChannel(new CcrsOneWayChannelConfig<TOutput> { MessageHandler = responseHandler }));
         }
 
         public void Receive(Action<TOutput> responseHandler, CcrsChannelHandlerModes handlerMode)
         {
-            this.Receive(new CcrsChannelFactory().CreateChannel(new CcrsChannelConfig<TOutput> { MessageHandler = responseHandler, HandlerMode = handlerMode }));
+            this.Receive(new CcrsChannelFactory().CreateChannel(new CcrsOneWayChannelConfig<TOutput> { MessageHandler = responseHandler, HandlerMode = handlerMode }));
         }
 
         public void Receive(Port<TOutput> responsePort)
