@@ -15,13 +15,13 @@ namespace Test.CcrSpaces.PubSub
             var sut = new CcrsPublicationHub<string>(new CcrsPublicationHubConfig());
 
             var chf = new CcrsChannelFactory();
-            var sub1 = chf.CreateChannel(new CcrsChannelConfig<string>
+            var sub1 = chf.CreateChannel(new CcrsOneWayChannelConfig<string>
                                                    {
                                                        MessageHandler = s => base.are.Set()
                                                    });
 
             var are2 = new AutoResetEvent(false);
-            var sub2 = chf.CreateChannel(new CcrsChannelConfig<string>
+            var sub2 = chf.CreateChannel(new CcrsOneWayChannelConfig<string>
                                                     {
                                                         MessageHandler = s => are2.Set()
                                                     });
@@ -44,7 +44,7 @@ namespace Test.CcrSpaces.PubSub
             var sut = new CcrsPublicationHub<string>(new CcrsPublicationHubConfig());
 
             var chf = new CcrsChannelFactory();
-            var sub1 = chf.CreateChannel(new CcrsChannelConfig<string>
+            var sub1 = chf.CreateChannel(new CcrsOneWayChannelConfig<string>
                             {
                                 MessageHandler = s => base.are.Set()
                             });

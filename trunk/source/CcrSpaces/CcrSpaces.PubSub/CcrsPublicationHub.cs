@@ -14,7 +14,7 @@ namespace CcrSpaces.PubSub
 
             new CcrsChannelFactory().ConfigureChannel(
                         this,
-                        new CcrsChannelConfig<T>{
+                        new CcrsOneWayChannelConfig<T>{
                                                     MessageHandler = this.subscriptions.ProcessPublish,
                                                     TaskQueue = config.TaskQueue,
                                                     HandlerMode = config.HandlerMode

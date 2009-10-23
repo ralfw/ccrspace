@@ -28,7 +28,7 @@ namespace GeneralTestInfrastructure
             this.mocks = new MockRepository();
             this.mockSpace = mocks.Stub<ICcrSpace>();
             this.dpq = new DispatcherQueue();
-            mockSpace.Expect(x => x.DefaultTaskQueue).Return(this.dpq);
+            mockSpace.Expect(x => x.DefaultTaskQueue).Return(this.dpq).Repeat.Any();
 
             FixtureArrange();
         }

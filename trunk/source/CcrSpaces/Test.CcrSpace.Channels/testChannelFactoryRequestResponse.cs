@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Test.CcrSpace.Channels
 {
     [TestFixture]
-    public class testCcrsChannelFactoryRequestResponse : TestFixtureBase
+    public class testChannelFactoryRequestResponse : TestFixtureBase
     {
         private CcrsChannelFactory sut;
 
@@ -22,7 +22,7 @@ namespace Test.CcrSpace.Channels
         {
             int output = 0;
 
-            var config = new CcrsChannelConfig<string, int>
+            var config = new CcrsRequestResponseChannelConfig<string, int>
                              {
                                  InputMessageHandler = (s, pi) => pi.Post(s.Length),
                                  OutputMessageHandler = n => {
@@ -44,7 +44,7 @@ namespace Test.CcrSpace.Channels
         {
             int output = 0;
 
-            var config = new CcrsChannelConfig<string, int>
+            var config = new CcrsRequestResponseChannelConfig<string, int>
                             {
                                 InputMessageHandler = (s, pi) => pi.Post(s.Length)
                             };
@@ -70,7 +70,7 @@ namespace Test.CcrSpace.Channels
         [Test]
         public void Post_without_continutation()
         {
-            var config = new CcrsChannelConfig<string, int>
+            var config = new CcrsRequestResponseChannelConfig<string, int>
                             {
                                 InputMessageHandler = (s, pi) => pi.Post(s.Length)
                             };
@@ -101,7 +101,7 @@ namespace Test.CcrSpace.Channels
         {
             int output = 0;
 
-            var config = new CcrsChannelConfig<string, int>
+            var config = new CcrsRequestResponseChannelConfig<string, int>
                                 {
                                     InputMessageHandler = (s, pi) => pi.Post(s.Length)
                                 };

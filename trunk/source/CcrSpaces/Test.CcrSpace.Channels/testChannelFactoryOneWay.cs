@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Test.CcrSpace.Channels
 {
     [TestFixture]
-    public class testCcrsChannelFactoryOneWay : TestFixtureBase
+    public class testChannelFactoryOneWay : TestFixtureBase
     {
         private CcrsChannelFactory sut;
 
@@ -21,7 +21,7 @@ namespace Test.CcrSpace.Channels
         [Test]
         public void Create_persistent_port_with_handler()
         {
-            var cfg = new CcrsChannelConfig<int> {MessageHandler = n => base.are.Set()};
+            var cfg = new CcrsOneWayChannelConfig<int> {MessageHandler = n => base.are.Set()};
             var p = this.sut.CreateChannel(cfg);
 
             p.Post(1);
@@ -49,7 +49,7 @@ namespace Test.CcrSpace.Channels
         {
             List<int> numbers = new List<int>();
 
-            var cfg = new CcrsChannelConfig<int>
+            var cfg = new CcrsOneWayChannelConfig<int>
                           {
                               MessageHandler = s =>
                                                     {

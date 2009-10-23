@@ -13,7 +13,7 @@ namespace CcrSpaces.PubSub
         public Port<T> Subscriber;
 
         public CcrsSubscribe(string key, Action<T> subscriptionHandler)
-            : this(key, new CcrsChannelFactory().CreateChannel(new CcrsChannelConfig<T>
+            : this(key, new CcrsChannelFactory().CreateChannel(new CcrsOneWayChannelConfig<T>
                                                                       {
                                                                           MessageHandler = subscriptionHandler
                                                                       })) {}
@@ -46,13 +46,13 @@ namespace CcrSpaces.PubSub
         {
             var chf = new CcrsChannelFactory();
 
-            chf.ConfigureChannel(this.P0, new CcrsChannelConfig<CcrsSubscribe<T>>
+            chf.ConfigureChannel(this.P0, new CcrsOneWayChannelConfig<CcrsSubscribe<T>>
                                                 {
                                                     MessageHandler = this.ProcessSubscribe,
                                                     TaskQueue = config.TaskQueue,
                                                     HandlerMode = CcrsChannelHandlerModes.Parallel
                                                 });
-            chf.ConfigureChannel(this.P1, new CcrsChannelConfig<CcrsUnsubscribe>
+            chf.ConfigureChannel(this.P1, new CcrsOneWayChannelConfig<CcrsUnsubscribe>
                                                 {
                                                     MessageHandler = this.ProcessUnsubscribe,
                                                     TaskQueue = config.TaskQueue,
