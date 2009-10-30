@@ -13,6 +13,8 @@ namespace CcrSpaces.Flows.Stages
                                 });
         }
 
+        public TerminalStage(CcrsOneWayChannelConfig<StageMessage> config) { base.Configure(config); }
+
 
         private void ConsumeMessage(Action<TInput> handler, TInput msg)
         {

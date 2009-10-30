@@ -6,7 +6,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Flows.Infrastructure
 {
-    internal static class IPortReceiveExtensions
+    internal static partial class IPortReceiveExtensions
     {
         public static void RegisterGenericSyncReceiver(this IPortReceive port, Action<object> elementHandler)
         {

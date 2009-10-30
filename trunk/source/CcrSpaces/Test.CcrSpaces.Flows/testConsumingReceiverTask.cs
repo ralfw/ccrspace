@@ -17,7 +17,7 @@ namespace Test.CcrSpaces.Flows
             var p = new Port<int>();
 
             int nReceived = 0;
-            (p as IPortReceive).RegisterReceiver(new ConsumingReceiverTask(n => { nReceived = (int)n; }));
+            (p as IPortReceive).RegisterReceiver(new IPortReceiveExtensions.ConsumingReceiverTask(n => { nReceived = (int)n; }));
 
             p.Post(1);
 

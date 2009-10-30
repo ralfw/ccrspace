@@ -96,10 +96,10 @@ namespace Test.CcrSpaces.Flows
             using (new CcrsCausality(Console.WriteLine))
             {
                 IPortReceive pLengthToEven = (IPortReceive)Activator.CreateInstance(chIsEvenNumber.P0.GetType());
-                pLengthToEven.RegisterReceiver(new ConsumingReceiverTask(e => chIsEvenNumber.P2.Post(new CcrsRequestOfUnknownType(e, chDumpBool))));
+                pLengthToEven.RegisterReceiver(new IPortReceiveExtensions.ConsumingReceiverTask(e => chIsEvenNumber.P2.Post(new CcrsRequestOfUnknownType(e, chDumpBool))));
 
                 IPortReceive pInput = (IPortReceive)Activator.CreateInstance(chStringLength.P0.GetType());
-                pInput.RegisterReceiver(new ConsumingReceiverTask(e => chStringLength.P2.Post(new CcrsRequestOfUnknownType(e, (IPort)pLengthToEven))));
+                pInput.RegisterReceiver(new IPortReceiveExtensions.ConsumingReceiverTask(e => chStringLength.P2.Post(new CcrsRequestOfUnknownType(e, (IPort)pLengthToEven))));
 
                 (pInput as Port<string>).Post("hello");
                 (pInput as Port<string>).Post("world");
