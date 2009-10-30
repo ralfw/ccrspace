@@ -11,21 +11,26 @@ namespace CcrSpaces.Flows.Stages
     internal partial class IntermediateStage<TInput, TOutput> : StageBase
     {
         public IntermediateStage(Action<TInput, Port<TOutput>> handler)
+            : this(new CcrsFilterChannelConfig<TInput, TOutput>
+                        {
+                            InputMessageHandler = handler   
+                        })
+        {}
+
+        public IntermediateStage(CcrsFilterChannelConfig<TInput, TOutput> config)
         {
             base.Configure(new CcrsOneWayChannelConfig<StageMessage>
-                              {
-                                  MessageHandler = m =>
+                               {
+                                   MessageHandler = m =>
                                        {
                                            AssertHasResponsePort(m);
                                            Port<TOutput> responseInterceptor = CreateLocalResponsePort(m);
-                                           ProcessMessageAndReturnResult(handler, (TInput)m.Message, responseInterceptor);
+                                           ProcessMessageAndReturnResult(config.InputMessageHandler, (TInput)m.Message, responseInterceptor);
                                        },
-                              });
+                                   TaskQueue = config.TaskQueue,
+                                   HandlerMode = config.InputHandlerMode
+                               });
         }
-
-        public IntermediateStage(CcrsOneWayChannelConfig<StageMessage> config) { base.Configure(config); }
-
-
 
 
         private Port<TOutput> CreateLocalResponsePort(StageMessage m)
@@ -41,7 +46,5 @@ namespace CcrSpaces.Flows.Stages
                     });
             return responseInterceptor;
         }
-
-
     }
 }

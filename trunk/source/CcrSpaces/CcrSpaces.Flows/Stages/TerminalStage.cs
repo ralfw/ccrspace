@@ -6,14 +6,18 @@ namespace CcrSpaces.Flows.Stages
     internal class TerminalStage<TInput> : StageBase
     {
         public TerminalStage(Action<TInput> handler)
+            : this(new CcrsOneWayChannelConfig<TInput>{MessageHandler=handler})
+        {}
+
+        public TerminalStage(CcrsOneWayChannelConfig<TInput> config)
         {
             base.Configure(new CcrsOneWayChannelConfig<StageMessage>
-                                {
-                                    MessageHandler = m => ConsumeMessage(handler, (TInput)m.Message),
-                                });
+                               {
+                                   MessageHandler = m => ConsumeMessage(config.MessageHandler, (TInput)m.Message),
+                                   TaskQueue = config.TaskQueue,
+                                   HandlerMode = config.HandlerMode
+                               });
         }
-
-        public TerminalStage(CcrsOneWayChannelConfig<StageMessage> config) { base.Configure(config); }
 
 
         private void ConsumeMessage(Action<TInput> handler, TInput msg)
