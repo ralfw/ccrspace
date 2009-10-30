@@ -94,33 +94,5 @@ namespace Test.CcrSpace.Channels
             }
             Dispatcher.RemoveCausality(c);
         }
-
-
-        [Test]
-        public void Generic_request()
-        {
-            int output = 0;
-
-            var config = new CcrsRequestResponseChannelConfig<string, int>
-                                {
-                                    InputMessageHandler = (s, pi) => pi.Post(s.Length)
-                                };
-            var p = this.sut.CreateChannel(config);
-
-            Port<int> responses = new Port<int>();
-            Arbiter.Activate(
-                new DispatcherQueue(),
-                responses.Receive(n =>
-                {
-                    output = n;
-                    base.are.Set();
-                })
-                );
-
-            p.Post(new CcrsRequestOfUnknownType("hello", responses));
-
-            Assert.IsTrue(base.are.WaitOne(500));
-            Assert.AreEqual(5, output);
-        }
     }
 }

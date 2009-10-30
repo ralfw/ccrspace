@@ -30,7 +30,7 @@ namespace CcrSpaces.Channels
 
 
         #region request/response channel
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> requestHandler)
+        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> requestHandler)
         {
             return CreateChannel(space, new CcrsRequestResponseChannelConfig<TInput, TOutput>
                                              {
@@ -38,7 +38,7 @@ namespace CcrSpaces.Channels
                                              });
         }
 
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> requestHandler, Action<TOutput> responseHandler)
+        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> requestHandler, Action<TOutput> responseHandler)
         {
             return CreateChannel(space, new CcrsRequestResponseChannelConfig<TInput, TOutput>
                                             {
@@ -47,7 +47,7 @@ namespace CcrSpaces.Channels
                                             });
         }
 
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> requestHandler, Action<TOutput> responseHandler)
+        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> requestHandler, Action<TOutput> responseHandler)
         {
             return CreateChannel(space, new CcrsRequestResponseChannelConfig<TInput, TOutput>
                                             {
@@ -56,7 +56,7 @@ namespace CcrSpaces.Channels
                                             });
         }
 
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> requestHandler)
+        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> requestHandler)
         {
             return CreateChannel(space, new CcrsRequestResponseChannelConfig<TInput, TOutput>
                                              {
@@ -64,7 +64,7 @@ namespace CcrSpaces.Channels
                                              });
         }
 
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(this ICcrSpace space, CcrsRequestResponseChannelConfig<TInput, TOutput> config)
+        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, CcrsRequestResponseChannelConfig<TInput, TOutput> config)
         {
             config.TaskQueue = config.TaskQueue ?? space.DefaultTaskQueue;
             return CcrsChannelFactory.Instance.CreateChannel(config);
@@ -98,7 +98,7 @@ namespace CcrSpaces.Channels
         #endregion
 
 
-        public static CcrsPendingRequest<TInput, TOutput> Request<TInput, TOutput>(this PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> ports, TInput request)
+        public static CcrsPendingRequest<TInput, TOutput> Request<TInput, TOutput>(this PortSet<TInput, CcrsRequest<TInput, TOutput>> ports, TInput request)
         {
             return new CcrsPendingRequest<TInput, TOutput>
                        {

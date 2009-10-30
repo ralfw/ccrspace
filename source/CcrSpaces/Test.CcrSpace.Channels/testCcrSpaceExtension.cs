@@ -34,7 +34,7 @@ namespace Test.CcrSpace.Channels
 
             var mockCf = new MockChannelFactory
                              {
-                                 PReqResp = new PortSet<string, CcrsRequest<string, int>, CcrsRequestOfUnknownType>()
+                                 PReqResp = new PortSet<string, CcrsRequest<string, int>>()
                              };
             Action<string, Port<int>> reqHandler = (s, pi) => { };
             Action<int> respHandler = n => { };
@@ -88,7 +88,7 @@ namespace Test.CcrSpace.Channels
         public Port<int> POneWay;
         public CcrsOneWayChannelConfig<int> CfgOneWay;
 
-        public PortSet<string, CcrsRequest<string, int>, CcrsRequestOfUnknownType> PReqResp;
+        public PortSet<string, CcrsRequest<string, int>> PReqResp;
         public CcrsRequestResponseChannelConfig<string, int> CgfReqResp;
 
         #region Implementation of ICcrsChannelFactory
@@ -99,10 +99,10 @@ namespace Test.CcrSpace.Channels
             return this.POneWay as Port<T>;
         }
 
-        public PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config)
+        public PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config)
         {
             this.CgfReqResp = config as CcrsRequestResponseChannelConfig<string, int>;
-            return this.PReqResp as PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType>;
+            return this.PReqResp as PortSet<TInput, CcrsRequest<TInput, TOutput>>;
         }
 
         public Port<TInput> CreateChannel<TInput, TOutput>(CcrsFilterChannelConfig<TInput, TOutput> config)
