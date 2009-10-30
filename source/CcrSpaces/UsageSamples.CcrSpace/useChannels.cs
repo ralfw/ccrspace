@@ -50,8 +50,8 @@ namespace UsageSamples.CcrSpaces
                 p.Post("hello"); // watch the output window for the result
 
                 // defer decision on response handler until request
-                p = space.CreateChannel<string, int>(s => s.Length);
-                p.Request("hello, world").Receive(Console.WriteLine);
+                var p2 = space.CreateChannel<string, int>(s => s.Length);
+                p2.Request("hello, world").Receive(Console.WriteLine);
 
                 // return multiple results for each request
                 var q = space.CreateChannel<string, string>((s, pw) =>
@@ -60,6 +60,21 @@ namespace UsageSamples.CcrSpaces
                                                                         pw.Post(w);
                                                                 });
                 q.Request("the quick brown fox").Receive(Console.WriteLine);
+
+                Thread.Sleep(2000);
+            }
+        }
+
+
+        [Test]
+        public void Chain_channels()
+        {
+            using(var space = new CcrSpace())
+            {
+                var p2 = space.CreateChannel<int>(n => Console.WriteLine("number of chars: {0}", n));
+                var p1 = space.CreateChannel<string, int>(s => s.Length, p2);
+
+                p1.Post("hello, world!");
 
                 Thread.Sleep(2000);
             }

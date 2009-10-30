@@ -14,13 +14,13 @@ namespace CcrSpaces.Hosting
 
 
         public void HostPort<T>(Port<T> port, string name) { this.appSpace.RunWorker(port, name); }
-        public void HostPort<TInput, TOutput>(PortSet<TInput, CcrsRequest<TInput, TOutput>> ports, string name) { this.appSpace.RunWorker(ports, name); }
+        public void HostPort<TInput, TOutput>(Port<CcrsRequest<TInput, TOutput>> ports, string name) { this.appSpace.RunWorker(ports, name); }
         public void HostAsyncComponent<TAsyncContract>(TAsyncContract worker, string name)
             where TAsyncContract : IPort { this.appSpace.RunWorker(worker, name); }
 
 
         public Port<T> ConnectToPort<T>(string remoteAddress) { return this.appSpace.ConnectWorker<Port<T>>(remoteAddress); }
-        public PortSet<TInput, CcrsRequest<TInput, TOutput>> ConnectToPort<TInput, TOutput>(string remoteAddress) { return this.appSpace.ConnectWorker<PortSet<TInput, CcrsRequest<TInput, TOutput>>>(remoteAddress); }
+        public Port<CcrsRequest<TInput, TOutput>> ConnectToPort<TInput, TOutput>(string remoteAddress) { return this.appSpace.ConnectWorker<Port<CcrsRequest<TInput, TOutput>>>(remoteAddress); }
         public TAsyncContract ConnectToAsyncComponent<TAsyncContract>(string remoteAddress) 
             where TAsyncContract : IPort, new() { return this.appSpace.ConnectWorker<TAsyncContract>(remoteAddress); }
 

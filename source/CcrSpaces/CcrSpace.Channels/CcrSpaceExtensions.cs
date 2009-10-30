@@ -30,38 +30,38 @@ namespace CcrSpaces.Channels
 
 
         #region request/response channel
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> requestHandler)
+        public static Port<CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> requestHandler)
         {
             return CreateChannel(space, new CcrsRequestResponseChannelConfig<TInput, TOutput>
                                              {
                                                  InputMessageHandler = (input, outputPort) => outputPort.Post(requestHandler(input))
-                                             });
+                                             }).P1;
         }
 
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> requestHandler, Action<TOutput> responseHandler)
+        public static Port<TInput> CreateChannel<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> requestHandler, Action<TOutput> responseHandler)
         {
             return CreateChannel(space, new CcrsRequestResponseChannelConfig<TInput, TOutput>
                                             {
                                                 InputMessageHandler = (input, outputPort) => outputPort.Post(requestHandler(input)),
                                                 OutputMessageHandler = responseHandler
-                                            });
+                                            }).P0;
         }
 
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> requestHandler, Action<TOutput> responseHandler)
+        public static Port<TInput> CreateChannel<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> requestHandler, Action<TOutput> responseHandler)
         {
             return CreateChannel(space, new CcrsRequestResponseChannelConfig<TInput, TOutput>
                                             {
                                                 InputMessageHandler = requestHandler,
                                                 OutputMessageHandler = responseHandler
-                                            });
+                                            }).P0;
         }
 
-        public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> requestHandler)
+        public static Port<CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> requestHandler)
         {
             return CreateChannel(space, new CcrsRequestResponseChannelConfig<TInput, TOutput>
                                              {
                                                  InputMessageHandler = requestHandler
-                                             });
+                                             }).P1;
         }
 
         public static PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(this ICcrSpace space, CcrsRequestResponseChannelConfig<TInput, TOutput> config)
@@ -98,11 +98,11 @@ namespace CcrSpaces.Channels
         #endregion
 
 
-        public static CcrsPendingRequest<TInput, TOutput> Request<TInput, TOutput>(this PortSet<TInput, CcrsRequest<TInput, TOutput>> ports, TInput request)
+        public static CcrsPendingRequest<TInput, TOutput> Request<TInput, TOutput>(this Port<CcrsRequest<TInput, TOutput>> port, TInput request)
         {
             return new CcrsPendingRequest<TInput, TOutput>
                        {
-                            Requests = ports,
+                            Requests = port,
                             Request = request
                        };
         }

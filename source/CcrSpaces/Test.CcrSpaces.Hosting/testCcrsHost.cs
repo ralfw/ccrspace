@@ -42,7 +42,7 @@ namespace Test.CcrSpaces.Hosting
 
                 using (var client = new CcrsHost("tcp.port=0"))
                 {
-                    var pc = client.ConnectToPort<string, int>("localhost:9999/myport");
+                    var pc = client.ConnectToPort<string>("localhost:9999/myport");
                     pc.Post("hello");
 
                     Assert.IsTrue(base.are.WaitOne(1000));
