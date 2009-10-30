@@ -6,7 +6,7 @@ namespace CcrSpaces.Channels
     public interface ICcrsChannelFactory
     {
         Port<T> CreateChannel<T>(CcrsOneWayChannelConfig<T> config);
-        PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config);
+        PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config);
         Port<TInput> CreateChannel<TInput, TOutput>(CcrsFilterChannelConfig<TInput, TOutput> config);
     }
 
@@ -38,9 +38,9 @@ namespace CcrSpaces.Channels
         }
 
 
-        public PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config)
+        public PortSet<TInput, CcrsRequest<TInput, TOutput>> CreateChannel<TInput, TOutput>(CcrsRequestResponseChannelConfig<TInput, TOutput> config)
         {
-            var reqRespPort = new PortSet<TInput, CcrsRequest<TInput, TOutput>, CcrsRequestOfUnknownType>();
+            var reqRespPort = new PortSet<TInput, CcrsRequest<TInput, TOutput>>();
             {
                 Port<TOutput> responses = new Port<TOutput>();
 
@@ -67,13 +67,6 @@ namespace CcrSpaces.Channels
                 ConfigureChannel(reqRespPort.P1, new CcrsOneWayChannelConfig<CcrsRequest<TInput, TOutput>>
                                                 {
                                                     MessageHandler = req => config.InputMessageHandler(req.Request, req.Responses),
-                                                    TaskQueue = config.TaskQueue,
-                                                    HandlerMode = config.InputHandlerMode
-                                                });
-
-                ConfigureChannel(reqRespPort.P2, new CcrsOneWayChannelConfig<CcrsRequestOfUnknownType>
-                                                {
-                                                    MessageHandler = req => config.InputMessageHandler((TInput)req.Request, (Port<TOutput>)req.Responses),
                                                     TaskQueue = config.TaskQueue,
                                                     HandlerMode = config.InputHandlerMode
                                                 });
