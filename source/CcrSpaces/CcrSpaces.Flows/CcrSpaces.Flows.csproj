@@ -49,7 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\ConsumingReceiverTask.cs" />
+    <Compile Include="Infrastructure\IPortReceiveExtensions_ConsumingReceiverTask.cs">
+      <DependentUpon>IPortReceiveExtensions.cs</DependentUpon>
+    </Compile>
     <Compile Include="FlowFactory.cs" />
     <Compile Include="Infrastructure\IPortReceiveExtensions.cs" />
     <Compile Include="OneWayFlow.cs" />
