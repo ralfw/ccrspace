@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CcrSpaces.Channels;
+using CcrSpaces.ExceptionHandling;
 using CcrSpaces.Flows;
+using CcrSpaces.Flows.Infrastructure;
 using GeneralTestInfrastructure;
+using Microsoft.Ccr.Core;
 using NUnit.Framework;
 
 namespace Test.CcrSpaces.Flows
@@ -23,12 +27,40 @@ namespace Test.CcrSpaces.Flows
 
 
         [Test]
+        public void Two_stage_flow_with_terminal_stage()
+        {
+            var fsi = new CcrsFlow<string, int>((s, pn) => pn.Post(s.Length));
+            var sut = fsi.Finish(n => base.are.Set());
+
+            sut.Post("hello");
+
+            Assert.IsTrue(base.are.WaitOne(1000));
+        }
+
+
+        [Test]
         public void Multi_stage_flow_with_terminal_stage()
         {
             var fsi = new CcrsFlow<string, int>((s, pn) => pn.Post(s.Length));
-            var sut = sut.Continue<int>(n => base.are.Set());
+            var fib = fsi.Continue<bool>((n, pb) => pb.Post(n%2 == 0));
+            var sut = fib.Finish(b =>base.are.Set());
 
             sut.Post("hello");
+
+            Assert.IsTrue(base.are.WaitOne(1000));
+        }
+
+
+        [Test]
+        public void Multi_stage_flow_without_terminal_stage()
+        {
+            var fsi = new CcrsFlow<string, int>((s, pn) => pn.Post(s.Length));
+            var sut = fsi.Continue<bool>((n, pb) => pb.Post(n%2==0));
+
+            var pResult = new Port<bool>();
+            pResult.RegisterGenericSyncReceiver(o => base.are.Set());
+
+            sut.Post(new CcrsRequest<string,bool>("hello", pResult));
 
             Assert.IsTrue(base.are.WaitOne(1000));
         }
