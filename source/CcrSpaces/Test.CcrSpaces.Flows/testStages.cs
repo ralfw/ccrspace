@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace Test.CcrSpaces.Flows
 {
     [TestFixture]
-    public class testStage : TestFixtureBase
+    public class testStages : TestFixtureBase
     {
         [Test]
         public void Terminating_stage_consumes_message()

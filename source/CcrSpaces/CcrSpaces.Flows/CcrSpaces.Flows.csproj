@@ -52,10 +52,8 @@
     <Compile Include="Infrastructure\IPortReceiveExtensions_ConsumingReceiverTask.cs">
       <DependentUpon>IPortReceiveExtensions.cs</DependentUpon>
     </Compile>
-    <Compile Include="FlowFactory.cs" />
     <Compile Include="Infrastructure\IPortReceiveExtensions.cs" />
-    <Compile Include="OneWayFlow.cs" />
-    <Compile Include="RequestResponseFlow.cs" />
+    <Compile Include="Flows.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stages\IntermediateStage.cs" />
     <Compile Include="Stages\IntermediateStage_Details.cs">
