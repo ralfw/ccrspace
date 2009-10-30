@@ -8,7 +8,6 @@ namespace CcrSpaces.Flows.Stages
         public TerminalStage(Action<TInput> handler)
             : this(new CcrsOneWayChannelConfig<TInput>{MessageHandler=handler})
         {}
-
         public TerminalStage(CcrsOneWayChannelConfig<TInput> config)
         {
             base.Configure(new CcrsOneWayChannelConfig<StageMessage>
