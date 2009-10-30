@@ -16,7 +16,6 @@ namespace CcrSpaces.Flows.Stages
                             InputMessageHandler = handler   
                         })
         {}
-
         public IntermediateStage(CcrsFilterChannelConfig<TInput, TOutput> config)
         {
             base.Configure(new CcrsOneWayChannelConfig<StageMessage>
