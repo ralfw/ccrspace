@@ -9,7 +9,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Flows
 {
-    internal class CcrsFlow<TInput> : Port<TInput>
+    public class CcrsFlow<TInput> : Port<TInput>
     {
         private readonly StageBase firstStage;
 

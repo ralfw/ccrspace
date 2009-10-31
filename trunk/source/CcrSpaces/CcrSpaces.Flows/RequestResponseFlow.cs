@@ -9,13 +9,13 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Flows
 {
-    internal class CcrsFlow<TInput, TOutput> : Port<CcrsRequest<TInput, TOutput>>
+    public class CcrsFlow<TInput, TOutput> : Port<CcrsRequest<TInput, TOutput>>
     {
         private readonly StageBase firstStage;
         private StageBase lastStage;
 
 
-        public CcrsFlow(StageBase firstStage, StageBase lastStage)
+        internal CcrsFlow(StageBase firstStage, StageBase lastStage)
         {
             this.firstStage = firstStage;
             this.lastStage = lastStage;
@@ -44,6 +44,8 @@ namespace CcrSpaces.Flows
         }
 
 
+        public CcrsFlow<TInput, TNextOutput> Continue<TNextOutput>(Func<TOutput, TNextOutput> intermediateHandler)
+        { return Continue<TNextOutput>((m, p) => p.Post(intermediateHandler(m))); }
         public CcrsFlow<TInput, TNextOutput> Continue<TNextOutput>(Action<TOutput, Port<TNextOutput>> intermediateHandler)
         { return Continue(new CcrsFilterChannelConfig<TOutput, TNextOutput>{InputMessageHandler=intermediateHandler}); }
         public CcrsFlow<TInput, TNextOutput> Continue<TNextOutput>(CcrsFilterChannelConfig<TOutput, TNextOutput> config)
@@ -54,9 +56,9 @@ namespace CcrSpaces.Flows
         }
 
 
-        public CcrsFlow<TInput> Finish(Action<TOutput> terminalHandler)
-        { return Finish(new CcrsOneWayChannelConfig<TOutput>{MessageHandler=terminalHandler}); }
-        public CcrsFlow<TInput> Finish(CcrsOneWayChannelConfig<TOutput> config)
+        public CcrsFlow<TInput> Close(Action<TOutput> terminalHandler)
+        { return Close(new CcrsOneWayChannelConfig<TOutput>{MessageHandler=terminalHandler}); }
+        public CcrsFlow<TInput> Close(CcrsOneWayChannelConfig<TOutput> config)
         {
             this.lastStage.Next = new TerminalStage<TOutput>(config);
             return new CcrsFlow<TInput>(this.firstStage);
