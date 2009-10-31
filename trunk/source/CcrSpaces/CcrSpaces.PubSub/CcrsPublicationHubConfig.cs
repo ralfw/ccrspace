@@ -6,6 +6,6 @@ namespace CcrSpaces.PubSub
     public class CcrsPublicationHubConfig
     {
         public DispatcherQueue TaskQueue;
-        public CcrsChannelHandlerModes HandlerMode = CcrsChannelHandlerModes.Sequential;
+        public CcrsHandlerModes HandlerMode = CcrsHandlerModes.Sequential;
     }
 }

@@ -14,7 +14,7 @@ namespace CcrSpaces.Channels
             this.Receive(new CcrsChannelFactory().CreateChannel(new CcrsOneWayChannelConfig<TOutput> { MessageHandler = responseHandler }));
         }
 
-        public void Receive(Action<TOutput> responseHandler, CcrsChannelHandlerModes handlerMode)
+        public void Receive(Action<TOutput> responseHandler, CcrsHandlerModes handlerMode)
         {
             this.Receive(new CcrsChannelFactory().CreateChannel(new CcrsOneWayChannelConfig<TOutput> { MessageHandler = responseHandler, HandlerMode = handlerMode }));
         }

@@ -6,9 +6,9 @@ namespace CcrSpaces.PubSub
     public static class CcrSpaceExtensions
     {
         public static CcrsPublicationHub<T> CreatePublicationHub<T>(this ICcrSpace space) 
-        { return CreatePublicationHub<T>(space, CcrsChannelHandlerModes.Sequential); }
+        { return CreatePublicationHub<T>(space, CcrsHandlerModes.Sequential); }
 
-        public static CcrsPublicationHub<T> CreatePublicationHub<T>(this ICcrSpace space, CcrsChannelHandlerModes handlerMode)
+        public static CcrsPublicationHub<T> CreatePublicationHub<T>(this ICcrSpace space, CcrsHandlerModes handlerMode)
         {
             return new CcrsPublicationHub<T>(new CcrsPublicationHubConfig
                                                  {

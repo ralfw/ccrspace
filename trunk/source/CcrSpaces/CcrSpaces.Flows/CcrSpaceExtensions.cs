@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CcrSpaces.Core;
 using Microsoft.Ccr.Core;
 
@@ -9,11 +6,20 @@ namespace CcrSpaces.Flows
 {
     public static class CcrSpaceExtensions
     {
-        public static CcrsFlow<TInput, TOutput> StartFlow<TInput, TOutput>(this ICcrSpace space)
+        public static CcrsFlow<TInput, TOutput> StartFlow<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> handler)
+        { return space.StartFlow<TInput, TOutput>((m, pr) => pr.Post(handler(m))); }
+        public static CcrsFlow<TInput, TOutput> StartFlow<TInput, TOutput>(this ICcrSpace space, Action<TInput, Port<TOutput>> handler)
         {
-            //TODO: how to allow for taskqueue and handler mode config of each stage? how to set defaults?
-            //return new CcrsFlow<TInput, TOutput>()
-            return null;
+            return space.StartFlow(new CcrsIntermediateFlowStageConfig<TInput, TOutput>
+                                       {
+                                           InputMessageHandler = handler,
+                                           TaskQueue = space.DefaultTaskQueue
+                                       });
+        }
+        public static CcrsFlow<TInput, TOutput> StartFlow<TInput, TOutput>(this ICcrSpace space, CcrsIntermediateFlowStageConfig<TInput, TOutput> config)
+        {
+            config.TaskQueue = config.TaskQueue ?? space.DefaultTaskQueue;
+            return new CcrsFlow<TInput, TOutput>(config);
         }
     }
 }

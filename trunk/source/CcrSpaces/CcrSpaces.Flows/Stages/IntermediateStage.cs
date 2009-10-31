@@ -10,7 +10,7 @@ namespace CcrSpaces.Flows.Stages
 {
     internal partial class IntermediateStage<TInput, TOutput> : StageBase
     {
-        public IntermediateStage(CcrsFilterChannelConfig<TInput, TOutput> config)
+        public IntermediateStage(CcrsIntermediateFlowStageConfig<TInput, TOutput> config)
         {
             base.Configure(new CcrsOneWayChannelConfig<StageMessage>
                                {
@@ -21,7 +21,7 @@ namespace CcrSpaces.Flows.Stages
                                            ProcessMessageAndReturnResult(config.InputMessageHandler, (TInput)m.Message, responseInterceptor);
                                        },
                                    TaskQueue = config.TaskQueue,
-                                   HandlerMode = config.InputHandlerMode
+                                   HandlerMode = config.HandlerMode
                                });
         }
 

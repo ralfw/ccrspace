@@ -3,7 +3,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Channels
 {
-    public enum CcrsChannelHandlerModes
+    public enum CcrsHandlerModes
     {
         Parallel,
         Sequential,
@@ -15,7 +15,7 @@ namespace CcrSpaces.Channels
     {
         public Action<T> MessageHandler;
         public DispatcherQueue TaskQueue;
-        public CcrsChannelHandlerModes HandlerMode = CcrsChannelHandlerModes.Sequential;
+        public CcrsHandlerModes HandlerMode = CcrsHandlerModes.Sequential;
     }
 
 
@@ -25,7 +25,7 @@ namespace CcrSpaces.Channels
         public Port<TOutput> OutputPort;
 
         public DispatcherQueue TaskQueue;
-        public CcrsChannelHandlerModes InputHandlerMode = CcrsChannelHandlerModes.Sequential;
+        public CcrsHandlerModes InputHandlerMode = CcrsHandlerModes.Sequential;
     }
 
     
@@ -35,7 +35,7 @@ namespace CcrSpaces.Channels
         public Action<TOutput> OutputMessageHandler;
 
         public DispatcherQueue TaskQueue;
-        public CcrsChannelHandlerModes InputHandlerMode = CcrsChannelHandlerModes.Sequential;
-        public CcrsChannelHandlerModes OutputHandlerMode = CcrsChannelHandlerModes.Sequential;
+        public CcrsHandlerModes InputHandlerMode = CcrsHandlerModes.Sequential;
+        public CcrsHandlerModes OutputHandlerMode = CcrsHandlerModes.Sequential;
     }
 }

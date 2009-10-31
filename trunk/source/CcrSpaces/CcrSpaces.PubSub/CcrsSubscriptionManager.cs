@@ -50,13 +50,13 @@ namespace CcrSpaces.PubSub
                                                 {
                                                     MessageHandler = this.ProcessSubscribe,
                                                     TaskQueue = config.TaskQueue,
-                                                    HandlerMode = CcrsChannelHandlerModes.Parallel
+                                                    HandlerMode = CcrsHandlerModes.Parallel
                                                 });
             chf.ConfigureChannel(this.P1, new CcrsOneWayChannelConfig<CcrsUnsubscribe>
                                                 {
                                                     MessageHandler = this.ProcessUnsubscribe,
                                                     TaskQueue = config.TaskQueue,
-                                                    HandlerMode = CcrsChannelHandlerModes.Parallel
+                                                    HandlerMode = CcrsHandlerModes.Parallel
                                                 });
         }
 
