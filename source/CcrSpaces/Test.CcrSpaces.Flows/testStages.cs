@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CcrSpaces.Channels;
 using CcrSpaces.Flows.Stages;
 using CcrSpaces.Flows.Infrastructure;
 using GeneralTestInfrastructure;
@@ -16,7 +17,10 @@ namespace Test.CcrSpaces.Flows
         [Test]
         public void Terminating_stage_consumes_message()
         {
-            var sut = new TerminalStage<string>(s => base.are.Set());
+            var sut = new TerminalStage<string>(new CcrsOneWayChannelConfig<string>
+                                                    {
+                                                        MessageHandler= s => base.are.Set()
+                                                    });
 
             sut.Post(new StageMessage{Message="hello"});
 
@@ -29,8 +33,14 @@ namespace Test.CcrSpaces.Flows
         {
             string result = "";
 
-            var sut = new IntermediateStage<string, string>((s, ps) => ps.Post(s));
-            sut.Next = new TerminalStage<string>(s => { result = s; base.are.Set(); });
+            var sut = new IntermediateStage<string, string>(new CcrsFilterChannelConfig<string, string>
+                                                                {
+                                                                    InputMessageHandler=(s, ps) => ps.Post(s)
+                                                                });
+            sut.Next = new TerminalStage<string>(new CcrsOneWayChannelConfig<string>
+                                                     {
+                                                         MessageHandler = s => { result = s; base.are.Set(); }
+                                                     });
 
             sut.Post(new StageMessage {Message = "hello"});
 
@@ -42,7 +52,10 @@ namespace Test.CcrSpaces.Flows
         [Test]
         public void Intermediate_stage_throws_exception_if_next_stage_is_missing()
         {
-            var sut = new IntermediateStage<string, string>((s, ps) => ps.Post(s));
+            var sut = new IntermediateStage<string, string>(new CcrsFilterChannelConfig<string, string>
+                                                                {
+                                                                    InputMessageHandler = (s, ps) => ps.Post(s)
+                                                                });
 
             var pEx = new Port<Exception>();
             pEx.RegisterGenericSyncReceiver(ex => base.are.Set());
@@ -61,7 +74,10 @@ namespace Test.CcrSpaces.Flows
         {
             string result = "";
 
-            var sut = new IntermediateStage<string, string>((s, ps) => ps.Post(s));
+            var sut = new IntermediateStage<string, string>(new CcrsFilterChannelConfig<string, string>
+                                                                {
+                                                                    InputMessageHandler = (s, ps) => ps.Post(s)
+                                                                });
 
             var pResult = new Port<string>();
             pResult.RegisterGenericSyncReceiver(s => { result = (string)s; base.are.Set(); });

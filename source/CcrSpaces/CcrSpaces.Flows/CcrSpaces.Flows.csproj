@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CcrSpaceExtensions.cs" />
     <Compile Include="Infrastructure\IPortReceiveExtensions_ConsumingReceiverTask.cs">
       <DependentUpon>IPortReceiveExtensions.cs</DependentUpon>
     </Compile>
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\CcrSpace.Channels\CcrSpace.Channels.csproj">
       <Project>{7B0FE665-6715-46D4-87EA-D42219B68CB8}</Project>
       <Name>CcrSpace.Channels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CcrSpace.Core\CcrSpace.Core.csproj">
+      <Project>{3CEDC287-356D-49B3-A752-DCD38D55A5C7}</Project>
+      <Name>CcrSpace.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

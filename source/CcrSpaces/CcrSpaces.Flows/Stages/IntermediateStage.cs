@@ -10,12 +10,6 @@ namespace CcrSpaces.Flows.Stages
 {
     internal partial class IntermediateStage<TInput, TOutput> : StageBase
     {
-        public IntermediateStage(Action<TInput, Port<TOutput>> handler)
-            : this(new CcrsFilterChannelConfig<TInput, TOutput>
-                        {
-                            InputMessageHandler = handler   
-                        })
-        {}
         public IntermediateStage(CcrsFilterChannelConfig<TInput, TOutput> config)
         {
             base.Configure(new CcrsOneWayChannelConfig<StageMessage>
