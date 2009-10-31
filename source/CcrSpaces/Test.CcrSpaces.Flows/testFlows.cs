@@ -30,7 +30,7 @@ namespace Test.CcrSpaces.Flows
         public void Two_stage_flow_with_terminal_stage()
         {
             var fsi = new CcrsFlow<string, int>((s, pn) => pn.Post(s.Length));
-            var sut = fsi.Close(n => base.are.Set());
+            var sut = fsi.Terminate(n => base.are.Set());
 
             sut.Post("hello");
 
@@ -43,7 +43,7 @@ namespace Test.CcrSpaces.Flows
         {
             var fsi = new CcrsFlow<string, int>((s, pn) => pn.Post(s.Length));
             var fib = fsi.Continue<bool>((n, pb) => pb.Post(n%2 == 0));
-            var sut = fib.Close(b =>base.are.Set());
+            var sut = fib.Terminate(b =>base.are.Set());
 
             sut.Post("hello");
 

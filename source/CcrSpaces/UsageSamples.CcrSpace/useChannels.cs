@@ -26,14 +26,14 @@ namespace UsageSamples.CcrSpaces
 
                 // parallel channel
                 p = space.CreateChannel<int>(Console.WriteLine, 
-                                             CcrsChannelHandlerModes.Parallel);
+                                             CcrsHandlerModes.Parallel);
                 for (int i = 100; i < 120; i++)
                     p.Post(i);
 
                 // a channel processing messages in the sync context
                 // of its creator. use this to access GUI controls during message processing
                 p = space.CreateChannel<int>(Console.WriteLine,
-                                             CcrsChannelHandlerModes.InCurrentSyncContext);
+                                             CcrsHandlerModes.InCurrentSyncContext);
 
                 Thread.Sleep(2000);
             }

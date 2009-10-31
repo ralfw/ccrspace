@@ -9,10 +9,10 @@ namespace CcrSpaces.Channels
         #region one way channel
         public static Port<T> CreateChannel<T>(this ICcrSpace space, Action<T> messageHandler)
         {
-            return CreateChannel(space, messageHandler, CcrsChannelHandlerModes.Sequential);
+            return CreateChannel(space, messageHandler, CcrsHandlerModes.Sequential);
         }
 
-        public static Port<T> CreateChannel<T>(this ICcrSpace space, Action<T> messageHandler, CcrsChannelHandlerModes handlerMode)
+        public static Port<T> CreateChannel<T>(this ICcrSpace space, Action<T> messageHandler, CcrsHandlerModes handlerMode)
         {
             return CreateChannel(space, new CcrsOneWayChannelConfig<T>
                                             {

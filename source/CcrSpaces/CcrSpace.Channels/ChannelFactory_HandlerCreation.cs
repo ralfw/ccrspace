@@ -10,7 +10,7 @@ namespace CcrSpaces.Channels
         private Action<T> CreateInSyncContextHandler<T>(CcrsOneWayChannelConfig<T> config)
         {
             Action<T> safeHandler = config.MessageHandler;
-            if (config.HandlerMode == CcrsChannelHandlerModes.InCurrentSyncContext)
+            if (config.HandlerMode == CcrsHandlerModes.InCurrentSyncContext)
             {
                 SynchronizationContext currentContext = SynchronizationContext.Current;
                 safeHandler = m =>

@@ -35,17 +35,17 @@ namespace Test.CcrSpace.Channels
         [Test]
         public void Handle_messages_sequentially()
         {
-            Process_messages(CcrsChannelHandlerModes.Sequential, Assert.AreEqual);
+            Process_messages(CcrsHandlerModes.Sequential, Assert.AreEqual);
         }
 
         [Test]
         public void Parallel_message_processing()
         {
-            Process_messages(CcrsChannelHandlerModes.Parallel, Assert.Less);
+            Process_messages(CcrsHandlerModes.Parallel, Assert.Less);
         }
 
 
-        private void Process_messages(CcrsChannelHandlerModes mode, Action<int, int> assertListWasFilledCorrectly)
+        private void Process_messages(CcrsHandlerModes mode, Action<int, int> assertListWasFilledCorrectly)
         {
             List<int> numbers = new List<int>();
 

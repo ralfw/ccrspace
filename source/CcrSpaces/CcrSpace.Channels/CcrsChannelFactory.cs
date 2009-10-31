@@ -92,7 +92,7 @@ namespace CcrSpaces.Channels
 
         public void ConfigureChannel<T>(Port<T> port, CcrsOneWayChannelConfig<T> config)
         {
-            if (config.HandlerMode == CcrsChannelHandlerModes.Sequential || config.HandlerMode == CcrsChannelHandlerModes.InCurrentSyncContext)
+            if (config.HandlerMode == CcrsHandlerModes.Sequential || config.HandlerMode == CcrsHandlerModes.InCurrentSyncContext)
             {
                 Action<T> safeHandler = CreateInSyncContextHandler(config);
                 CreateSequentialHandler(config, safeHandler, port);

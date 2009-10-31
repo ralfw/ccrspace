@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CcrSpaces.Channels;
+using CcrSpaces.Flows;
 using CcrSpaces.Flows.Stages;
 using CcrSpaces.Flows.Infrastructure;
 using GeneralTestInfrastructure;
@@ -33,7 +34,7 @@ namespace Test.CcrSpaces.Flows
         {
             string result = "";
 
-            var sut = new IntermediateStage<string, string>(new CcrsFilterChannelConfig<string, string>
+            var sut = new IntermediateStage<string, string>(new CcrsIntermediateFlowStageConfig<string, string>
                                                                 {
                                                                     InputMessageHandler=(s, ps) => ps.Post(s)
                                                                 });
@@ -52,7 +53,7 @@ namespace Test.CcrSpaces.Flows
         [Test]
         public void Intermediate_stage_throws_exception_if_next_stage_is_missing()
         {
-            var sut = new IntermediateStage<string, string>(new CcrsFilterChannelConfig<string, string>
+            var sut = new IntermediateStage<string, string>(new CcrsIntermediateFlowStageConfig<string, string>
                                                                 {
                                                                     InputMessageHandler = (s, ps) => ps.Post(s)
                                                                 });
@@ -74,7 +75,7 @@ namespace Test.CcrSpaces.Flows
         {
             string result = "";
 
-            var sut = new IntermediateStage<string, string>(new CcrsFilterChannelConfig<string, string>
+            var sut = new IntermediateStage<string, string>(new CcrsIntermediateFlowStageConfig<string, string>
                                                                 {
                                                                     InputMessageHandler = (s, ps) => ps.Post(s)
                                                                 });

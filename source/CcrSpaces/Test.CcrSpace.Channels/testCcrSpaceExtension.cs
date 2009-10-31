@@ -23,7 +23,7 @@ namespace Test.CcrSpace.Channels
 
             Assert.AreSame(handler, mockCf.CfgOneWay.MessageHandler);
             Assert.AreSame(dpq, mockCf.CfgOneWay.TaskQueue);
-            Assert.AreEqual(CcrsChannelHandlerModes.Sequential, mockCf.CfgOneWay.HandlerMode);
+            Assert.AreEqual(CcrsHandlerModes.Sequential, mockCf.CfgOneWay.HandlerMode);
         }
 
 
@@ -46,8 +46,8 @@ namespace Test.CcrSpace.Channels
             Assert.AreSame(reqHandler, mockCf.CgfReqResp.InputMessageHandler);
             Assert.AreSame(respHandler, mockCf.CgfReqResp.OutputMessageHandler);
             Assert.AreSame(base.dpq, mockCf.CgfReqResp.TaskQueue);
-            Assert.AreEqual(CcrsChannelHandlerModes.Sequential, mockCf.CgfReqResp.InputHandlerMode);
-            Assert.AreEqual(CcrsChannelHandlerModes.Sequential, mockCf.CgfReqResp.OutputHandlerMode);
+            Assert.AreEqual(CcrsHandlerModes.Sequential, mockCf.CgfReqResp.InputHandlerMode);
+            Assert.AreEqual(CcrsHandlerModes.Sequential, mockCf.CgfReqResp.OutputHandlerMode);
         }
 
 
