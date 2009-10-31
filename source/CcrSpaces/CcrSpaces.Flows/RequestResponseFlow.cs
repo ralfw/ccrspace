@@ -78,7 +78,7 @@ namespace CcrSpaces.Flows
         {
             if (stageTaskQueue == null && (this.overallFlowConfig.StageFlags & CcrsFlowStageFlags.IndividualTaskQueue) == CcrsFlowStageFlags.IndividualTaskQueue)
                 return this.overallFlowConfig.TaskQueue != null
-                               ? new DispatcherQueue("FlowStage", this.overallFlowConfig.TaskQueue.Dispatcher)
+                               ? new DispatcherQueue("FlowStage" + Guid.NewGuid(), this.overallFlowConfig.TaskQueue.Dispatcher)
                                : new DispatcherQueue();
 
             return stageTaskQueue;
