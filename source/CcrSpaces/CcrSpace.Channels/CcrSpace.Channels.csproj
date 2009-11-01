@@ -53,6 +53,10 @@
     <Compile Include="ChannelConfig.cs" />
     <Compile Include="CcrsPendingRequest.cs" />
     <Compile Include="CcrsRequest.cs" />
+    <Compile Include="Extensions\IPortReceiveExtensions.cs" />
+    <Compile Include="Extensions\IPortReceiveExtensions_ConsumingReceiverTask.cs">
+      <DependentUpon>IPortReceiveExtensions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\PortExtensions.cs" />
     <Compile Include="CcrsChannelFactory.cs" />
     <Compile Include="ChannelFactory_HandlerCreation.cs">

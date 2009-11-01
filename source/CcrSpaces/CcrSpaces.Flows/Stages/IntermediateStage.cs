@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CcrSpaces.Channels;
-using CcrSpaces.Flows.Infrastructure;
+﻿using CcrSpaces.Channels;
+using CcrSpaces.Channels.Extensions;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Flows.Stages

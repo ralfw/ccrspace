@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6F5E0302-2C21-49A3-8CFE-1751FE15F2CA}</ProjectGuid>
+    <ProjectGuid>{1578D612-33E4-4947-B01D-5587F1D4FAFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UsageSamples.CcrSpaces</RootNamespace>
-    <AssemblyName>UsageSamples.CcrSpace</AssemblyName>
+    <RootNamespace>CcrSpaces.Actors</RootNamespace>
+    <AssemblyName>CcrSpaces.Actors</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,10 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\Microsoft.Ccr\microsoft.ccr.core.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.5.2.9222, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\NUnit\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -53,13 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="useActors.cs" />
-    <Compile Include="useCcrSpace.cs" />
+    <Compile Include="ActorDialogMessage.cs" />
+    <Compile Include="CcrsActor.cs" />
+    <Compile Include="CcrsActorBase.cs" />
+    <Compile Include="CcrsActorConfig.cs" />
+    <Compile Include="CcrsActorContext.cs" />
+    <Compile Include="CcrSpaceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="useChannels.cs" />
-    <Compile Include="useFlows.cs" />
-    <Compile Include="useHosting.cs" />
-    <Compile Include="usePubSub.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CcrSpace.Channels\CcrSpace.Channels.csproj">
@@ -69,26 +65,6 @@
     <ProjectReference Include="..\CcrSpace.Core\CcrSpace.Core.csproj">
       <Project>{3CEDC287-356D-49B3-A752-DCD38D55A5C7}</Project>
       <Name>CcrSpace.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CcrSpace.ExceptionHandling\CcrSpace.ExceptionHandling.csproj">
-      <Project>{4D1A5A15-6A1A-44C1-A56E-775E363834B0}</Project>
-      <Name>CcrSpace.ExceptionHandling</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CcrSpaces.Actors\CcrSpaces.Actors.csproj">
-      <Project>{1578D612-33E4-4947-B01D-5587F1D4FAFC}</Project>
-      <Name>CcrSpaces.Actors</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CcrSpaces.Flows\CcrSpaces.Flows.csproj">
-      <Project>{EE7B2FC4-A49C-4982-8F91-0A620202274D}</Project>
-      <Name>CcrSpaces.Flows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CcrSpaces.Hosting\CcrSpaces.Hosting.csproj">
-      <Project>{C28BABF3-48FA-4827-89ED-3FD7D4C94CC1}</Project>
-      <Name>CcrSpaces.Hosting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CcrSpaces.PubSub\CcrSpaces.PubSub.csproj">
-      <Project>{448239EB-C078-4DEE-912F-709882CBBA1F}</Project>
-      <Name>CcrSpaces.PubSub</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
