@@ -41,7 +41,7 @@ namespace Test.CcrSpace.Channels
 
             CcrsChannelFactory.Instance = mockCf;
 
-            Assert.AreSame(mockCf.PReqResp, mockSpace.CreateChannel(reqHandler, respHandler));
+            Assert.AreSame(mockCf.PReqResp.P0, mockSpace.CreateChannel(reqHandler, respHandler));
 
             Assert.AreSame(reqHandler, mockCf.CgfReqResp.InputMessageHandler);
             Assert.AreSame(respHandler, mockCf.CgfReqResp.OutputMessageHandler);

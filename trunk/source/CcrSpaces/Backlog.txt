@@ -1,12 +1,8 @@
-flows
-	oneway
-	request/response
-
-actors
-	send
-	reply
-
 response timeout
+
+flow patterns
+	fork
+	scatter/gather
 
 register config string interpreters statically on ccr space
 
@@ -39,3 +35,12 @@ services on ccr space?
 pub/sub
 	local
 	remote
+
+flows
+	oneway
+	request/response
+
+actors
+	send
+	reply
+
