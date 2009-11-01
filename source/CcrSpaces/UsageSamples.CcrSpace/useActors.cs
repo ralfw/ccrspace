@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using CcrSpaces.Actors;
 using CcrSpaces.Core;
@@ -14,21 +12,68 @@ namespace UsageSamples.CcrSpaces
     [TestFixture]
     public class useActors
     {
-        //[Test]
-        //public void Let_local_and_remote_worker_chat()
-        //{
-        //    using (var server = new CcrSpace().ConfigureAsHost(@"tcp.port=9999"))
-        //    {
-        //        server.HostPort(flow, "flow");
+        [Test]
+        public void Let_local_and_remote_worker_chat()
+        {
+            using (var server = new CcrSpace().ConfigureAsHost(@"tcp.port=9999"))
+            {
+                server.HostPort(server.CreateActor(new PongActor()), "pong");
 
-        //        using (var client = new CcrSpace().ConfigureAsHost(@"tcp.port=0"))
-        //        {
-        //            var remoteFlow = client.ConnectToPort<string>(@"localhost:9999/flow");
-        //            remoteFlow.Post("hello");
+                using (var client = new CcrSpace().ConfigureAsHost(@"tcp.port=0"))
+                {
+                    var remoteActor = client.ConnectToPort<object>(@"localhost:9999/pong");
 
-        //            Thread.Sleep(2000);
-        //        }
-        //    }
-        //}
+                    var localActor = client.CreateActor(new PingActor(remoteActor));
+                    localActor.Post("hello, pong!");
+
+                    Thread.Sleep(2000);
+                }
+            }
+        }
+    }
+
+
+    class PingActor : CcrsActorBase
+    {
+        private readonly Port<object> pongActor;
+
+        public PingActor(Port<object> pongActor)
+        { this.pongActor = pongActor; }
+
+
+        #region Overrides of CcrsActorBase
+        public override IEnumerator<ITask> Run(CcrsActorContext ctx)
+        {
+            Console.WriteLine("waiting for message to send to pong");
+            yield return ctx.Receive<string>();
+
+            Console.WriteLine("pinging pong actor with '{0}'", ctx.ReceivedValue);
+            ctx.Ask(this.pongActor, ctx.ReceivedValue);
+
+            Console.WriteLine("waiting for response");
+            yield return ctx.Receive<string>();
+
+            Console.WriteLine("received '{0}' from pong", ctx.ReceivedValue);
+        }
+        #endregion
+    }
+
+
+    class PongActor : CcrsActorBase
+    {
+        #region Overrides of CcrsActorBase
+
+        public override IEnumerator<ITask> Run(CcrsActorContext ctx)
+        {
+            Console.WriteLine("    waiting for message from ping");
+
+            yield return ctx.Receive<string>();
+            Console.WriteLine("    received '{0}' from ping", ctx.ReceivedValue);
+
+            ctx.Reply(string.Format("hi, there! here´s your message back: {0}", ctx.ReceivedValue.ToString().ToUpper()));
+            Console.WriteLine("    replied to ping");
+        }
+
+        #endregion
     }
 }

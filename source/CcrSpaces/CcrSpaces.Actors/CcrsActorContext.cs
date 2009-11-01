@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Actors
@@ -55,6 +53,12 @@ namespace CcrSpaces.Actors
             if (this.receivedMessage.Sender == null) throw new InvalidOperationException("Last message received has no sender to reply to!");
 
             this.receivedMessage.Sender.PostUnknownType(new ActorDialogMessage{Message=message, Sender=self});
+        }
+
+
+        public CcrsPulsator PulsePeriodically(int pulsationPeriodMsec)
+        {
+            return new CcrsPulsator(self, pulsationPeriodMsec);
         }
     }
 }
