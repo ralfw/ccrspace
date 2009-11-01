@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using CcrSpaces.Actors;
 using GeneralTestInfrastructure;
@@ -66,6 +67,16 @@ namespace Test.CcrSpaces.Actors
             Assert.IsTrue(acPing.Are.WaitOne(1000));
             Assert.AreEqual(2, acPing.ValuesReceived[0]);
         }
+
+
+        [Test]
+        public void Actor_pulses_itself()
+        {
+            var ac = new MethodActors();
+            var sut = new CcrsActor(ac.PulsingActor);
+
+            Assert.IsTrue(ac.Are.WaitOne(1000));
+        }
     }
 
 
@@ -118,6 +129,23 @@ namespace Test.CcrSpaces.Actors
             yield return ctx.Receive<int>();
 
             ctx.Reply((int) ctx.ReceivedValue + 1);
+
+            this.Are.Set();
+        }
+
+
+        public IEnumerator<ITask> PulsingActor(CcrsActorContext ctx)
+        {
+            using (ctx.PulsePeriodically(100))
+            {
+                int i=0;
+                while (true)
+                {
+                    yield return ctx.Receive<DateTime>();
+                    Console.WriteLine("pulse received: {0} / {1}", ctx.ReceivedValue, i);
+                    if (i++ > 3) break;
+                }
+            }
 
             this.Are.Set();
         }
