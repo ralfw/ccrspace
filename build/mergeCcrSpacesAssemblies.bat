@@ -1,0 +1,2 @@
+cd ..\bin
+..\build\ilmerge /t:library /copyattrs /xmldocs /out:deployment\CcrSpaces.dll CcrSpace.ExceptionHandling.dll CcrSpaces.Actors.dll CcrSpaces.Channels.dll CcrSpaces.Core.dll CcrSpaces.Flows.dll CcrSpaces.Hosting.dll CcrSpaces.PubSub.dll
