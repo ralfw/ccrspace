@@ -54,7 +54,7 @@
     <Compile Include="CcrsActorBase.cs" />
     <Compile Include="CcrsActorConfig.cs" />
     <Compile Include="CcrsActorContext.cs" />
-    <Compile Include="CcrSpaceExtensions.cs" />
+    <Compile Include="CcrSpaceExtensionsForActors.cs" />
     <Compile Include="CcrsPulsator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

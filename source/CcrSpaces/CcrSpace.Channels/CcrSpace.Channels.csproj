@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CcrSpaceExtensions.cs" />
+    <Compile Include="CcrSpaceExtensionsForChannels.cs" />
     <Compile Include="ChannelConfig.cs" />
     <Compile Include="CcrsPendingRequest.cs" />
     <Compile Include="CcrsRequest.cs" />

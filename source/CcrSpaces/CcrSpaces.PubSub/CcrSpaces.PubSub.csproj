@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CcrSpaceExtensions.cs" />
+    <Compile Include="CcrSpaceExtensionsForPubSub.cs" />
     <Compile Include="CcrsPublicationHub.cs" />
     <Compile Include="CcrsPublicationHubConfig.cs" />
     <Compile Include="CcrsSubscriptionManager.cs" />

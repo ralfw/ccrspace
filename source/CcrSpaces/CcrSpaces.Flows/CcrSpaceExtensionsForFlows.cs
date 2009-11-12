@@ -5,7 +5,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Core
 {
-    public static class CcrSpaceExtensions
+    public static class CcrSpaceExtensionsForFlows
     {
         public static CcrsFlow<TInput, TOutput> StartFlow<TInput, TOutput>(this ICcrSpace space, Func<TInput, TOutput> handler)
         { return space.StartFlow<TInput, TOutput>((m, pr) => pr.Post(handler(m))); }
