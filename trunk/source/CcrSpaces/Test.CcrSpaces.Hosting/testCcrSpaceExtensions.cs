@@ -1,5 +1,4 @@
 ﻿using CcrSpaces.Core;
-using CcrSpaces.Core.Core;
 using CcrSpaces.Core.Channels;
 using CcrSpaces.Core.Hosting;
 using GeneralTestInfrastructure;

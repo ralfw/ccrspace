@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using CcrSpaces.Core;
-using CcrSpaces.Core.Core;
 using CcrSpaces.Core.Channels;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;

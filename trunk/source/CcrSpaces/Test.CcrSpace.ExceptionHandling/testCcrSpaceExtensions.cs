@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CcrSpaces.Core;
-using CcrSpaces.Core.Core;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
@@ -33,6 +32,7 @@ namespace Test.CcrSpace.ExceptionHandling
             Assert.IsTrue(base.are.WaitOne(500));
         }
 
+
         [Test]
         public void Using_catch()
         {
@@ -41,11 +41,20 @@ namespace Test.CcrSpace.ExceptionHandling
                 var p = new Port<int>();
                 Arbiter.Activate(
                     new DispatcherQueue(),
-                    p.Receive(n => { throw new ApplicationException("error!"); })
+                    Arbiter.Receive(
+                        true,
+                        p,
+                        n =>
+                          {
+                              Console.WriteLine("received: {0}", n);
+                              throw new ApplicationException("error!");
+                          })
                     );
                 p.Post(1);
+                p.Post(2);
             }
 
+            Assert.IsTrue(base.are.WaitOne(500));
             Assert.IsTrue(base.are.WaitOne(500));
         }
     }

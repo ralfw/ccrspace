@@ -45,7 +45,6 @@ namespace Test.CcrSpace.Channels
             Process_messages(CcrsHandlerModes.Parallel, Assert.Less);
         }
 
-
         private void Process_messages(CcrsHandlerModes mode, Action<int, int> assertListWasFilledCorrectly)
         {
             List<int> numbers = new List<int>();
@@ -79,6 +78,32 @@ namespace Test.CcrSpace.Channels
             }
 
             assertListWasFilledCorrectly(j, numbers.Count);
+        }
+
+
+        [Test]
+        public void Sequential_messages_are_still_processed_after_exception()
+        {
+            var cfg = new CcrsOneWayChannelConfig<int>
+                          {
+                              MessageHandler = n =>
+                                                   {
+                                                       if (n == 666) throw new ApplicationException();
+                                                       are.Set();
+                                                   },
+                              HandlerMode = CcrsHandlerModes.Sequential
+                          };
+
+            var ch = this.sut.CreateChannel(cfg);
+
+            ch.Post(1);
+            Assert.IsTrue(are.WaitOne(500));
+
+            ch.Post(666);
+            Assert.IsFalse(are.WaitOne(500));
+
+            ch.Post(2);
+            Assert.IsTrue(are.WaitOne(500));
         }
     }
 }

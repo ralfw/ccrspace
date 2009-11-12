@@ -30,10 +30,16 @@ namespace CcrSpaces.Core.Channels
             Action<T> sequentialHandler = null;
             sequentialHandler = m =>
                                     {
-                                        safeHandler(m);
-// ReSharper disable AccessToModifiedClosure
-                                        port.WireUpHandler(config.TaskQueue, false, sequentialHandler);
-// ReSharper restore AccessToModifiedClosure
+                                        try
+                                        {
+                                            safeHandler(m);
+                                        }
+                                        finally
+                                        {
+                                            // ReSharper disable AccessToModifiedClosure
+                                            port.WireUpHandler(config.TaskQueue, false, sequentialHandler);
+                                            // ReSharper restore AccessToModifiedClosure
+                                        }
                                     };
             port.WireUpHandler(config.TaskQueue, false, sequentialHandler);
         }

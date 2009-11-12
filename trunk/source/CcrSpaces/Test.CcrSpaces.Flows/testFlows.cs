@@ -5,7 +5,6 @@ using System.Text;
 using CcrSpaces.Core;
 using CcrSpaces.Core.Channels;
 using CcrSpaces.Core.Channels.Extensions;
-using CcrSpaces.Core.Core;
 using CcrSpaces.Core.Flows;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;

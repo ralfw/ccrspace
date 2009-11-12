@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CcrSpaces.Core;
-using CcrSpaces.Core.Core;
 using GeneralTestInfrastructure;
 using NUnit.Framework;
 using CcrSpaces.Core.Flows;
