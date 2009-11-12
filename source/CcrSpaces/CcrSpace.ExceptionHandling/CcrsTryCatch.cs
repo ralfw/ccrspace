@@ -1,8 +1,9 @@
 ﻿using System;
-using CcrSpaces.ExceptionHandling;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.ExceptionHandling;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.ExceptionHandling
+namespace CcrSpaces.Core.ExceptionHandling
 {
     public class CcrsTryCatch
     {

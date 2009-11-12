@@ -1,10 +1,10 @@
 ﻿using System;
-using CcrSpaces.Channels;
-using CcrSpaces.Channels.Extensions;
-using CcrSpaces.Flows.Stages;
+using CcrSpaces.Core.Channels.Extensions;
+using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Flows.Stages;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Flows
+namespace CcrSpaces.Core.Flows
 {
     public class CcrsFlow<TInput, TOutput> : Port<CcrsRequest<TInput, TOutput>>
     {

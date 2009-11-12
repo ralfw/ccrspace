@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.ExceptionHandling
+namespace CcrSpaces.Core.ExceptionHandling
 {
     internal static class CausalityFactory
     {

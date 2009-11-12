@@ -1,6 +1,7 @@
 ﻿using CcrSpaces.Core;
-using CcrSpaces.Channels;
-using CcrSpaces.Hosting;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Hosting;
 using GeneralTestInfrastructure;
 using NUnit.Framework;
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
 using CcrSpaces.Core;
-using CcrSpaces.ExceptionHandling;
+using NUnit.Framework;
+using CcrSpaces.Core.Core;
 
 namespace UsageSamples.CcrSpaces
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Actors
+namespace CcrSpaces.Core.Actors
 {
     public abstract class CcrsActorBase
     {

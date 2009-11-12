@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Channels
+namespace CcrSpaces.Core
 {
     public enum CcrsHandlerModes
     {

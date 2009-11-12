@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace CcrSpaces.Core.Services
+namespace CcrSpaces.Core.Core.Services
 {
     internal class ServiceRegistry : ICcrsServiceRegistry
     {

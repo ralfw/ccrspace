@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Actors
+namespace CcrSpaces.Core.Actors
 {
     public class CcrsActorContext
     {

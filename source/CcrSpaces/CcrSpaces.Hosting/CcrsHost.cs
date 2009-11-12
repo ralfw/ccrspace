@@ -1,9 +1,9 @@
-﻿using CcrSpaces.Channels;
-using CcrSpaces.Core.Services;
+﻿using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Core.Services;
 using Microsoft.Ccr.Core;
 using XcoAppSpaces.Core;
 
-namespace CcrSpaces.Hosting
+namespace CcrSpaces.Core.Hosting
 {
     internal class CcrsHost : ICcrsResourcefulService
     {

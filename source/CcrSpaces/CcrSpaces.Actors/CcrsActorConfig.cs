@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using CcrSpaces.Core.Actors;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Actors
+namespace CcrSpaces.Core
 {
     public class CcrsActorConfig
     {

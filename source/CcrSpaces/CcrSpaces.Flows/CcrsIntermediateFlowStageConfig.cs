@@ -1,8 +1,8 @@
 ﻿using System;
-using CcrSpaces.Channels;
+using CcrSpaces.Core.Channels;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Flows
+namespace CcrSpaces.Core
 {
     [Flags]
     public enum CcrsFlowStageFlags

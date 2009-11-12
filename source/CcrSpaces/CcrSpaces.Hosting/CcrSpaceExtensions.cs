@@ -1,8 +1,9 @@
-﻿using CcrSpaces.Channels;
-using CcrSpaces.Core;
+﻿using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.Hosting;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Hosting
+namespace CcrSpaces.Core
 {
     public static class CcrSpaceExtensions
     {

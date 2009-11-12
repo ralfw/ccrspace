@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using CcrSpaces.Channels;
-using CcrSpaces.Channels.Extensions;
+using CcrSpaces.Core;
+using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Channels.Extensions;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;

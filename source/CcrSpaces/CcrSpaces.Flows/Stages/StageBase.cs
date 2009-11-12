@@ -1,7 +1,7 @@
-﻿using CcrSpaces.Channels;
+﻿using CcrSpaces.Core.Channels;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Flows.Stages
+namespace CcrSpaces.Core.Flows.Stages
 {
     internal class StageMessage
     {

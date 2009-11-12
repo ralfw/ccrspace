@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using CcrSpaces.Channels;
 using CcrSpaces.Core;
-using CcrSpaces.Hosting;
-using CcrSpaces.Flows;
+using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.Hosting;
+using CcrSpaces.Core.Flows;
 using NUnit.Framework;
 
 namespace UsageSamples.CcrSpaces

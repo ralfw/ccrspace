@@ -1,8 +1,8 @@
-﻿using CcrSpaces.Channels;
-using CcrSpaces.Channels.Extensions;
+﻿using CcrSpaces.Core.Channels.Extensions;
+using CcrSpaces.Core.Channels;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Flows.Stages
+namespace CcrSpaces.Core.Flows.Stages
 {
     internal partial class IntermediateStage<TInput, TOutput> : StageBase
     {

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading;
+using CcrSpaces.Core;
 using NUnit.Framework;
 
-using CcrSpaces.Core;
-using CcrSpaces.Channels;
-using CcrSpaces.Hosting;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Hosting;
 
 namespace UsageSamples.CcrSpaces
 {

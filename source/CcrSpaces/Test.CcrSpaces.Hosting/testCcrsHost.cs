@@ -1,8 +1,9 @@
 ﻿using System;
-using CcrSpaces.Hosting;
+using CcrSpaces.Core;
+using CcrSpaces.Core.Hosting;
 using GeneralTestInfrastructure;
 using NUnit.Framework;
-using CcrSpaces.Channels;
+using CcrSpaces.Core.Channels;
 
 namespace Test.CcrSpaces.Hosting
 {

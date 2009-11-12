@@ -1,5 +1,6 @@
 ﻿using System;
-using CcrSpaces.Channels;
+using CcrSpaces.Core;
+using CcrSpaces.Core.Channels;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;

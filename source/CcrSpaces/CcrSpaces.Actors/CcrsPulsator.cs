@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Microsoft.Ccr.Core;
-namespace CcrSpaces.Actors
+namespace CcrSpaces.Core.Actors
 {
     public class CcrsPulsator : IDisposable
     {

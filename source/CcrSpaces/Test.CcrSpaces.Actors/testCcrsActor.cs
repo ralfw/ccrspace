@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using CcrSpaces.Actors;
+using CcrSpaces.Core.Actors;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;

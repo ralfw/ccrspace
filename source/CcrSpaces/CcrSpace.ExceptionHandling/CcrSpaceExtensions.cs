@@ -1,7 +1,8 @@
 ﻿using System;
-using CcrSpaces.Core;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.ExceptionHandling;
 
-namespace CcrSpaces.ExceptionHandling
+namespace CcrSpaces.Core
 {
     public static class CcrSpaceExtensions
     {

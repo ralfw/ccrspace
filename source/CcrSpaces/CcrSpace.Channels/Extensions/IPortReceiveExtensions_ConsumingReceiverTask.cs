@@ -2,7 +2,7 @@
 using Microsoft.Ccr.Core;
 using Microsoft.Ccr.Core.Arbiters;
 
-namespace CcrSpaces.Channels.Extensions
+namespace CcrSpaces.Core.Channels.Extensions
 {
     partial class IPortReceiveExtensions
     {

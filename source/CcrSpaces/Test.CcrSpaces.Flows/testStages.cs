@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CcrSpaces.Channels;
-using CcrSpaces.Channels.Extensions;
-using CcrSpaces.Flows;
-using CcrSpaces.Flows.Stages;
+using CcrSpaces.Core;
+using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Channels.Extensions;
+using CcrSpaces.Core.Flows;
+using CcrSpaces.Core.Flows.Stages;
 using GeneralTestInfrastructure;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
