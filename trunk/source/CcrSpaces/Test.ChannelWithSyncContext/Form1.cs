@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
-using CcrSpaces.Channels;
+using CcrSpaces.Core;
+using CcrSpaces.Core.Channels;
 using Microsoft.Ccr.Core;
 
 namespace Test.ChannelWithSyncContext

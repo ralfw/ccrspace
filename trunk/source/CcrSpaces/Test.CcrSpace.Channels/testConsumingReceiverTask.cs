@@ -1,4 +1,4 @@
-﻿using CcrSpaces.Channels.Extensions;
+﻿using CcrSpaces.Core.Channels.Extensions;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
 

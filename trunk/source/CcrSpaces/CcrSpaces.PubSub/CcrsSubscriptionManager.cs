@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using CcrSpaces.Channels;
+using CcrSpaces.Core.Channels;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.PubSub
+namespace CcrSpaces.Core.PubSub
 {
     [Serializable]
     public class CcrsSubscribe<T>

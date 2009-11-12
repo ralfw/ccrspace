@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CcrSpaces.ExceptionHandling;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.ExceptionHandling;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.ExceptionHandling
+namespace CcrSpaces.Core.ExceptionHandling
 {
     public class CcrsCausality : IDisposable
     {

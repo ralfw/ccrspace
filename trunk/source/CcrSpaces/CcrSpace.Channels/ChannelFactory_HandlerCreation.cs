@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using Microsoft.Ccr.Core;
-using CcrSpaces.Channels.Extensions;
+using CcrSpaces.Core.Channels.Extensions;
 
-namespace CcrSpaces.Channels
+namespace CcrSpaces.Core.Channels
 {
     partial class CcrsChannelFactory
     {

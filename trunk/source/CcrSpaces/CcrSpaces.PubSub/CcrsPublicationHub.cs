@@ -1,7 +1,7 @@
-﻿using CcrSpaces.Channels;
+﻿using CcrSpaces.Core.Channels;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.PubSub
+namespace CcrSpaces.Core.PubSub
 {
     public class CcrsPublicationHub<T> : Port<T>
     {

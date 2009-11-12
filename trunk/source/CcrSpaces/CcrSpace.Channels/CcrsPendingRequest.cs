@@ -1,7 +1,8 @@
 ﻿using System;
+using CcrSpaces.Core.Channels;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Channels
+namespace CcrSpaces.Core
 {
     public class CcrsPendingRequest<TInput, TOutput>
     {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading;
-using CcrSpaces.Channels;
 using CcrSpaces.Core;
-using CcrSpaces.Hosting;
-using CcrSpaces.PubSub;
+using CcrSpaces.Core.Channels;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.Hosting;
+using CcrSpaces.Core.PubSub;
 using NUnit.Framework;
 
 namespace UsageSamples.CcrSpaces

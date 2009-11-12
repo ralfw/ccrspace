@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Channels.Extensions
+namespace CcrSpaces.Core.Channels.Extensions
 {
     public static partial class IPortReceiveExtensions
     {

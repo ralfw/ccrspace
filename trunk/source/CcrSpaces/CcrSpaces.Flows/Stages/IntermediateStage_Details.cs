@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Flows.Stages
+namespace CcrSpaces.Core.Flows.Stages
 {
     partial class IntermediateStage<TInput, TOutput>
     {

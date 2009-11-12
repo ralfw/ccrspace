@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using CcrSpaces.Core;
+using CcrSpaces.Core.Core;
 using Microsoft.Ccr.Core;
 using NUnit.Framework;
 using Rhino.Mocks;

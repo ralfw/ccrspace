@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using CcrSpaces.Core.Services;
+using CcrSpaces.Core.Core.Services;
 using NUnit.Framework;
 
 namespace Test.CcrSpace.Core

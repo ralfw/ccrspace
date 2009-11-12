@@ -1,8 +1,9 @@
 ﻿using System;
-using CcrSpaces.Core;
+using CcrSpaces.Core.Core;
+using CcrSpaces.Core.Flows;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Flows
+namespace CcrSpaces.Core
 {
     public static class CcrSpaceExtensions
     {

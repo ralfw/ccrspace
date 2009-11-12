@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Actors
+namespace CcrSpaces.Core.Actors
 {
     [Serializable]
     internal class ActorDialogMessage

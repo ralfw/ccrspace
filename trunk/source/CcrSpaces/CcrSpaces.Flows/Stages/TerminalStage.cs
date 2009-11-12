@@ -1,7 +1,7 @@
 ﻿using System;
-using CcrSpaces.Channels;
+using CcrSpaces.Core.Channels;
 
-namespace CcrSpaces.Flows.Stages
+namespace CcrSpaces.Core.Flows.Stages
 {
     internal class TerminalStage<TInput> : StageBase
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using CcrSpaces.Channels.Extensions;
+using CcrSpaces.Core.Channels.Extensions;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Actors
+namespace CcrSpaces.Core.Actors
 {
     public class CcrsActor : Port<object>
     {
