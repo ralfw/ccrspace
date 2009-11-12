@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CcrSpaces.Core.Actors;
-using CcrSpaces.Core.Core;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Core

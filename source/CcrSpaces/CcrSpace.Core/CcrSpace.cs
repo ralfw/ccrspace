@@ -1,7 +1,7 @@
-﻿using CcrSpaces.Core.Core.Services;
+﻿using CcrSpaces.Core.Services;
 using Microsoft.Ccr.Core;
 
-namespace CcrSpaces.Core.Core
+namespace CcrSpaces.Core
 {
     public class CcrSpace : ICcrSpace
     {

@@ -1,5 +1,4 @@
 ﻿using CcrSpaces.Core.Channels;
-using CcrSpaces.Core.Core;
 using CcrSpaces.Core.PubSub;
 
 namespace CcrSpaces.Core

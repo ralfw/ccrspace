@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading;
 using CcrSpaces.Core;
 using CcrSpaces.Core.Channels;
-using CcrSpaces.Core.Core;
 using CcrSpaces.Core.Hosting;
 using CcrSpaces.Core.Flows;
 using NUnit.Framework;

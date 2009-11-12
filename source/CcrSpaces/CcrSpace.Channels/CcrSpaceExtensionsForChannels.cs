@@ -1,6 +1,5 @@
 ﻿using System;
 using CcrSpaces.Core.Channels;
-using CcrSpaces.Core.Core;
 using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Core

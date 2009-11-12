@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using CcrSpaces.Core;
 using NUnit.Framework;
-using CcrSpaces.Core.Core;
 
 namespace UsageSamples.CcrSpaces
 {
