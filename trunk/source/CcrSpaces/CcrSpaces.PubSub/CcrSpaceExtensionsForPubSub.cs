@@ -4,7 +4,7 @@ using CcrSpaces.Core.PubSub;
 
 namespace CcrSpaces.Core
 {
-    public static class CcrSpaceExtensions
+    public static class CcrSpaceExtensionsForPubSub
     {
         public static CcrsPublicationHub<T> CreatePublicationHub<T>(this ICcrSpace space) 
         { return CreatePublicationHub<T>(space, CcrsHandlerModes.Sequential); }

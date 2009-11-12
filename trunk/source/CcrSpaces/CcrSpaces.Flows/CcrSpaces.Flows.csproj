@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CcrsIntermediateFlowStageConfig.cs" />
-    <Compile Include="CcrSpaceExtensions.cs" />
+    <Compile Include="CcrSpaceExtensionsForFlows.cs" />
     <Compile Include="RequestResponseFlow.cs" />
     <Compile Include="OneWayFlow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,7 +6,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Core
 {
-    public static class CcrSpaceExtensions
+    public static class CcrSpaceExtensionsForActors
     {
         public static CcrsActor CreateActor(this ICcrSpace space, CcrsActorBase actor)
         { return CreateActor(space, actor.Run); }

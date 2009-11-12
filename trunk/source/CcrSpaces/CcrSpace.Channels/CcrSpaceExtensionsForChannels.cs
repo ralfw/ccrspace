@@ -5,7 +5,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Core
 {
-    public static class CcrSpaceExtensions
+    public static class CcrSpaceExtensionsForChannels
     {
         #region one way channel
         public static Port<T> CreateChannel<T>(this ICcrSpace space, Action<T> messageHandler)
