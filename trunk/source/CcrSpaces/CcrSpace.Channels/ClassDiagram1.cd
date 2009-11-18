@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CcrSpaces.Core.Channels.CcrsChannelFactory" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="1.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAACAAAAAAAAAAAAABABAAAQAAAAABAAAI=</HashCode>
+      <FileName>CcrsChannelFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CcrSpaces.Core.CcrSpaceExtensionsForChannels">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CcrSpaceExtensionsForChannels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CcrSpaces.Core.CcrsPendingRequest&lt;TInput, TOutput&gt;" Collapsed="true">
+    <Position X="8.25" Y="3" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAQAAAAABAAAAA=</HashCode>
+      <FileName>CcrsPendingRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CcrSpaces.Core.CcrsRequest&lt;TInput, TOutput&gt;" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CcrsRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CcrSpaces.Core.CcrsOneWayChannelConfig&lt;T&gt;" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAYAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChannelConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CcrSpaces.Core.CcrsFilterChannelConfig&lt;TInput, TOutput&gt;" Collapsed="true">
+    <Position X="8.25" Y="2" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAgAAAAgAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChannelConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CcrSpaces.Core.CcrsRequestResponseChannelConfig&lt;TInput, TOutput&gt;" Collapsed="true">
+    <Position X="8.25" Y="1.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAgAAAAAAgAAAAgAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChannelConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CcrSpaces.Core.Channels.Extensions.IPortReceiveExtensions">
+    <Position X="8.25" Y="4.25" Width="2.5" />
+    <NestedTypes>
+      <Class Name="CcrSpaces.Core.Channels.Extensions.IPortReceiveExtensions.ConsumingReceiverTask" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Extensions\IPortReceiveExtensions_ConsumingReceiverTask.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\IPortReceiveExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CcrSpaces.Core.Channels.Extensions.PortExtensions">
+    <Position X="8.25" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\PortExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="CcrSpaces.Core.Channels.ICcrsChannelFactory" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CcrsChannelFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="CcrSpaces.Core.CcrsHandlerModes" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAACAAAAA=</HashCode>
+      <FileName>ChannelConfig.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
