@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0"?>
 <doc>
   <assembly>
     <name>XcoAppSpaces</name>
@@ -74,19 +74,19 @@
       <param name="port">The port.</param>
       <returns>Remote communication information about the port.</returns>
     </member>
-    <member name="T:XcoAppSpaces.Core.CausalitySyncContext">
+    <member name="T:XcoAppSpaces.Core.SyncContext">
       <summary>
              Using the causalities in the SynchronizationContext
             </summary>
     </member>
-    <member name="F:XcoAppSpaces.Core.CausalitySyncContext.NoSyncContext">
+    <member name="F:XcoAppSpaces.Core.SyncContext.NoSyncContext">
       <summary>
             No synchronization context used
             </summary>
     </member>
-    <member name="F:XcoAppSpaces.Core.CausalitySyncContext.UseCurrentSyncContext">
+    <member name="F:XcoAppSpaces.Core.SyncContext.UseCurrentSyncContext">
       <summary>
-            SynchronizationContext.Current will be used for causalities
+            SynchronizationContext.Current will be used for task execution
             </summary>
     </member>
     <member name="T:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions">
@@ -103,7 +103,7 @@
       <param name="port">The port from which the messages should be received.</param>
       <param name="handler">The method to be called when a message is received from the port.</param>
     </member>
-    <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.Receive``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0},XcoAppSpaces.Core.CausalitySyncContext)">
+    <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.Receive``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0},XcoAppSpaces.Core.SyncContext)">
       <summary>
             Receive messages from the given port. Whenever an element is posted to the port, the given handler is called.
             </summary>
@@ -111,7 +111,7 @@
       <param name="space">The XcoAppSpace.</param>
       <param name="port">The port from which the messages should be received.</param>
       <param name="handler">The method to be called when a message is received from the port.</param>
-      <param name="receiveInCurrentSyncContext">If true, the current synchronization context is used for processing the messages.</param>
+      <param name="syncContext">Specifies the synchronization context that is used for processing the messages.</param>
     </member>
     <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.ReceiveSequentially``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0})">
       <summary>
@@ -124,7 +124,7 @@
       <param name="port">The port from which the messages should be received.</param>
       <param name="handler">The method to be called when a message is received from the port.</param>
     </member>
-    <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.ReceiveSequentially``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0},XcoAppSpaces.Core.CausalitySyncContext)">
+    <member name="M:XcoAppSpaces.Core.Extensions.XcoAppSpaceExtensions.ReceiveSequentially``1(XcoAppSpaces.Core.XcoAppSpace,Microsoft.Ccr.Core.Port{``0},Microsoft.Ccr.Core.Handler{``0},XcoAppSpaces.Core.SyncContext)">
       <summary>
             Receive messages from the given port. Whenever an element is posted to the port, the given handler is called.
             Messages are received sequentially, meaning that the next message is received only after processing of the
@@ -134,7 +134,7 @@
       <param name="space">The XcoAppSpace.</param>
       <param name="port">The port from which the messages should be received.</param>
       <param name="handler">The method to be called when a message is received from the port.</param>
-      <param name="receiveInCurrentSyncContext">If true, the current synchronization context is used for processing the messages.</param>
+      <param name="syncContext">Specifies the synchronization context that is used for processing the messages.</param>
     </member>
     <member name="T:XcoAppSpaces.Core.CausalityHelpers">
       <summary>
@@ -146,20 +146,99 @@
             Wrapper class for access to the local workers by the Core.Communication components.
             </summary>
     </member>
-    <member name="T:XcoAppSpaces.Core.PublishMode">
+    <member name="T:XcoAppSpaces.Core.IXcoFluentConfiguration">
       <summary>
-             Defines if a worker should be published so other appspace
-             instances can connnect to it
+            Fluent interface for creating an XcoAppSpace.
             </summary>
     </member>
-    <member name="F:XcoAppSpaces.Core.PublishMode.Unpublished">
+    <member name="M:XcoAppSpaces.Core.IXcoFluentConfiguration.Create">
       <summary>
-             Worker will no be published, invisible for other spaces
+            Creates an XcoAppSpace with the given configuration.
+            </summary>
+      <returns>A new XcoAppSpace instance.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoFluentConfiguration.UsingCcrDispatcher(Microsoft.Ccr.Core.Dispatcher)">
+      <summary>
+            Defines the CCR dispatcher that the XcoAppSpace should use (if not defined, the XcoAppSpace uses its own CCR dispatcher).
+            </summary>
+      <param name="ccrDispatcher">The CCR Dispatcher that the XcoAppSpace should use.</param>
+      <returns>The given XcoAppSpaceConfiguration instance.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoFluentConfiguration.UsingService``1(``0)">
+      <summary>
+            Defines a service that the XcoAppSpace should use (if not defined, the default for this type of service is used). An
+            exception is thrown if the type of service is unknown.
+            </summary>
+      <param name="service">The service that the XcoAppSpace should use.</param>
+      <returns>An XcoFluentServiceConfiguration instance to configure the service.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoAppSpaceConfig">
+      <summary>
+            Fluent interface for creating an XcoAppSpace.
             </summary>
     </member>
-    <member name="F:XcoAppSpaces.Core.PublishMode.Published">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpaceConfig.Create">
       <summary>
-             Worker will be published to other appspace instances
+            Creates an XcoAppSpace with the given configuration.
+            </summary>
+      <returns>A new XcoAppSpace instance.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpaceConfig.UsingCcrDispatcher(Microsoft.Ccr.Core.Dispatcher)">
+      <summary>
+            Defines the CCR dispatcher that the XcoAppSpace should use (if not defined, the XcoAppSpace uses its own CCR dispatcher).
+            </summary>
+      <param name="ccrDispatcher">The CCR Dispatcher that the XcoAppSpace should use.</param>
+      <returns>The given XcoAppSpaceConfiguration instance.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpaceConfig.UsingService``1(``0)">
+      <summary>
+            Defines a service that the XcoAppSpace should use (if not defined, the default for this type of service is used). An
+            exception is thrown if the type of service is unknown.
+            </summary>
+      <param name="service">The service that the XcoAppSpace should use.</param>
+      <returns>An XcoFluentServiceConfiguration instance to configure the service.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpaceConfig.op_Implicit(XcoAppSpaces.Core.XcoAppSpaceConfig)~XcoAppSpaces.Core.XcoAppSpace">
+      <summary>
+            Creates an XcoAppSpace instance from the given configuration object.
+            </summary>
+      <param name="config">The configuration object.</param>
+      <returns>The created XcoAppSpace instance.</returns>
+    </member>
+    <member name="T:XcoAppSpaces.Core.XcoServiceConfig`1">
+      <summary>
+            Fluent interface for creating an XcoAppSpace and configuring a communication service.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoServiceConfig`1.WithName(System.String)">
+      <summary>
+            Defines the name of the communication service. (The name must be unique among all communication service
+            instances.)
+            </summary>
+      <param name="name">The name of the communication service.</param>
+      <returns>The given XcoCommServiceConfiguration instance.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoServiceConfig`1.AsDefault">
+      <summary>
+            Defines that the communication service to be the default for the space.
+            </summary>
+      <returns>The given XcoCommServiceConfiguration instance.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoServiceConfig`1.op_Implicit(XcoAppSpaces.Core.XcoServiceConfig{`0})~XcoAppSpaces.Core.XcoAppSpace">
+      <summary>
+            Creates an XcoAppSpace instance from the given configuration object.
+            </summary>
+      <param name="config">The configuration object.</param>
+      <returns>The created XcoAppSpace instance.</returns>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoServiceConfig`1.Service">
+      <summary>
+            The service that is getting configured.
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoServiceConfig`1.Config">
+      <summary>
+            The configuration itself.
             </summary>
     </member>
     <member name="T:XcoAppSpaces.Core.Unsubscribe">
@@ -256,46 +335,283 @@
             The security service that is used by this space instance.
             </summary>
     </member>
-    <member name="T:XcoAppSpaces.Core.XcoWorkerInfo">
+    <member name="T:XcoAppSpaces.Core.IXcoAppSpace">
       <summary>
-            Presents information about a worker in the space.
+            Interface definition for the XcoAppSpace class, the main class of XcoAppSpaces.
             </summary>
     </member>
-    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.Name">
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.Resolve``1">
       <summary>
-            The name of the worker.
+            Resolves an instance of the requested type with the given name from the local appspace.
+            </summary>
+      <typeparam name="TContract">The type that is requested.</typeparam>
+      <returns>The resolved object.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.Resolve``1(System.String)">
+      <summary>
+            Resolves worker of the requested type with the given name from the local appspace.
+            </summary>
+      <typeparam name="TContract">The type that is requested.</typeparam>
+      <param name="name">The name of the object to retreive.</param>
+      <returns>The resolved object.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``2">
+      <summary>
+            Runs a worker within the appspace. The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``2(Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace. The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``2(System.String)">
+      <summary>
+            Runs a worker within the appspace. The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="name">The name under which the worker should be registered.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``2(System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace. The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="name">The name under which the worker should be registered.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``2(XcoAppSpaces.Contracts.Worker.PublishMode)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``2(XcoAppSpaces.Contracts.Worker.PublishMode,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``2(XcoAppSpaces.Contracts.Worker.PublishMode,System.String)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``2(XcoAppSpaces.Contracts.Worker.PublishMode,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``1(``0)">
+      <summary>
+            Runs a worker within the appspace.  The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``1(``0,System.String)">
+      <summary>
+            Runs a worker within the appspace.  The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``1(``0,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace.  The worker is published so other appspace instances can connect to it.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Contracts.Worker.PublishMode)">
+      <summary>
+            Runs a worker within the appspace. 
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Contracts.Worker.PublishMode,System.String)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Contracts.Worker.PublishMode,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+      <summary>
+            Runs a worker within the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
+      <param name="worker">The worker instance to run.</param>
+      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="name">The name under which the worker should be registered.</param>
+      <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
+      <returns>The worker instance that has been created.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.DisposeWorker(Microsoft.Ccr.Core.IPort)">
+      <summary>
+            Disposes the given worker instance and removes it from the appspace.
+            </summary>
+      <param name="worker">The worker to be removed.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.DisposeWorker``1">
+      <summary>
+            Disposes a worker instance and removes it from the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The type of the worker.</typeparam>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.DisposeWorker``1(System.String)">
+      <summary>
+            Disposes a worker instance and removes it from the appspace.
+            </summary>
+      <typeparam name="TMessageContract">The type of the worker.</typeparam>
+      <param name="name">The name of the worker.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.ConnectWorker``1(System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space.  After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.ConnectWorker``1(System.String,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space. After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <param name="localName">The name under which the worker should be registered locally.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.ConnectWorker``1(System.String,System.String,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space. After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="commServiceName">The name of the communication service that should be used for communication with the worker.</param>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <param name="localName">The name under which the worker should be registered locally.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.ConnectWorker``1(XcoAppSpaces.Contracts.Worker.PublishMode,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space.  After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="publish">Defines if the created worker proxy should be published so other appspace instances can connnect to it, and by that use the appspace instance to connect to the original worker.</param>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.ConnectWorker``1(XcoAppSpaces.Contracts.Worker.PublishMode,System.String,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space. After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="publish">Defines if the created worker proxy should be published so other appspace instances can connnect to it, and by that use the appspace instance to connect to the original worker.</param>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <param name="localName">The name under which the worker should be registered locally.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Core.IXcoAppSpace.ConnectWorker``1(XcoAppSpaces.Contracts.Worker.PublishMode,System.String,System.String,System.String)">
+      <summary>
+            Establishes a connection to a worker that is running at a remote space, and registers
+            the worker at the local space. After ConnectWorker is called, the worker to which the
+            connection has been established is also available through the appspace's Resolve method.
+            This method allows using addresses that are not displayable with a "hostname:port" pattern.
+            </summary>
+      <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
+      <param name="publish">Defines if the created worker proxy should be published so other appspace instances can connnect to it, and by that use the appspace instance to connect to the original worker.</param>
+      <param name="commServiceName">The name of the communication service that should be used for communication with the worker.</param>
+      <param name="workerAddress">The address of the worker in form "address/workername"</param>
+      <param name="localName">The name under which the worker should be registered locally.</param>
+      <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
+    </member>
+    <member name="P:XcoAppSpaces.Core.IXcoAppSpace.Info">
+      <summary>
+            Provides meta information about the XcoAppSpace instance, e.g. information about 
+            running workers and communication services.
             </summary>
     </member>
-    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.IsPublished">
+    <member name="P:XcoAppSpaces.Core.IXcoAppSpace.Credentials">
       <summary>
-            True if the worker is published (reachable by other appspace instances).
+            The credentials that are used by the space to connect to remote workers.
             </summary>
     </member>
-    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.IsRemote">
+    <member name="P:XcoAppSpaces.Core.IXcoAppSpace.DefaultDispatcher">
       <summary>
-            True if the worker is not local, but actually hosted by another appspace instance.
+            The CCR dispatcher that is used by the appspace.
             </summary>
     </member>
-    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.RemoteAddress">
+    <member name="P:XcoAppSpaces.Core.IXcoAppSpace.DefaultDispatcherQueue">
       <summary>
-            The remote address of the worker, or null if the worker is local.
+            The CCR dispatcher queue taht is used by the appspace.
             </summary>
     </member>
-    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.CommService">
+    <member name="P:XcoAppSpaces.Core.IXcoAppSpace.Address">
       <summary>
-            Information about the communication service that the worker uses, or null
-            if the worker is local.
+            The address of the space (that can be used by other spaces to connect to this space)
             </summary>
     </member>
-    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.Worker">
+    <member name="P:XcoAppSpaces.Core.IXcoAppSpace.Errors">
       <summary>
-            The worker instance.
-            </summary>
-    </member>
-    <member name="P:XcoAppSpaces.Core.XcoWorkerInfo.NumberOfConnections">
-      <summary>
-            The number of connections to the worker (= how many times the "ConnectWorker" method
-            was called to connect to this worker).
+            Port where errors are posted that occur during commmunication with Fother space instances
+            and that have not been caught by causalities (e.g. errors during message deserialization 
+            or security errors).
             </summary>
     </member>
     <member name="T:XcoAppSpaces.Core.XcoAppSpace">
@@ -317,17 +633,23 @@
             </summary>
       <param name="configString">The config string to configure the appspace instance.</param>
     </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.#ctor(XcoAppSpaces.Core.Configuration.IXcoConfiguration)">
+      <summary>
+            Creates a new XcoAppSpace by using the given configuration.
+            </summary>
+      <param name="config">
+      </param>
+    </member>
     <member name="M:XcoAppSpaces.Core.XcoAppSpace.Resolve``1">
       <summary>
-            Resolves an instance of the requested type with the given name from the appspace's 
-            DI container.
+            Resolves an instance of the requested type with the given name from the local appspace.
             </summary>
       <typeparam name="TContract">The type that is requested.</typeparam>
       <returns>The resolved object.</returns>
     </member>
     <member name="M:XcoAppSpaces.Core.XcoAppSpace.Resolve``1(System.String)">
       <summary>
-            Resolves worker of the requested type with the given name from the local appspace
+            Resolves worker of the requested type with the given name from the local appspace.
             </summary>
       <typeparam name="TContract">The type that is requested.</typeparam>
       <param name="name">The name of the object to retreive.</param>
@@ -369,7 +691,7 @@
       <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
       <returns>The worker instance that has been created.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Core.PublishMode)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Contracts.Worker.PublishMode)">
       <summary>
             Runs a worker within the appspace.
             </summary>
@@ -378,7 +700,7 @@
       <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
       <returns>The worker instance that has been created.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Core.PublishMode,Microsoft.Ccr.Core.DispatcherQueue)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Contracts.Worker.PublishMode,Microsoft.Ccr.Core.DispatcherQueue)">
       <summary>
             Runs a worker within the appspace.
             </summary>
@@ -388,7 +710,7 @@
       <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
       <returns>The worker instance that has been created.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Core.PublishMode,System.String)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Contracts.Worker.PublishMode,System.String)">
       <summary>
             Runs a worker within the appspace.
             </summary>
@@ -398,7 +720,7 @@
       <param name="name">The name under which the worker should be registered.</param>
       <returns>The worker instance that has been created.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Core.PublishMode,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``2(XcoAppSpaces.Contracts.Worker.PublishMode,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
       <summary>
             Runs a worker within the appspace.
             </summary>
@@ -435,7 +757,7 @@
       <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
       <returns>The worker instance that has been created.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Core.PublishMode)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Contracts.Worker.PublishMode)">
       <summary>
             Runs a worker within the appspace. 
             </summary>
@@ -444,7 +766,7 @@
       <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
       <returns>The worker instance that has been created.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Core.PublishMode,System.String)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Contracts.Worker.PublishMode,System.String)">
       <summary>
             Runs a worker within the appspace.
             </summary>
@@ -454,7 +776,7 @@
       <param name="name">The name under which the worker should be registered.</param>
       <returns>The worker instance that has been created.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Core.PublishMode,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.RunWorker``1(``0,XcoAppSpaces.Contracts.Worker.PublishMode,System.String,Microsoft.Ccr.Core.DispatcherQueue)">
       <summary>
             Runs a worker within the appspace.
             </summary>
@@ -520,7 +842,7 @@
       <param name="localName">The name under which the worker should be registered locally.</param>
       <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Core.PublishMode,System.String)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Contracts.Worker.PublishMode,System.String)">
       <summary>
             Establishes a connection to a worker that is running at a remote space, and registers
             the worker at the local space.  After ConnectWorker is called, the worker to which the
@@ -532,7 +854,7 @@
       <param name="workerAddress">The address of the worker in form "address/workername"</param>
       <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Core.PublishMode,System.String,System.String)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Contracts.Worker.PublishMode,System.String,System.String)">
       <summary>
             Establishes a connection to a worker that is running at a remote space, and registers
             the worker at the local space. After ConnectWorker is called, the worker to which the
@@ -545,7 +867,7 @@
       <param name="localName">The name under which the worker should be registered locally.</param>
       <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Core.PublishMode,System.String,System.String,System.String)">
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConnectWorker``1(XcoAppSpaces.Contracts.Worker.PublishMode,System.String,System.String,System.String)">
       <summary>
             Establishes a connection to a worker that is running at a remote space, and registers
             the worker at the local space. After ConnectWorker is called, the worker to which the
@@ -561,7 +883,20 @@
     </member>
     <member name="M:XcoAppSpaces.Core.XcoAppSpace.Dispose">
       <summary>
-            Closes the appspace and disposes the CCR dispatcher and DI container if they were not handed in at startup.
+            Closes the appspace and disposes the CCR dispatcher if it was not handed in at startup.
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Core.XcoAppSpace.ConfigureWithConfigString(System.String)">
+      <summary>
+            Initializes the XcoAppSpace using the given config string.
+            </summary>
+      <param name="configString">The config string that should be used for initialization of the space.</param>
+      <returns>An XcoAppSpaceConfiguration instance for further configuration of the space.</returns>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoAppSpace.Info">
+      <summary>
+            Provides meta information about the XcoAppSpace instance, e.g. information about 
+            running workers and communication services.
             </summary>
     </member>
     <member name="P:XcoAppSpaces.Core.XcoAppSpace.Credentials">
@@ -584,17 +919,16 @@
             The address of the space (that can be used by other spaces to connect to this space)
             </summary>
     </member>
-    <member name="P:XcoAppSpaces.Core.XcoAppSpace.Info">
-      <summary>
-            Provides meta information about the XcoAppSpace instance, e.g. information about 
-            running workers and communication services.
-            </summary>
-    </member>
     <member name="P:XcoAppSpaces.Core.XcoAppSpace.Errors">
       <summary>
             Port where errors are posted that occur during commmunication with Fother space instances
             and that have not been caught by causalities (e.g. errors during message deserialization 
             or security errors).
+            </summary>
+    </member>
+    <member name="P:XcoAppSpaces.Core.XcoAppSpace.Configure">
+      <summary>
+            Returns an XcoAppSpaceConfig object for configuring and creating a new space instance.
             </summary>
     </member>
     <member name="T:XcoAppSpaces.Core.XcoPublisher">
@@ -1333,6 +1667,11 @@
             Port where communication errors are posted that are not caught by causalities.
             </summary>
     </member>
+    <member name="P:XcoAppSpaces.Core.Communication.Connector.MessagingPort">
+      <summary>
+            Port that takes messages to be sent.
+            </summary>
+    </member>
     <member name="T:XcoAppSpaces.Transport.Sockets.Config">
       <summary>
             Configuration contains settings that are target for possible later outsourcing
@@ -1391,6 +1730,43 @@
       <param name="config">The configuration object.</param>
       <returns>The configuration object for further configuration with the fluent interface.</returns>
     </member>
+    <member name="T:XcoAppSpaces.Transport.Sockets.TransferHelper">
+      <summary>
+             Helperclass for XcoMessage convert for transfer
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.TransferHelper.#ctor">
+      <summary>
+             Helper class for XcoMessages converts
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.TransferHelper.Convert(XcoAppSpaces.Contracts.Transport.XcoMessage)">
+      <summary>
+            Converts the XcoMessage to a byte[]
+            </summary>
+      <param name="msg">XcoMessage to convert</param>
+      <returns>byte[] instance of the XcoMessage</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.TransferHelper.Convert(System.IO.BinaryReader)">
+      <summary>
+            Convert byte[] to XcoMessage
+            </summary>
+      <param name="stream">read XcoMessage from stream</param>
+      <returns>new XcoMessage instance</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.Sockets.TransferHelper.ReadData(System.IO.BinaryReader,System.Int32,System.Byte[]@)">
+      <summary>
+            Read data from stream
+            </summary>
+      <param name="stream">
+      </param>
+      <param name="gesamtLen">
+      </param>
+      <param name="content">
+      </param>
+      <returns>
+      </returns>
+    </member>
     <member name="T:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService">
       <summary>
             Communication Service that send/receives messages to/from remote spaces via
@@ -1433,7 +1809,7 @@
             Releases all currently active connections.
             </summary>
     </member>
-    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.Send(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+    <member name="M:XcoAppSpaces.Transport.Sockets.XcoTCPTransportService.Send(XcoAppSpaces.Contracts.Transport.XcoMessage)">
       <summary>
             Sends a message to a remote space.
             </summary>
@@ -1510,6 +1886,43 @@
       <param name="queuename">The queue name on which the communication service should be read from.</param>
       <returns>The configuration object for further configuration with the fluent interface.</returns>
     </member>
+    <member name="T:XcoAppSpaces.Transport.MSMQ.TransferHelper">
+      <summary>
+             Helperclass for XcoMessage convert for transfer
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.TransferHelper.#ctor">
+      <summary>
+             Helper class for XcoMessages converts
+            </summary>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.TransferHelper.Convert(XcoAppSpaces.Contracts.Transport.XcoMessage)">
+      <summary>
+            Converts the XcoMessage to a byte[]
+            </summary>
+      <param name="msg">XcoMessage to convert</param>
+      <returns>byte[] instance of the XcoMessage</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.TransferHelper.Convert(System.IO.BinaryReader)">
+      <summary>
+            Convert byte[] to XcoMessage
+            </summary>
+      <param name="stream">read XcoMessage from stream</param>
+      <returns>new XcoMessage instance</returns>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.MSMQ.TransferHelper.ReadData(System.IO.BinaryReader,System.Int32,System.Byte[]@)">
+      <summary>
+            Read data from stream
+            </summary>
+      <param name="stream">
+      </param>
+      <param name="gesamtLen">
+      </param>
+      <param name="content">
+      </param>
+      <returns>
+      </returns>
+    </member>
     <member name="T:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService">
       <summary>
             Communication Service that send/receives messages to/from remote spaces via
@@ -1554,7 +1967,7 @@
             Releases all currently active connections.
             </summary>
     </member>
-    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.Send(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+    <member name="M:XcoAppSpaces.Transport.MSMQ.XcoMSMQTransportService.Send(XcoAppSpaces.Contracts.Transport.XcoMessage)">
       <summary>
             Sends a message to a remote space.
             </summary>
@@ -1720,7 +2133,7 @@
             has to be called when wanting to communicate with a remote space.
             </summary>
     </member>
-    <member name="M:XcoAppSpaces.Transport.WCF.IRemoteSpaceService.SendMessage(System.Byte[])">
+    <member name="M:XcoAppSpaces.Transport.WCF.IRemoteSpaceService.SendMessage(XcoAppSpaces.Contracts.Transport.XcoMessage)">
       <summary>
             Sends a message to a remote space (serialized into a byte array).
             </summary>
@@ -1744,14 +2157,21 @@
       <returns>
       </returns>
     </member>
-    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.#ctor(System.String,XcoAppSpaces.Contracts.Serialization.IXcoSerializer,XcoAppSpaces.Contracts.Logging.IXcoLogger)">
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.#ctor(System.String,XcoAppSpaces.Contracts.Logging.IXcoLogger)">
       <summary>
             Creates a new RemoteSender. A new IRemoteSpaceService object is created that communicates
             with the given address, with help of the ChannelFactory class.
             </summary>
       <param name="address">The address of the remote space, in binding form.</param>
-      <param name="serializationHelper">SerializationHelper that should be used for serialization of messages.</param>
       <param name="log">Logger to use for logging.</param>
+    </member>
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.#ctor(System.String,XcoAppSpaces.Transport.WCF.RemoteSender.LoadConfigurationDelegate)">
+      <summary>
+            Creates a new RemoteSender. A new IRemoteSpaceService object is created that communicates
+            with the given address, with help of the ChannelFactory class.
+            </summary>
+      <param name="address">The address of the remote space, in binding form.</param>
+      <param name="loadConfig">Delegate for loading the service configuration.</param>
     </member>
     <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.Connect">
       <summary>
@@ -1768,7 +2188,7 @@
             Terminates the connection by calling the Disconnect method of the IRemoteSpaceService object.
             </summary>
     </member>
-    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.SendMessage(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.SendMessage(XcoAppSpaces.Contracts.Transport.XcoMessage)">
       <summary>
             Sends a message by first serializing it and the using the IRemoteSpaceService object to send it.
             The last send time is set to the current time.
@@ -1794,14 +2214,13 @@
             used concurrent.
             </summary>
     </member>
-    <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.#ctor(System.Uri,XcoAppSpaces.Contracts.Transport.MessageReceivedMethod,XcoAppSpaces.Contracts.Transport.IXcoTransportService,XcoAppSpaces.Contracts.Serialization.IXcoSerializer,XcoAppSpaces.Contracts.Logging.IXcoLogger)">
+    <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.#ctor(System.Uri,XcoAppSpaces.Contracts.Transport.IXcoMessageReceiverService,XcoAppSpaces.Contracts.Transport.IXcoTransportService,XcoAppSpaces.Contracts.Logging.IXcoLogger)">
       <summary>
             Creates a new SpacePortal.
             </summary>
       <param name="addr">The address in which the service host is running (here only needed for information purposes).</param>
       <param name="messageReceived">The method that should be called when a message arrives.</param>
       <param name="commService">The communication service.</param>
-      <param name="serializer">SerializationHelper that should be used for serialization and deserialization of messages.</param>
       <param name="log">Logger to be used for logging.</param>
     </member>
     <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.Connect">
@@ -1816,7 +2235,7 @@
             internally by WCF).
             </summary>
     </member>
-    <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.SendMessage(System.Byte[])">
+    <member name="M:XcoAppSpaces.Transport.WCF.SpacePortal.SendMessage(XcoAppSpaces.Contracts.Transport.XcoMessage)">
       <summary>
             Processes a message that has been received. The message is deserialized and the corresponding
             process method is called.
@@ -1928,7 +2347,7 @@
             </summary>
       <param name="timerInfo">Field for additional info from the timer that starts the method (is ignored because not additional info needed).</param>
     </member>
-    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.Send(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+    <member name="M:XcoAppSpaces.Transport.WCF.XcoWCFTransportService.Send(XcoAppSpaces.Contracts.Transport.XcoMessage)">
       <summary>
             Sends a message to a remote space. If no remote sender for this message exists yet,
             a new RemoteSender is created and stored in the list of currently open RemoteSenders.
@@ -2128,19 +2547,6 @@
             Interface 
             </summary>
     </member>
-    <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.AddWorker(Microsoft.Ccr.Core.IPort,System.Collections.Generic.List{XcoAppSpaces.Contracts.Service.XcoServiceAttributeInfo})">
-      <summary>
-            Adds a worker to the security service. This method is called for every worker that is added to the space using RunWorker().
-            </summary>
-      <param name="worker">The worker that should be added.</param>
-      <param name="attributes">A list of attributes that apply to the worker and could contain information that is important to the security service, e.g. security permission attributes.</param>
-    </member>
-    <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.RemoveWorker(Microsoft.Ccr.Core.IPort)">
-      <summary>
-            Removes a worker from the security service. This method is called for every worker that is removed from the space using DisposeWorker().
-            </summary>
-      <param name="worker">The worker that should be removed.</param>
-    </member>
     <member name="M:XcoAppSpaces.Contracts.Security.IXcoSecurityService.GetClientCredentials(System.Net.ICredentials,System.String)">
       <summary>
             Gets xco client credentials from a given credentials object and for the given address, that can be 
@@ -2245,13 +2651,6 @@
             Deserializes an object from a byte array.
             </summary>
       <param name="element">The serialized object.</param>
-      <returns>The object that has been deserialized.</returns>
-    </member>
-    <member name="M:XcoAppSpaces.Contracts.Serialization.IXcoSerializer.Deserialize(System.IO.Stream)">
-      <summary>
-            Deserializes an object from a stream.
-            </summary>
-      <param name="stream">The stream that contains the serialized object.</param>
       <returns>The object that has been deserialized.</returns>
     </member>
     <member name="T:XcoAppSpaces.Serialization.Binary.XcoBinarySerializer">
@@ -2374,17 +2773,6 @@
             The configuration object that should be returned for further configuration with the fluent interface.
             </summary>
     </member>
-    <member name="T:XcoAppSpaces.Contracts.Service.IXcoAppSpaceConfiguration">
-      <summary>
-            Definition for an XcoAppSpace configuration that is used together with IXcoConfigStringInterpreters.
-            </summary>
-    </member>
-    <member name="P:XcoAppSpaces.Contracts.Service.IXcoAppSpaceConfiguration.Services">
-      <summary>
-            The list of services that should be part of an XcoAppSpace instance that is created with this
-            configuration.
-            </summary>
-    </member>
     <member name="T:XcoAppSpaces.Contracts.Service.IXcoConfigStringInterpreter">
       <summary>
             Interface for classes that are able to interpret a space configuration.
@@ -2474,19 +2862,17 @@
             The service instance.
             </summary>
     </member>
-    <member name="T:XcoAppSpaces.Contracts.Transport.MessageReceivedMethod">
+    <member name="T:XcoAppSpaces.Contracts.Transport.IXcoMessageReceiverService">
       <summary>
-            Definition for a method to process a message received from a remote Space.
+            Service that should recieve all messages from the transport service.
             </summary>
-      <param name="msg">The message that has been received.</param>
-      <param name="commService">The communication service that received the message</param>
     </member>
     <member name="T:XcoAppSpaces.Contracts.Transport.IXcoTransportService">
       <summary>
             Interface definition for Services that can be used for communication between application spaces.
             </summary>
     </member>
-    <member name="M:XcoAppSpaces.Contracts.Transport.IXcoTransportService.Send(XcoAppSpaces.Contracts.Transport.IXcoMessage)">
+    <member name="M:XcoAppSpaces.Contracts.Transport.IXcoTransportService.Send(XcoAppSpaces.Contracts.Transport.XcoMessage)">
       <summary>
             Sends a message to a remote space.
             </summary>
@@ -2497,12 +2883,12 @@
             The Address of the server.
             </summary>
     </member>
-    <member name="T:XcoAppSpaces.Contracts.Transport.IXcoMessage">
+    <member name="T:XcoAppSpaces.Contracts.Transport.XcoMessage">
       <summary>
             Interface definition for a message to be sent by remote communication.
             </summary>
     </member>
-    <member name="P:XcoAppSpaces.Contracts.Transport.IXcoMessage.RemoteAddress">
+    <member name="P:XcoAppSpaces.Contracts.Transport.XcoMessage.RemoteAddress">
       <summary>
             The address of the remote space where the message should be sent to,
             or the message is received from.
