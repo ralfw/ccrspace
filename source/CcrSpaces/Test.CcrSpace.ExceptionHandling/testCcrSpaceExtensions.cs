@@ -55,7 +55,7 @@ namespace Test.CcrSpace.ExceptionHandling
             }
 
             Assert.IsTrue(base.are.WaitOne(500));
-            Assert.IsTrue(base.are.WaitOne(500));
+            Assert.IsTrue(base.are.WaitOne(1000));
         }
     }
 }

@@ -2,7 +2,7 @@ Please note:
 
 If you want to use the Jabber Communication Service of the XcoAppSpaces.dll in the bin folder of this distribution you need to link it at runtime to the agsXMPP library. Practically this means you either need to have agsXMPP installed in the GAC on the computer running a software using the XcoAppSpaces.dll, or you put the relevant agsXMPP library assembly in the same folder where the XcoAppSpaces.dll resides.
 
-For your convenience we´ve included the relevant agsXMPP libraries here with the Xcoordination Application Space redistributable, released under the GPL. The full GPL license text is included below.
+For your convenience we´ve included the relevant agsXMPP libraries here with the XcoAppSpace redistributable, released under the GPL. The full GPL license text is included below.
 
 
 Anyone can get the full source code for the agsXMPP package by 
@@ -11,15 +11,14 @@ a) Downloading the source code of the current agsXMPP release and its license (h
 
 b) Downloading its GPL Open Source redistributable and sources from the Xcoordination Application Space repository at CodePlex: http://xcoappspace.codeplex.com.
 
-b) Or sending a request including a mailing address to info@xcoordination.org with subject “agsXMPP Source Code Request”. This offer expires on December 31th, 2012.
+b) Or sending a request including a mailing address to info@xcoordination.org with subject “agsXMPP Source Code Request”. This offer expires on January 1st, 2013.
 
 
 Please note that you might need to license agsXMPP separatedly depending on how you use/distribute your software! If in doubt which license applies to your case, please contact sales at sales@ag-software.de.
 
-Please note that the GPL version of agsXMPP is incompatible with the other libraries that you find in this zip file.
 
--The Xco AppSpace Team
- http://www.xcoordination.com
+The Xcoordination Application Space Team 
+http://www.xcoordination.com
 
 --
 
