@@ -1,40 +1,94 @@
-ApplicationSpace License
+==============================================
+Licensing the Xcoordination Application Space:
+==============================================
 
-The ApplicationSpace library is released by www.xcoordination.com under the GPL version 2 with the following exception:
+The XcoAppSpace is developed and licensed by Xcoordination http://www.xcoordination.com.
 
-Linking this library statically or dynamically with other modules is making a combined work based on this library.  Thus, the terms and conditions of the GNU General Public License cover the whole combination.
-
-As a special exception, the copyright holders of this library give you permission to link this library with independent modules to produce an executable, regardless of the license terms of these independent modules, and to copy and distribute the resulting executable under terms of your choice, provided that you also meet, for each linked independent module, the terms and conditions of the license of that module.  An independent module is a module which is not derived from or based on this library.  If you modify this library, you may extend this exception to your version of the library, but you are not obligated to do so. If you do not wish to do so, delete this exception statement from your version.
-
-
-Bottom line: In plain English this means you can use this library in commercial closed-source applications.
+Xcoordination offers two different license options for the Xcoordination Application Space:
 
 
+1) General Public License (GPL) Version 2
+
+Xcoordination Application Space is free under the GPL, where it can be used:
+
+ * for development
+ * in-house as long as no deployment to third parties takes place
+ * together with works that are placed under the GPL themselves
+
+You receive a copy of the GPL together with the Xcoordination Application Space distribution.
+
+
+2) Commercial License
+
+For incorporation into own commercial products and for use together with redistributed software that is not placed under the GPL, Xcoordination Application Space is also available under a commercial license.
+
+Please send email to info@xcoordination.org for licensing terms and pricing.
+
+
+
+===================
 General Information
+===================
 
 Note that the provided library - in order to be functional in an application that uses it - needs the following software libraries:
 
-* Microsoft Concurrency Coordination Runtime, download from http://www.microsoft.com/ccrdss/ or http://msdn.microsoft.com/en-us/robotics/default.aspx depending on your needs.
 
-* The Unity Application Block (Unity), a lightweight extensible dependency injection container with support for constructor, property, and method call injection. Unity is open source licensed under the Microsoft Public License (Ms-PL). Download from http://www.codeplex.com/unity or obtain as a part of the download package.
+* Microsoft Concurrency Coordination Runtime (CCR), download from http://www.microsoft.com/ccrdss or http://msdn.microsoft.com/en-us/robotics/default.aspx depending on your needs.
+
+In order to use the CCR - either on its own or in conjunction with the Xcoordination Application Space - you need to license it appropriately with regard to the software you are writing. Please see the CCR download and license conditions at http://www.microsoft.com/ccrdss or http://msdn.microsoft.com/en-us/robotics/default.aspx for any details.
+
+The Xcoordination Application Space license expressly does not grant you any rights for using the CCR!
+
 
 * agsXMPP SDK, an SDK / library for the eXtensible Messaging and Presence Protocol (XMPP) protocol written in managed C# dedicated to .NET and Mono technologies. The SDK is released as open source (GPL) under a dual license. Download from http://www.ag-software.de/index.php?page=agsxmpp-sdk or obtain as a part of the download package.
 
-With the Application Space included are the assemblies of those packages. This is for your convenience and only for Application Space internal usage. Please see the disclaimer document in this folder for further licensing details you need to observe in order to build your application based on the Application Space.
+In order to use the Jabber communication service with the Xcoordination Application Space you need to comply with the license of the agsXMPP SDK. It is offered under both GPL and commercial license. Depending on your software’s license you need to explicitly license the agsXMPP SDK. Please see the agsXMPP manufacturer´s site for details: http://www.ag-software.de/index.php?page=agsxmpp-sdk.
+
+The Xcoordination Application Space license expressly does not grant you any rights in addition to the agsXMPP SDK´s license! 
 
 
+Whether or not you will need to pay a license fee to the respective manufacturer depends on how you´ll be using the XcoAppSpace. Please contact the corresponding manufacturer for how to license each product properly.
+
+
+With the Xcoordination Application Space included are the assemblies of those packages. This is for your convenience and only for Xcoordination Application Space internal usage. Please see for disclaimer documents in these folders for further licensing details you need to observe in order to build your application based on the Xcoordination Application Space.
+
+
+
+========
 Download
+========
 
-The ApplicationSpace is developed and licensed by http://www.xcoordination.com under the GPL version 2 with a special exception that allows you to use this library in commercial closed-source applications. If you use the software, you accept this license. If you do not accept the license, do not use the software. You can download the full source code and compiled assembly as well as the Microsoft Unity DI Container and the agsXMPP SDK from this site. Please download now!
+The Xcoordination Application Space is developed and licensed by Xcoordination http://www.xcoordination.com.
 
-Alternatively, anyone can get the full source code for this package by: 
+If you do not accept the license, do not use the software. You can download the full source code and compiled assembly from this site. Please download now!
 
-a) Downloading it from http://www.xcoordination.com/xco/download.  
+Anyone can get the full source code for this package by: 
 
-b) Or sending a request including a mailing address to info@xcoordination.com with subject “ApplicationSpace Source Code Request”. This offer expires on December 31th, 2012.
+a) Either downloading it from http://xcoappspace.codeplex.com or from http://www.xcoordination.com/xco/download.  
+
+b) Or sending a request including a mailing address to info@xcoordination.com with subject “Xcoordination Application Space Source Code Request”. This offer expires on January 1st, 2013.
 
 
+
+===========
+No Warranty
+===========
+
+Xcoordination explicitly does not provide any warranty on software that you find in the Xcoordination Application Space package or that you download from this site.
+
+
+
+=================================
+What Does It Mean in Plain Words?
+=================================
+
+Once you leave the evaluation phase of the XcoAppSpace check the licenses of Xcoordination Application Space, CCR and agsXMPP SDK if you need to pay royalties to Xcoordination, Microsoft or AG Software for using their libraries. 
+
+
+
+===================
 GNU v2 License Text
+===================
 
 For the actual version of this license text please see http://www.gnu.org/licenses/gpl-2.0.html. The following text is a copy of this text from May 12th, 2009:
 
@@ -107,5 +161,6 @@ NO WARRANTY
 
 END OF TERMS AND CONDITIONS
 --
+
 
 
