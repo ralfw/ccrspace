@@ -3,7 +3,7 @@ using Microsoft.Ccr.Core;
 
 namespace CcrSpaces.Core.Channels.Extensions
 {
-    internal static class PortExtensions
+    public static class PortExtensions
     {
         public static void WireUpHandler<T>(this Port<T> port, DispatcherQueue taskQueue, bool persistent, Action<T> handler)
         {
