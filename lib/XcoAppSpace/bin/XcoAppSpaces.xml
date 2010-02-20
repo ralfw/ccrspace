@@ -765,7 +765,7 @@
             </summary>
       <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
       <typeparam name="TImplementation">The implementation type of the worker (which must inherit from the contract type).</typeparam>
-      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="publishMode">Defines if the worker should be published so other appspace instances can connnect to it.</param>
       <param name="name">The name under which the worker should be registered.</param>
       <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
       <returns>The worker instance that has been created.</returns>
@@ -821,7 +821,7 @@
             </summary>
       <typeparam name="TMessageContract">The contract type of the worker, which must be an IPort (meaning it must be a CCR Port or PortSet).</typeparam>
       <param name="worker">The worker instance to run.</param>
-      <param name="publish">Defines if the worker should be published so other appspace instances can connnect to it.</param>
+      <param name="publishMode">Defines if the worker should be published so other appspace instances can connnect to it.</param>
       <param name="name">The name under which the worker should be registered.</param>
       <param name="queue">The CCR dispatcher queue that should be used, or null if the appspace's default dispatcher queue should be used.</param>
       <returns>The worker instance that has been created.</returns>
@@ -914,7 +914,7 @@
             This method allows using addresses that are not displayable with a "hostname:port" pattern.
             </summary>
       <typeparam name="TMessageContract">The contract type of the worker.</typeparam>
-      <param name="publish">Defines if the created worker proxy should be published so other appspace instances can connnect to it, and by that use the appspace instance to connect to the original worker.</param>
+      <param name="publishMode">Defines if the created worker proxy should be published so other appspace instances can connnect to it, and by that use the appspace instance to connect to the original worker.</param>
       <param name="commServiceName">The name of the communication service that should be used for communication with the worker.</param>
       <param name="workerAddress">The address of the worker in form "address/workername"</param>
       <param name="localName">The name under which the worker should be registered locally.</param>
@@ -1654,7 +1654,7 @@
       <param name="address">The address to be checked.</param>
       <returns>True if the address refers to the local space.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.Communication.Connector.ConnectWorker``1(System.String,System.String,System.Net.ICredentials,XcoAppSpaces.Contracts.Communication.XcoTransportServiceInfo@)">
+    <member name="M:XcoAppSpaces.Core.Communication.Connector.ConnectWorker``1(System.String,System.String,System.Net.ICredentials)">
       <summary>
             Establishes a connection to a worker that is running at a remote space. Creates a local
             proxy of the worker that allows posting messages that are automatically transported
@@ -1668,10 +1668,9 @@
       <param name="workerAddress">The address of the worker in den form "address/workername"</param>
       <param name="commServiceName">The name of the communication service that should be used to communicate with the worker (or null if the default communication service should be used).</param>
       <param name="credentials">The credentials that should be used to connect to the worker.</param>
-      <param name="commServiceInfo">Information about the communication service that the proxy will use to communicate with the worker.</param>
       <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.Communication.Connector.ConnectWorker``1(System.String,System.String,System.String,System.Net.ICredentials,XcoAppSpaces.Contracts.Communication.XcoTransportServiceInfo@)">
+    <member name="M:XcoAppSpaces.Core.Communication.Connector.ConnectWorker``1(System.String,System.String,System.String,System.Net.ICredentials)">
       <summary>
             Establishes a connection to a worker that is running at a remote space. Creates a local
             proxy of the worker that allows posting messages that are automatically transported
@@ -1684,7 +1683,6 @@
       <param name="address">The address of the space where the worker is running (in form hostname:port).</param>
       <param name="commServiceName">The name of the communication service that should be used to communicate with the worker (or null if the default communication service should be used).</param>
       <param name="credentials">The credentials that should be used to connect to the worker.</param>
-      <param name="commServiceInfo">Information about the communication service that the proxy will use to communicate with the worker.</param>
       <returns>A worker contract instance that allows to post messages to the remote worker.</returns>
     </member>
     <member name="M:XcoAppSpaces.Core.Communication.Connector.Dispose">
@@ -1715,11 +1713,6 @@
     <member name="P:XcoAppSpaces.Core.Communication.Connector.Errors">
       <summary>
             Port where communication errors are posted that are not caught by causalities.
-            </summary>
-    </member>
-    <member name="P:XcoAppSpaces.Core.Communication.Connector.MessageProcessor">
-      <summary>
-            Port that takes messages to be sent.
             </summary>
     </member>
     <member name="P:XcoAppSpaces.Core.Communication.Connector.StartPriority">
@@ -2055,6 +2048,11 @@
             Returns the MSMQ name
             </summary>
     </member>
+    <member name="T:XcoAppSpaces.Transport.WCF.IBindingsHelper">
+      <summary>
+            Helper for different WCF Bindings
+            </summary>
+    </member>
     <member name="T:XcoAppSpaces.Transport.WCF.BindingsHelper">
       <summary>
             Helper for different WCF Bindings
@@ -2220,7 +2218,7 @@
       <param name="address">The address of the remote space, in binding form.</param>
       <param name="log">Logger to use for logging.</param>
     </member>
-    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.#ctor(System.String,XcoAppSpaces.Transport.WCF.RemoteSender.LoadConfigurationDelegate)">
+    <member name="M:XcoAppSpaces.Transport.WCF.RemoteSender.#ctor(System.String,XcoAppSpaces.Transport.WCF.RemoteSender.LoadConfigurationDelegate,XcoAppSpaces.Contracts.Logging.IXcoLogger)">
       <summary>
             Creates a new RemoteSender. A new IRemoteSpaceService object is created that communicates
             with the given address, with help of the ChannelFactory class.
@@ -2809,12 +2807,11 @@
             </summary>
       <param name="worker">The worker that should be unwired.</param>
     </member>
-    <member name="M:XcoAppSpaces.Contracts.CcrWiring.ICcrWirer.CreateWorkerProxy``1(Microsoft.Ccr.Core.Handler{XcoAppSpaces.Contracts.Messaging.MessageToSend},XcoAppSpaces.Contracts.Messaging.WorkerProxyInfo)">
+    <member name="M:XcoAppSpaces.Contracts.CcrWiring.ICcrWirer.CreateWorkerProxy``1(XcoAppSpaces.Contracts.Messaging.WorkerProxyInfo)">
       <summary>
             Creates a worker proxy for a remote worker from the given parameters.
             </summary>
       <typeparam name="TMessageContract">The contract type of the worker (must have an empty constructor so it can be instantiated as a proxy).</typeparam>
-      <param name="messageProcessor">The method that should be called by the proxy to send a message to the original worker.</param>
       <param name="proxyInfo">Information that is needed to create the worker proxy, like name and address of the worker.</param>
       <returns>The created worker proxy.</returns>
     </member>
@@ -3189,12 +3186,11 @@
       <param name="dpq">The dispatcher queue that should be used for wiring the worker, or null if space's the default dispatcher queue should be used.</param>
       <returns>A WorkerInfo object containing the worker instance and additional information that has been gathered during the worker wiring.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Core.CcrWiring.CcrWirer.CreateWorkerProxy``1(Microsoft.Ccr.Core.Handler{XcoAppSpaces.Contracts.Messaging.MessageToSend},XcoAppSpaces.Contracts.Messaging.WorkerProxyInfo)">
+    <member name="M:XcoAppSpaces.Core.CcrWiring.CcrWirer.CreateWorkerProxy``1(XcoAppSpaces.Contracts.Messaging.WorkerProxyInfo)">
       <summary>
             Creates a worker proxy for a remote worker from the given parameters.
             </summary>
       <typeparam name="TMessageContract">The contract type of the worker (must have an empty constructor so it can be instantiated as a proxy).</typeparam>
-      <param name="messageProcessor">The method that should be called by the proxy to send a message to the original worker.</param>
       <param name="proxyInfo">Information that is needed to create the worker proxy, like name and address of the worker.</param>
       <returns>The created worker proxy.</returns>
     </member>
@@ -3350,7 +3346,7 @@
       <param name="address">The address to be checked.</param>
       <returns>True if the address refers to the local space.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Contracts.Communication.IConnector.ConnectWorker``1(System.String,System.String,System.Net.ICredentials,XcoAppSpaces.Contracts.Communication.XcoTransportServiceInfo@)">
+    <member name="M:XcoAppSpaces.Contracts.Communication.IConnector.ConnectWorker``1(System.String,System.String,System.Net.ICredentials)">
       <summary>
             Establishes a connection to a worker that is running at a remote space. Returns information that
             can be used to generate proxy of the worker that allows posting messages that are automatically 
@@ -3362,10 +3358,9 @@
       <param name="workerAddress">The address of the worker in den form "address/workername"</param>
       <param name="commServiceName">The name of the communication service that should be used to communicate with the worker (or null if the default communication service should be used).</param>
       <param name="credentials">The credentials that should be used to connect to the worker.</param>
-      <param name="commServiceInfo">Information about the communication service that the proxy will use to communicate with the worker.</param>
       <returns>Information about the worker that can be used to generate a proxy to communicate with this worker.</returns>
     </member>
-    <member name="M:XcoAppSpaces.Contracts.Communication.IConnector.ConnectWorker``1(System.String,System.String,System.String,System.Net.ICredentials,XcoAppSpaces.Contracts.Communication.XcoTransportServiceInfo@)">
+    <member name="M:XcoAppSpaces.Contracts.Communication.IConnector.ConnectWorker``1(System.String,System.String,System.String,System.Net.ICredentials)">
       <summary>
             Establishes a connection to a worker that is running at a remote space. Returns information that
             can be used to generate proxy of the worker that allows posting messages that are automatically 
@@ -3394,11 +3389,6 @@
     <member name="P:XcoAppSpaces.Contracts.Communication.IConnector.Errors">
       <summary>
             Port where communication errors are posted that are not caught by causalities.
-            </summary>
-    </member>
-    <member name="P:XcoAppSpaces.Contracts.Communication.IConnector.MessageProcessor">
-      <summary>
-            Method that takes messages that should be sent.
             </summary>
     </member>
     <member name="T:XcoAppSpaces.Contracts.Communication.XcoCommunicationError">
